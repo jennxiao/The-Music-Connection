@@ -1,6 +1,5 @@
-// Place all the styles related to the Forms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
 .navbar {
   display: flex;
 }
@@ -9,6 +8,22 @@
   background-color: #ffdddd;
 }
 
-.radio-group {
+.radio-group.invalid {
   background-color: pink;
+}
+
+.invalid {
+  background-color: #ffdddd;
+}
+
+.btn-xl {
+    padding: 10px 20px;
+    font-size: 35px;
+    width:75%;    //Specify your width here
+}
+
+.btn-group {
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  display: block; /* Make the buttons appear below each other */
 }

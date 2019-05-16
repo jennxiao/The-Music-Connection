@@ -3,19 +3,16 @@ var cur_tab = 0;
 var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
-show_tab(cur_tab);
-
 init();
 function init() {
+  //Show only the first tab and the corresponding buttons
+  hide_all_tabs();
+  show_tab(cur_tab);
   //Event Listener for prev, next, and submit
   var prev_btn = document.getElementById("prev_btn");
   var next_btn = document.getElementById("next_btn");
-  prev_btn.addEventListener('click', function(){
-    prev();
-  });
-  next_btn.addEventListener('click', function(){
-    next();
-  });
+  prev_btn.addEventListener('click', prev);
+  next_btn.addEventListener('click', next);
   var form = document.querySelector('form')
   form.onkeypress = checkEnter;
   form.addEventListener('submit', function(event) {
@@ -107,6 +104,13 @@ function checkEnter(e){
  return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
 }
 
+//Hides all tabs
+function hide_all_tabs() {
+  var tabs = document.getElementsByClassName("tab");
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].style.display = "none";
+  }
+}
 // Selectively show nth tab and hide others
 function show_tab(n) {
   var tabs = document.getElementsByClassName("tab");
@@ -138,6 +142,7 @@ function next() {
   var tabs = document.getElementsByClassName("tab");
   tabs[cur_tab].style.display = "none";
   array.push(cur_tab);
+  console.log(array);
   //tab navigation listener
   var jump_group0 = tabs[cur_tab].querySelector("#jump-group0");
   if (jump_group0 != null) {
@@ -177,7 +182,6 @@ function next() {
 
 // Form validation
 function validate_form() {
-  return true;
   var tab = document.getElementsByClassName("tab")[cur_tab];
   var form_groups = tab.getElementsByClassName("form-group");
   var valid = true;
@@ -198,7 +202,8 @@ function validate_form() {
         form_group.getElementsByTagName("small")[0].innerHTML = "Please enter in a valid email."
         valid = false;
       } else {
-        form_group.getElementsByTagName("input")[0].className = form_group.getElementsByTagName("input")[0].classList.remove("invalid");
+        form_group.getElementsByTagName("input")[0].classList.add("form-control");
+        form_group.getElementsByTagName("input")[0].classList.remove("invalid");
         form_group.getElementsByTagName("small")[0].innerHTML = "Please enter in your email here."
       }
     } else if (form_group.classList.contains("radio-group")) {       // Radio Groups Validation
@@ -214,7 +219,7 @@ function validate_form() {
         form_group.getElementsByClassName("form-text")[0].innerHTML = "Please fill out this field.";
         valid = false;
       } else {
-        form_group.className += "form-control";
+        form_group.classList.remove("invalid");
       }
     } else if (form_group.classList.contains("checkbox-group")) {   // Checkbox validation
       var cnt = 0;
