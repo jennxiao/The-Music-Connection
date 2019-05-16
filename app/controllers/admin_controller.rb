@@ -28,6 +28,8 @@ class AdminController < ApplicationController
     end
 
     def results
+      @tt_pairs = Match.where("lower(tutee_id) LIKE 't%'")
+      @tp_pairs = Match.where("lower(tutee_id) LIKE 'p%'")
     end
 
     def getRandomColor
