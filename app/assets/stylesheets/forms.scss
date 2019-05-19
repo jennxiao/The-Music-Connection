@@ -1,0 +1,29 @@
+@import "bootstrap";
+
+.navbar {
+  display: flex;
+}
+
+.invalid {
+  background-color: #ffdddd;
+}
+
+.radio-group.invalid {
+  background-color: pink;
+}
+
+.invalid {
+  background-color: #ffdddd;
+}
+
+.btn-xl {
+    padding: 10px 20px;
+    font-size: 35px;
+    width:75%;    //Specify your width here
+}
+
+.btn-group {
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  display: block; /* Make the buttons appear below each other */
+}

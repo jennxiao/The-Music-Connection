@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<br>
+<div class="row">
+  <a href='/' >
+    <div class="container logo">
+        &nbsp;
+        <%= image_tag "logo2.svg", :class => 'logo', :size => "85x85" %>
+    </div>
+  </a>
+  <a><br><h3>Admin Page</h3></a>
+</div>
+
+<div class="container">
+    <%= yield %>
+    <% if flash[:notice] %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+</div>
+</body>
+</html>

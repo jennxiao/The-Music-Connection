@@ -1,0 +1,90 @@
+<h3>Step 1. Manual Matching</h3>
+<div class="row">
+  <h5 class="col-md-6">Tutor</h5>
+  <h5 class="col-md-6">Parent/Teacher</h5>
+</div>
+<div class="row mb-3">
+  <div class="my-custom-scrollbar col-md-6">
+    <table class="table table-striped table-bordered table-hover table-sm" id="table1">
+      <tr class="thead-dark">
+        <th></th>
+        <th>Name</th>
+        <th>Instruments</th>
+        <th>Time Availaibility </th>
+        <th>Comments</th>
+      </tr>
+      <% @tutors.each do |tutor| %>
+        <% if !Match.where(:tutor_id => "t" + tutor.id.to_s)[0].nil? %>
+          <% color = Match.where(:tutor_id => "t" + tutor.id.to_s)[0]['color'] %>
+          <%= ("<tr style=background-color:" + color + ">").html_safe %>
+        <% else %>
+          <tr>
+        <% end %>
+          <td><input type="radio" name=table1 value=""></td>
+          <td><%= tutor['name'] %></td>
+          <td><%= tutor['instrument'].sub("&", ", ") %></td>
+          <td><%= format_time(tutor) %> </td>
+          <td>
+            <% if tutor['comment'] != ""  %>
+              <%= "- " + tutor['comment']%>
+            <% end %>
+            <% if tutor['preferred_student_class'] != ""  %>
+              <% if tutor['comment'] != "" %>
+                <br>
+              <% end %>
+              <%= "- " + tutor['preferred_student_class']%>
+            <% end %>
+          </td>
+          <td style="display:none"><%= "t" + tutor['id'].to_s %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="my-custom-scrollbar col-md-6">
+    <table class="table table-striped table-bordered table-hover table-sm" id="table2">
+      <tr class="thead-dark">
+        <th></th>
+        <th>Name</th>
+        <th>Instruments</th>
+        <th>Time Availaibility </th>
+        <th>Comments</th>
+      </tr>
+      <% @parents.each do |parent| %>
+        <% if !Match.where(:tutee_id => "p" + parent.id.to_s)[0].nil? %>
+          <% color = Match.where(:client_id => "p" + parent.id.to_s)[0]['color'] %>
+          <%= ("<tr style=background-color:" + color + ">").html_safe %>
+        <% else %>
+          <tr>
+        <% end %>
+          <td><input type="radio" name=table2 value=""></td>
+          <td><%= parent['name'] %></td>
+          <td><%= parent['instrument'].sub("&", ", ") %></td>
+          <td><%= format_time(parent) %> </td>
+          <td><%= "- " + parent['comment'] %> </td>
+          <td style="display:none"><%= "p" + parent['id'].to_s %></td>
+        </tr>
+      <% end %>
+      <% @teachers.each do |teacher| %>
+        <% if !Match.where(:tutee_id => "t" + teacher.id.to_s)[0].nil? %>
+          <% color = Match.where(:tutee_id => "t" + teacher.id.to_s)[0]['color'] %>
+          <%= ("<tr style=background-color:" + color + ">").html_safe %>
+        <% else %>
+          <tr>
+        <% end %>
+          <td><input type="radio" name=table2 value=""></td>
+          <td><%= teacher['name'] %></td>
+          <td><%= teacher['instrument'].sub("&", ", ") %></td>
+          <td><%= format_time(teacher) %> </td>
+          <td><%= "- " + teacher['comment'] %> </td>
+          <td style="display:none"><%= "t" + teacher['id'].to_s %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<button type="button" name="button" id="match_btn">Match Pair</button>
+<button type="button" name="button" id="undo_btn">Unmatch Pair</button>
+<br>
+
+<h3>Step 2. Run Algorithm </h3>
+<%= button_to "MATCH!!", admin_run_algo_path, method: :main %>

@@ -1,0 +1,47 @@
+<div style="height:63vw;overflow:hidden;">
+  <div class="hero-img">
+    <div class="motto">
+      <h1 class="typewriter" style="padding-bottom:5.9vw;"></h1>
+      <h1></h1>
+    </div>
+    <div style="margin-top:7vw;">
+      <div>
+          <% if session[:form_opened] %>
+              <button id="scroll_btn">Apply Now</button>
+              <h2 style="color:white; font-weight:900;">∨</h2>
+          <% else %>
+              <h3>Form has been closed! Please come back later.</h3>
+          <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<% if session[:form_opened] %>
+<div class="container pt-3" style="padding-bottom:12vw;">
+  <div class="row justify-content-center">
+      <h1 class='pacifico'>I'm a:</h1>
+  </div>
+  <div class="row pt-3 lobster text-center">
+    <div class="col-md-4">
+        <a href="forms/teacher">
+            <%= image_tag "teacher.png", size: "200x200", alt: "Edit Entry" %>
+        </a>
+        <h5>Teacher</h5>
+    </div>
+    <div class="col-md-4">
+        <a href="forms/tutor">
+            <%= image_tag "tutor.png", size: "200x200", alt: "Edit Entry" %>
+        </a>
+        <h5 class>Tutor</h5>
+    </div>
+    <div class="col-md-4">
+        <a href="forms/parent">
+            <%= image_tag "student.png", size: "200x200", alt: "Edit Entry" %>
+        </a>
+        <h5 class>Parent</h5>
+    </div>
+  </div>
+</div>
+<% end %>
