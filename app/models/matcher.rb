@@ -1,9 +1,11 @@
+# This class contains all the logic for matching students to teachers and tutors
 class Matcher
-    #match_counter -> sort -> final_match
-    #key = tutor_id, value = [possible matched parents or teachers]
+    # match_counter -> sort -> final_match
+    # key = tutor_id, value = [possible matched parents or teachers]
     @possible_matches
     @sorted_tutors
 
+    # Do not yet know all matches of student to tutor or teacher
     def initialize
         @possible_matches = {}
         @sorted_tutors = Tutor.all
@@ -13,7 +15,7 @@ class Matcher
         @possible_matches
     end
 
-
+    # Function to be called for algorithm to be run on student, tutor, and teacher data
     def main
         match_counter
         sort
@@ -21,6 +23,8 @@ class Matcher
         puts "Algorithm succesful."
     end
 
+    # Fills up @possible_matches hash for tutor 
+    # and number of matches of each tutor, parent, and teacher
     def match_counter
         teachers = Teacher.all
         tutors = Tutor.all
@@ -35,7 +39,10 @@ class Matcher
         end
     end
 
-    #it saves the #of matches and updates hashmap
+    # Takes in a tutor and checks if the tutor knows an instrument the parent wants
+    # and if the tutor is available at the time the parent needs a tutor, and if so
+    # it updates the parent and tutor's number of matches
+    # then it updates the possible matches hash with this matching
     def parent_counter(tutor)
       instruments = tutor.instrument.split("&")
         Parent.all.each do |parent|
@@ -53,7 +60,10 @@ class Matcher
         end
     end
 
-    #it saves the #of matches and updates hashmap
+    # Takes in a tutor and checks if the tutor knows an instrument the teacher wants
+    # and if the tutor is available at the time the teacher needs a tutor, and if so
+    # it updates the teacher and tutor's number of matches
+    # then it updates the possible matches hash with this matching
     def teacher_counter(tutor)
         instruments = tutor.instrument.split("&")
         Teacher.all.each do |teacher|
@@ -71,7 +81,8 @@ class Matcher
         end
     end
 
-    # ["1&2&3"]
+    # personEx['availabilities'] = "1&2&3"
+    # Given person, returns array of all times they are available
     def get_times(person)
         ret = []
         person['availabilities'].split('&').each do |tid|
@@ -80,7 +91,7 @@ class Matcher
         return ret
     end
 
-    # it's working dont change
+    # Take in tutor and tutee and returns whether a matching between them is possible
     def time_matches?(tutor, tutee)
         i = j = 0
         possible = false
@@ -89,6 +100,11 @@ class Matcher
 
         tutor_times.each do |t1|
             tutee_times.each do |t2|
+                # If tutor and teacher/student's day they want tutoring overlap
+                # Then if they have overlapping availability of at least an hour
+                # change possible to true to show that a matching between
+                # this tutor and tutee is possible
+                # Then check 
                 if t1['weekday'] == t2['weekday']
                     start_t = [t1['start_time'], t2['start_time']].sort
                     start_t[0] = start_t[0].split(":")
@@ -114,12 +130,15 @@ class Matcher
         end
     end
 
+    # after all prep is done, this function performs the matching between tutors and tutees
     def final_match
         # for each tutor, (sorted in order from least to most number of possible matches)
         @sorted_tutors.each do |sorted_tutor|
         # we go through its possible matches (also sorted in order from least to most number of possible matches)
+            # If no possible messages, just end
             if @possible_matches[sorted_tutor['id']].nil?
                 puts "no"
+            # else it does have a possible match
             else
                 puts "yes"
                 @possible_matches[sorted_tutor['id']].each do |tutee|
