@@ -4,8 +4,7 @@ gem 'bootstrap', '~> 4.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-gem 'pg', '~> 0.20' # use PostgreSQL in production (Heroku)
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -55,7 +54,7 @@ group :development do
 end
 
 group :production do
-
+  gem 'pg', '~> 0.20' # use PostgreSQL in production (Heroku)
   gem 'rails_12factor'  # Heroku-specific production settings
 end
 

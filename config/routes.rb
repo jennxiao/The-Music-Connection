@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   post 'admin/match_pair' => 'admin#match_pair'
   put 'admin/undo_pair' => 'admin#undo_pair'
 
-
   resources :tutors
   resources :teachers
   resources :parents
