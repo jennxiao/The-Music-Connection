@@ -74,11 +74,11 @@ class FormsController < ApplicationController
     weekday = params[:question][:weekday]
     start_time = params[:question][:start_time]
     end_time = params[:question][:end_time]
-    piano_home = params[:question][:piano_home]
+    params[:question][:piano_home].strip.downcase == "yes" ? piano_home = "t" : piano_home = "f"
     instrument = params[:question][:instrument]
     experiences = params[:question][:experiences]
-    pastapp = params[:question][:pastapp]
-    lunch = params[:question][:lunch]
+    params[:question][:pastapp].strip.downcase == "yes" ? pastapp = "t" : pastapp = "f"
+    params[:question][:lunch].strip.downcase == "yes" ? lunch = "t" : lunch = "f"
     comment = params[:question][:comment]
     others = params[:question][:others]
     number_of_matches = 0
@@ -102,11 +102,25 @@ class FormsController < ApplicationController
       times += (availability.id.to_s + "&")
     end
     times = times.chomp("&")
-    parent = Parent.new
-    parent.attributes = {name: name, phone: phone,
-      email: email, address: address, grade: grade, availabilities: times, piano_home: piano_home,
-      instrument: instruments, experiences: experiences,
-    pastapp: pastapp, lunch: lunch, comment: comment, number_of_matches: number_of_matches, matched: false}
+    parent = Parent.new( 
+      name: name, 
+      phone: phone,
+      email: email, 
+      address: address, 
+      grade: grade, 
+      availabilities: times, 
+      piano_home: piano_home,
+      instrument: instruments, 
+      experiences: experiences,
+      pastapp: pastapp, 
+      lunch: lunch, 
+      comment: comment, 
+      number_of_matches: number_of_matches, 
+      matched: false
+    )
+    puts parent.pastapp
+    puts parent.piano_home
+    puts parent.valid?
     parent.save!
     render 'thank_you'
   end
@@ -124,11 +138,11 @@ class FormsController < ApplicationController
     start_time = params[:question][:start_time]
     end_time = params[:question][:end_time]
     preferred_grade = params[:question][:preferred_grade]
-    in_class = params[:question][:in_class]
+    params[:question][:in_class].strip.downcase == "yes" ? in_class = "t" : in_class = "f"
+    params[:question][:private].strip.downcase == "yes" ? private = "t" : private = "f"
     instrument = params[:question][:instrument]
-    private = params[:question][:private]
-    returning = params[:question][:returning]
-    prev_again = params[:question][:prev_again]
+    params[:question][:returning].strip.downcase == "returning" ? returning = "t" : returning = "f"
+    params[:question][:prev_again].strip.downcase == "yes" ? prev_again = "t" : prev_again = "f"
     preferred_student_class = params[:question][:preferred_student_class]
     comment = params[:question][:comment]
     others = params[:question][:others]
