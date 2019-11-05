@@ -3,7 +3,7 @@ var cur_tab = 0;
 var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
-init();
+
 function init() {
   //Show only the first tab and the corresponding buttons
   hide_all_tabs();
@@ -142,7 +142,6 @@ function next() {
   var tabs = document.getElementsByClassName("tab");
   tabs[cur_tab].style.display = "none";
   array.push(cur_tab);
-  console.log(array);
   //tab navigation listener
   var jump_group0 = tabs[cur_tab].querySelector("#jump-group0");
   if (jump_group0 != null) {
@@ -264,3 +263,7 @@ function validate_form() {
   }
   return valid;
 }
+
+// Prevent the browser from attempting to execute init before page
+// finishes loading, which logs a phantom error in console
+window.onload = init;
