@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190508003536) do
+ActiveRecord::Schema.define(version: 20191105235030) do
 
   create_table "availabilities", force: :cascade do |t|
     t.string "weekday"
@@ -30,18 +30,18 @@ ActiveRecord::Schema.define(version: 20190508003536) do
     t.string   "phone"
     t.string   "email"
     t.string   "address"
-    t.string   "grade"
-    t.string   "piano_home"
     t.string   "availabilities"
     t.string   "instrument"
     t.string   "experiences"
-    t.string   "pastapp"
-    t.string   "lunch"
     t.string   "comment"
     t.integer  "number_of_matches"
     t.boolean  "matched"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "grade"
+    t.boolean  "piano_home"
+    t.boolean  "past_app"
+    t.boolean  "lunch"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20190508003536) do
     t.string   "email"
     t.string   "class_name"
     t.string   "school_name"
-    t.string   "grade"
     t.string   "availabilities"
     t.string   "instrument"
     t.string   "comment"
@@ -58,30 +57,31 @@ ActiveRecord::Schema.define(version: 20190508003536) do
     t.boolean  "matched"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "grade"
   end
 
   create_table "tutors", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
-    t.string   "sid"
     t.string   "year"
     t.string   "major"
     t.string   "minor"
     t.string   "experiences"
     t.string   "availabilities"
     t.string   "preferred_grade"
-    t.string   "in_class"
     t.string   "instrument"
-    t.string   "private"
-    t.string   "returning"
-    t.string   "prev_again"
     t.string   "preferred_student_class"
     t.string   "comment"
     t.integer  "number_of_matches"
     t.boolean  "matched"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "sid",                     limit: 8
+    t.boolean  "in_class"
+    t.boolean  "private"
+    t.boolean  "returning"
+    t.boolean  "prev_again"
   end
 
 end
