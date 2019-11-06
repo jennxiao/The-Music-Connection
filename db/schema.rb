@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191105235030) do
+ActiveRecord::Schema.define(version: 20191106061749) do
+
+  create_table "admin_settings", force: :cascade do |t|
+    t.boolean  "form_open"
+    t.string   "salt"
+    t.string   "password_hash"
+    t.datetime "last_updated"
+    t.string   "email"
+    t.string   "session_id"
+  end
 
   create_table "availabilities", force: :cascade do |t|
     t.string "weekday"
