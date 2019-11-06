@@ -17,9 +17,8 @@ class AdminController < ApplicationController
   end
 
   def welcome
-    a = AdminSettings.last
-    if a.last_updated == Time.at(1)
-      flash[:notice] = 'Settings are at default value: please update ASAP!'
+    if default_password?
+      flash[:notice] = 'Password is at default value: please update ASAP!'
     end
   end
 
@@ -122,7 +121,7 @@ class AdminController < ApplicationController
     a.attributes = {
       form_open: new_form_open.nil? ? b.form_open : new_form_open,
       salt: "this is never actually used bc library handles it for us",
-      password_hash: BCrypt::Password.create(new_pass.nil? ? b.password_hash : new_pass),
+      password_hash: new_pass.nil? ? b.password_hash : BCrypt::Password.create(new_pass),
       last_updated: Time.now,
       email: new_email.nil? ? b.email : new_email,
       session_id: Sysrandom.hex(64)

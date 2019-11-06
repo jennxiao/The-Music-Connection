@@ -13,10 +13,10 @@ module Login
         a.attributes = {
           form_open: false,
           salt: "salt",
-          password_hash: BCrypt::Password.create("password"),
+          password_hash: BCrypt::Password.create('password'),
           last_updated: Time.at(1),
-          email: "placeholder@tmc.com",
-          session_id: "placeholder"
+          email: 'placeholder@tmc.com',
+          session_id: 'placeholder'
         }
         a.save
       end
@@ -40,6 +40,11 @@ module Login
         return settings.session_id
       end
       return ""
+    end
+  
+    def default_password?
+      a = AdminSettings.last
+      BCrypt::Password.new(a.password_hash) == 'password'
     end
   
   end
