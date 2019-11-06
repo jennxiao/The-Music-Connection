@@ -16,6 +16,13 @@ class AdminController < ApplicationController
     redirect_to '/admin/welcome'
   end
 
+  def welcome
+    a = AdminSettings.last
+    if a.last_updated == Time.at(1)
+      flash[:notice] = 'Settings are at default value: please update ASAP!'
+    end
+  end
+
   def open_form
     change_settings({ new_form_open: true })
     flash[:notice] = 'Form is now opened!'
@@ -80,7 +87,6 @@ class AdminController < ApplicationController
     puts "successfully destroyed!"
     render text: ""
   end
-
 
   def reset_database
       Teacher.delete_all
