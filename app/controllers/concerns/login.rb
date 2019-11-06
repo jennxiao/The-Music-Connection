@@ -47,6 +47,11 @@ module Login
       BCrypt::Password.new(a.password_hash) == 'password'
     end
   
+    def logged_in?(auth)
+      a = AdminSettings.last
+      a.session_id == auth
+    end
+  
   end
 
 end

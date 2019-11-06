@@ -8,6 +8,9 @@ class AdminController < ApplicationController
   end
 
   def home
+    if logged_in?(session[:auth_token])
+      redirect_to '/admin/welcome'
+    end
   end
 
   def login
@@ -16,10 +19,28 @@ class AdminController < ApplicationController
     redirect_to '/admin/welcome'
   end
 
+  def logout
+    session[:auth_token] = ''
+    redirect_to '/admin'
+  end
+
   def welcome
     if default_password?
       flash[:notice] = 'Password is at default value: please update ASAP!'
     end
+  end
+
+  def update_settings_post
+    if session[:auth_token] != attempt_login(params[:old_password])
+      flash[:notice] = 'Incorrect password'
+      redirect_to '/admin/update_settings' and return
+    end
+    change_settings({
+      new_pass: params[:new_password].empty? ? nil : params[:new_password],
+      new_email: params[:new_email].empty? ? nil : params[:new_email]
+    })
+    flash[:notice] = 'Updated settings'
+    redirect_to '/admin/welcome' and return
   end
 
   def open_form

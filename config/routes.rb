@@ -1,29 +1,35 @@
 Rails.application.routes.draw do
 
-  get 'admin' => 'admin#home'
+  get  'admin' => 'admin#home'
   post 'admin/login'
-  get 'admin/close_form'
-  get 'admin/open_form'
-  get 'admin/generate_matches' => 'admin#generate_matches'
-  get 'admin/results'
+  get  'admin/update_settings'
+  post 'admin/update_settings' => 'admin#update_settings_post'
+  get  'admin/logout' => 'admin#logout'
+
+  get  'admin/close_form'
+  get  'admin/open_form'
+  get  'admin/generate_matches' => 'admin#generate_matches'
+  get  'admin/results'
 
   post 'admin/run_algo' => 'admin#run_algo'
   post 'admin/match_pair' => 'admin#match_pair'
-  put 'admin/undo_pair' => 'admin#undo_pair'
+  put  'admin/undo_pair' => 'admin#undo_pair'
 
   resources :tutors
   resources :teachers
   resources :parents
 
-  get 'forms/teacher'
+  get  '/forms' => 'forms#index'
+
+  get  'forms/teacher'
   post 'forms/teacher' => 'forms#teacher'
   post 'forms/teacher_submit' => 'forms#teacher_submit'
 
-  get 'forms/tutor'
-  get 'forms/parent'
-  get '/forms' => 'forms#index'
+  get  'forms/tutor'
   post 'forms/tutor' => 'forms#tutor'
   post 'forms/tutor_submit' => 'forms#tutor_submit'
+
+  get  'forms/parent'
   post 'forms/parent_submit' => 'forms#parent_submit'
 
 
