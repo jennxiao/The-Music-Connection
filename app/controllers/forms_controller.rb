@@ -4,9 +4,9 @@ class FormsController < ApplicationController
   end
 
   def teacher
-      if !session[:form_opened]
-          render text: "form closed!"
-      end
+    if !session[:form_opened]
+      render text: "form closed!"
+    end
   end
 
   def parent

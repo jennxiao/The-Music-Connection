@@ -19,11 +19,11 @@ class Tutor < ActiveRecord::Base
                               inclusion: { in: [ "Grade 3~5",
                                                  "Grade 6~8",
                                                  "Grade 9~12"  ]}
-  validates :in_class,        inclusion: { in: ["t", "f"] }
-  validates :private,         inclusion: { in: ["t", "f"] }
+  validates :in_class,        inclusion: { in: [true, false] }
+  validates :private,         inclusion: { in: [true, false] }
   validates :instrument,      exclusion:  { in: [nil] }
-  validates :returning,       inclusion: { in: ["t", "f"] }
-  validates :prev_again,      inclusion: { in: ["t", "f"] }
+  validates :returning,       inclusion: { in: [true, false] }
+  validates :prev_again,      inclusion: { in: [true, false] }
   validates :comment,         exclusion:  { in: [nil] }
 
 end

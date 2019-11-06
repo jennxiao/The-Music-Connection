@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'admin' => 'admin#home'
+  post 'admin/login'
   get 'admin/close_form'
   get 'admin/open_form'
   get 'admin/generate_matches' => 'admin#generate_matches'
