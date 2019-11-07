@@ -4,23 +4,23 @@ class FormsController < ApplicationController
   end
 
   def teacher
-    if !session[:form_opened]
+    if !session[:form_open]
       render text: "form closed!"
     end
   end
 
   def parent
-      if !session[:form_opened]
-          render text: "form closed!"
-      end
+    if !session[:form_open]
+      render text: "form closed!"
+    end
   end
 
   def tutor
-      if !session[:form_opened]
-          render text: "form closed!"
-      end
-      session[:q_page] = 0
-      @q_page = 0
+    if !session[:form_open]
+      render text: "form closed!"
+    end
+    session[:q_page] = 0
+    @q_page = 0
   end
 
   def teacher_submit
@@ -37,7 +37,6 @@ class FormsController < ApplicationController
     comment = params[:question][:comment]
     others = params[:question][:others]
     number_of_matches = 0
-    times = ""
     instruments = ""
     other_count = 1
     for i in 0...instrument.count do
@@ -49,19 +48,18 @@ class FormsController < ApplicationController
       end
     end
     instruments = instruments.chomp("&")
-    for i in 0...weekday.count do
-      availability = Availability.new
-      availability.attributes = {weekday: weekday[i], start_time: start_time[i], end_time: end_time[i]}
-      availability.save!
-      times += (availability.id.to_s + "&")
+    availabilities = ''
+    for i in 0...weekday.count do 
+      a = Availability.new(weekday[i], start_time[i], end_time[i])
+      availabilities += Availability.serialize(a)
     end
-    times = times.chomp("&")
     teacher = Teacher.new
     teacher.attributes = {name: name, phone: phone,
       email: email, class_name: class_name, school_name: school_name,
-      grade: grade, availabilities: times, instrument: instruments, comment: comment,
+      grade: grade, availabilities: availabilities, instrument: instruments, comment: comment,
       number_of_matches: number_of_matches, matched: false}
     teacher.save!
+    puts teacher
     render 'thank_you'
   end
 
@@ -82,8 +80,6 @@ class FormsController < ApplicationController
     comment = params[:question][:comment]
     others = params[:question][:others]
     number_of_matches = 0
-
-    times = ""
     instruments = ""
     other_count = 1
     for i in 0...instrument.count do
@@ -95,13 +91,11 @@ class FormsController < ApplicationController
       end
     end
     instruments = instruments.chomp("&")
-    for i in 0...weekday.count do
-      availability = Availability.new
-      availability.attributes = {weekday: weekday[i], start_time: start_time[i], end_time: end_time[i]}
-      availability.save!
-      times += (availability.id.to_s + "&")
+    availabilities = ''
+    for i in 0...weekday.count do 
+      a = Availability.new(weekday[i], start_time[i], end_time[i])
+      availabilities += Availability.serialize(a)
     end
-    times = times.chomp("&")
     parent = Parent.new
     parent.attributes = {
       name: name, 
@@ -109,7 +103,7 @@ class FormsController < ApplicationController
       email: email, 
       address: address, 
       grade: grade, 
-      availabilities: times, 
+      availabilities: availabilities, 
       piano_home: piano_home,
       instrument: instruments, 
       experiences: experiences,
@@ -145,7 +139,6 @@ class FormsController < ApplicationController
     comment = params[:question][:comment]
     others = params[:question][:others]
     number_of_matches = 0
-    times = ""
     instruments = ""
     other_count = 1
     for i in 0...instrument.count do
@@ -157,17 +150,15 @@ class FormsController < ApplicationController
       end
     end
     instruments = instruments.chomp("&")
-    for i in 0...weekday.count do
-      availability = Availability.new
-      availability.attributes = {weekday: weekday[i], start_time: start_time[i], end_time: end_time[i]}
-      availability.save!
-      times += (availability.id.to_s + "&")
+    availabilities = ''
+    for i in 0...weekday.count do 
+      a = Availability.new(weekday[i], start_time[i], end_time[i])
+      availabilities += Availability.serialize(a)
     end
-    times = times.chomp("&")
     tutor = Tutor.new
     tutor.attributes = {name: name, phone: phone,
       email: email, sid: sid, year: year,
-      major: major, minor: minor, experiences: experiences, availabilities: times,
+      major: major, minor: minor, experiences: experiences, availabilities: availabilities,
     preferred_grade: preferred_grade, in_class: in_class, instrument: instruments,
     private: private, returning: returning,
     prev_again: prev_again, preferred_student_class: preferred_student_class, comment: comment,

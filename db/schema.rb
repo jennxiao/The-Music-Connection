@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191106061749) do
+ActiveRecord::Schema.define(version: 20191107004435) do
 
   create_table "admin_settings", force: :cascade do |t|
     t.boolean  "form_open"
@@ -20,12 +20,6 @@ ActiveRecord::Schema.define(version: 20191106061749) do
     t.datetime "last_updated"
     t.string   "email"
     t.string   "session_id"
-  end
-
-  create_table "availabilities", force: :cascade do |t|
-    t.string "weekday"
-    t.string "start_time"
-    t.string "end_time"
   end
 
   create_table "matches", force: :cascade do |t|
