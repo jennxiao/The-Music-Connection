@@ -4,6 +4,7 @@ var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
 
+
 function init() {
   //Show only the first tab and the corresponding buttons
   hide_all_tabs();
@@ -23,6 +24,19 @@ function init() {
       return true;
     }
   }, true);
+
+  //Add a hyphen to every third character in phone number form.
+  var phoneNumberForm = document.getElementById("phone_number_form")
+  phoneNumberForm.addEventListener("keypress", addHyphens)
+
+  function addHyphens() {
+      var numberValue = phoneNumberForm.value;
+      if (numberValue.length == 3) {
+        phoneNumberForm.value += "-";
+      } else if (numberValue.length == 7) {
+        phoneNumberForm.value += "-";
+      }
+  }
 
   //Event Listener for adding/removing instruments
   document.getElementById("rem_instr").style.display = "none";
