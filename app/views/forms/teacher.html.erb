@@ -82,26 +82,40 @@
         <div id="instruments">
           <label>Instrument/Singing</label>
           <div class="instrument">
-<!--             <input type="checkbox" name="Piano" value="Piano"> Piano
-            <input type="checkbox" name="Violin" value="Violin"> Violin -->
-            <select class="form-control" name="question[instrument][]">
-              <option disabled selected value> -- select an option -- </option>
-              <option value="Violin">Violin</option>
-              <option value="Cello">Cello</option>
-              <option value="Guitar">Guitar</option>
-              <option value="Piano">Piano</option>
-              <option value="Singing">Singing</option>
-              <option value="Others" >Others</option>
-            </select>
-            <input class="form-control instr_other" type="text" style="display:none;" name="question[others][]" placeholder="Specify instrument">
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <input type="checkbox" name="question[instrument][]" value="Violin"> Violin <br>
+                <input type="checkbox" name="question[instrument][]" value="Viola"> Viola <br>
+                <input type="checkbox" name="question[instrument][]" value="Cello"> Cello <br>
+                <input type="checkbox" name="question[instrument][]" value="Double Bass"> Double Bass
+              </div>
+            </div>
+
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <input type="checkbox" name="question[instrument][]" value="Flute"> Flute <br>
+                <input type="checkbox" name="question[instrument][]" value="Clarinet"> Clarinet <br>
+                <input type="checkbox" name="question[instrument][]" value="Saxophone"> Saxophone <br>
+                <input type="checkbox" name="question[instrument][]" value="Oboe"> Oboe <br>
+                <input type="checkbox" name="question[instrument][]" value="Trumpet"> Trumpet <br>
+                <input type="checkbox" name="question[instrument][]" value="French Horn"> French Horn <br>
+                <input type="checkbox" name="question[instrument][]" value="Trombone"> Trombone <br>
+                <input type="checkbox" name="question[instrument][]" value="Baritone"> Baritone <br>
+                <input type="checkbox" name="question[instrument][]" value="Tuba"> Tuba <br>
+                <input type="checkbox" name="question[instrument][]" value="Percussion"> Percussion
+              </div>
+            </div>
+
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <input type="checkbox" name="question[instrument][]" value="Piano"> Piano <br>
+                <input type="checkbox" name="question[instrument][]" value="Guitar"> Guitar <br>
+                <input type="checkbox" name="question[instrument][]" value="Ukelele"> Ukelele <br>
+                <input type="checkbox" name="question[instrument][]" value="Voice"> Voice
+              </div>
+            </div>
           </div>
         </div>
-        <button type="button" class="btn btn-primary btn-sm" id="add_instr">
-          Add More Instrument
-        </button>
-        <button type="button" class="btn btn-primary btn-sm" id="rem_instr">
-          Remove Instrument
-        </button>
         <small class="form-text text-muted">Select the instruments your class teaches.</small>
       </div>
 

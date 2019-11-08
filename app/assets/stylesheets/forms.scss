@@ -27,3 +27,18 @@
   cursor: pointer; /* Pointer/hand icon */
   display: block; /* Make the buttons appear below each other */
 }
+
+.instrument {
+  display: flex;
+  flex-direction: row;
+}
+
+.paddedBox {
+  margin: 10px;
+}
+
+.instrument_box {
+  border: solid 1px blue;
+  flex: 0 0 33%;
+  margin-bottom: 10px;
+}
