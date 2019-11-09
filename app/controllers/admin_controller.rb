@@ -55,6 +55,32 @@ class AdminController < ApplicationController
     redirect_to '/admin/welcome'
   end
 
+  def debug_calculate
+    m = Matcher.calculate
+    # m = Match.all
+    @calculated = []
+    m.each do |match|
+      entry = {
+        :tutor => match.tutor.id,
+        :tutor_name => match.tutor.name,
+        :score => match.score,
+        :teacher => "nil",
+        :teacher_name => "nil",
+        :parent => "nil",
+        :parent_name => "nil"
+      }
+      if !match.teacher.nil?
+        entry[:teacher] = match.teacher.id
+        entry[:teacher_name] = match.teacher.name
+      else
+        entry[:parent] = match.parent.id
+        entry[:parent_name] = match.parent.name
+      end
+      @calculated.push(entry)
+    end
+    render 'debug_calculate'
+  end
+
   def generate_matches
     @tutors = Tutor.where("tutors.comment != '' or tutors.preferred_student_class != ''")
     @teachers = Teacher.where.not(comment: [nil, ""])
@@ -63,7 +89,7 @@ class AdminController < ApplicationController
   end
 
   def run_algo
-    Matcher.new.main
+    Matcher.calculate
     flash[:notice] = 'Matching has been completed!'
     redirect_to '/admin/welcome'
   end

@@ -38,28 +38,6 @@ function init() {
     }
   }
 
-  //Event Listener for adding/removing time availability
-  // var add_time = document.getElementById("add_time");
-  // add_time.addEventListener('click', function() {
-  //   var original = document.getElementsByClassName("time-group")[0];
-  //   var cln = original.cloneNode(true);
-  //   document.getElementById("time-groups").appendChild(cln);
-  //   if (document.getElementsByClassName("time-group").length > 1) {
-  //     document.getElementById("rem_time").style.display = "inline-block";
-  //   }
-  // });
-
-  // document.getElementById("rem_time").style.display = "none";
-  // var rem_time = document.getElementById("rem_time");
-  // rem_time.addEventListener('click', function () {
-  //   var len = document.getElementsByClassName("time-group").length;
-  //   var elem = document.getElementsByClassName("time-group")[len - 1];
-  //   document.getElementById("time-groups").removeChild(elem);
-  //   if (document.getElementsByClassName("time-group").length <= 1) {
-  //     document.getElementById("rem_time").style.display = "none";
-  //   }
-  // });
-
   //Event Listener for adding/removing classes
   var add_class = document.getElementById("add_class");
   add_class.addEventListener('click', function() {
