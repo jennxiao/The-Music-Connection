@@ -30,72 +30,57 @@ function init() {
   phoneNumberForm.addEventListener("keypress", addHyphens)
 
   function addHyphens() {
-      var numberValue = phoneNumberForm.value;
-      if (numberValue.length == 3) {
-        phoneNumberForm.value += "-";
-      } else if (numberValue.length == 7) {
-        phoneNumberForm.value += "-";
-      }
+    var numberValue = phoneNumberForm.value;
+    if (numberValue.length == 3) {
+      phoneNumberForm.value += "-";
+    } else if (numberValue.length == 7) {
+      phoneNumberForm.value += "-";
+    }
   }
-
-  //Event Listener for adding/removing instruments
-  document.getElementById("rem_instr").style.display = "none";
-  var instrument = document.getElementsByClassName("instrument")[0];
-  if (instrument != null) {
-    instrument.addEventListener('change', function(){
-      display_other(instrument);
-    });
-  }
-  var add_instr = document.getElementById("add_instr");
-  add_instr.addEventListener('click', function() {
-    var original = document.getElementsByClassName("instrument")[0];
-    var cln = original.cloneNode(true);
-
-    if (cln != null) {
-      cln.addEventListener('change', function(){
-        display_other(cln);
-      });
-    }
-    var other = cln.getElementsByClassName("instr_other")[0];
-    var val = cln.getElementsByTagName("select")[0].value;
-    if (val == "Others") {
-      other.style.display = 'block';
-    } else {
-      other.style.display = 'none';
-    }
-    document.getElementById("instruments").appendChild(cln);
-    if (document.getElementsByClassName("instrument").length > 1) {
-      document.getElementById("rem_instr").style.display = "inline-block";
-    }
-  });
-  var rem_instr = document.getElementById("rem_instr");
-  rem_instr.addEventListener('click', function () {
-    var len = document.getElementsByClassName("instrument").length;
-    var elem = document.getElementsByClassName("instrument")[len - 1];
-    document.getElementById("instruments").removeChild(elem);
-    if (document.getElementsByClassName("instrument").length <= 1) {
-      document.getElementById("rem_instr").style.display = "none";
-    }
-  });
 
   //Event Listener for adding/removing time availability
-  var add_time = document.getElementById("add_time");
-  add_time.addEventListener('click', function() {
-    var original = document.getElementsByClassName("time-group")[0];
+  // var add_time = document.getElementById("add_time");
+  // add_time.addEventListener('click', function() {
+  //   var original = document.getElementsByClassName("time-group")[0];
+  //   var cln = original.cloneNode(true);
+  //   document.getElementById("time-groups").appendChild(cln);
+  //   if (document.getElementsByClassName("time-group").length > 1) {
+  //     document.getElementById("rem_time").style.display = "inline-block";
+  //   }
+  // });
+
+  // document.getElementById("rem_time").style.display = "none";
+  // var rem_time = document.getElementById("rem_time");
+  // rem_time.addEventListener('click', function () {
+  //   var len = document.getElementsByClassName("time-group").length;
+  //   var elem = document.getElementsByClassName("time-group")[len - 1];
+  //   document.getElementById("time-groups").removeChild(elem);
+  //   if (document.getElementsByClassName("time-group").length <= 1) {
+  //     document.getElementById("rem_time").style.display = "none";
+  //   }
+  // });
+
+  //Event Listener for adding/removing classes
+  var add_class = document.getElementById("add_class");
+  add_class.addEventListener('click', function() {
+    console.log("add class clicked!")
+    var original = document.getElementsByClassName("class-group")[0];
     var cln = original.cloneNode(true);
-    document.getElementById("time-groups").appendChild(cln);
-    if (document.getElementsByClassName("time-group").length > 1) {
-      document.getElementById("rem_time").style.display = "inline-block";
+    document.getElementById("class-groups").appendChild(cln);
+    if (document.getElementsByClassName("class-group").length > 1) {
+      document.getElementById("rem_class").style.display = "inline-block";
     }
   });
-  document.getElementById("rem_time").style.display = "none";
-  var rem_time = document.getElementById("rem_time");
-  rem_time.addEventListener('click', function () {
-    var len = document.getElementsByClassName("time-group").length;
-    var elem = document.getElementsByClassName("time-group")[len - 1];
-    document.getElementById("time-groups").removeChild(elem);
-    if (document.getElementsByClassName("time-group").length <= 1) {
-      document.getElementById("rem_time").style.display = "none";
+
+  document.getElementById("rem_class").style.display = "none";
+  var rem_class = document.getElementById("rem_class");
+  rem_class.addEventListener('click', function () {
+    console.log("rem class clicked!")
+    var len = document.getElementsByClassName("class-group").length;
+    var elem = document.getElementsByClassName("class-group")[len - 1];
+    document.getElementById("class-groups").removeChild(elem);
+    if (document.getElementsByClassName("class-group").length <= 1) {
+      document.getElementById("rem_class").style.display = "none";
     }
   });
 }
