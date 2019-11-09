@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191107004435) do
+ActiveRecord::Schema.define(version: 20191109070243) do
 
   create_table "admin_settings", force: :cascade do |t|
     t.boolean  "form_open"
@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(version: 20191107004435) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.string "tutor_id"
-    t.string "tutee_id"
-    t.string "color"
+    t.integer "tutors_id"
+    t.integer "teachers_id"
+    t.integer "parents_id"
+    t.boolean "forced"
+    t.integer "score"
   end
 
   create_table "parents", force: :cascade do |t|

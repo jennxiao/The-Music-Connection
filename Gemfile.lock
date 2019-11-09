@@ -157,6 +157,7 @@ GEM
     minitest (5.12.2)
     multi_json (1.14.1)
     multi_test (0.1.2)
+    munkres (0.1.0)
     nenv (0.3.0)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -297,6 +298,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  munkres (~> 0.1.0)
   pg (~> 0.20)
   pusher
   rails (= 4.2.10)

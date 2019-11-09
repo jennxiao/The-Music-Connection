@@ -134,7 +134,11 @@ class FormsController < ApplicationController
     params[:question][:private].strip.downcase == "yes" ? private = true : private = false
     instrument = params[:question][:instrument]
     params[:question][:returning].strip.downcase == "returning" ? returning = true : returning = false
-    params[:question][:prev_again].strip.downcase == "yes" ? prev_again = true : prev_again = false
+    if params[:question][:prev_again].nil? || params[:question][:prev_again].strip.downcase == "yes"
+      prev_again = true 
+    else
+      prev_again = false
+    end
     preferred_student_class = params[:question][:preferred_student_class]
     comment = params[:question][:comment]
     others = params[:question][:others]

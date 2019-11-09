@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get  'admin/close_form'
   get  'admin/open_form'
+  get  'admin/debug_calculate'
+  
   get  'admin/generate_matches' => 'admin#generate_matches'
   get  'admin/results'
 

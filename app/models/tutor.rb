@@ -16,9 +16,9 @@ class Tutor < ActiveRecord::Base
                                                  "10+ years"   ]}
   validates :availabilities,  presence: true
   validates :preferred_grade, presence: true,
-                              inclusion: { in: [ "Grade 3~5",
-                                                 "Grade 6~8",
-                                                 "Grade 9~12"  ]}
+                              inclusion: { in: [ "Grade 3-5",
+                                                 "Grade 6-8",
+                                                 "Grade 9-12"  ]}
   validates :in_class,        inclusion: { in: [true, false] }
   validates :private,         inclusion: { in: [true, false] }
   validates :instrument,      exclusion:  { in: [nil] }

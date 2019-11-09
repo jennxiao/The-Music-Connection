@@ -30,6 +30,9 @@ gem 'pusher'
 gem 'bcrypt', '~> 3.1.7'
 gem 'sysrandom', '~> 1.0', '>= 1.0.5'
 
+# Implementation of Hungarian Algorithm
+gem 'munkres', '~> 0.1.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
