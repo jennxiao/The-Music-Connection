@@ -18,5 +18,4 @@ module AdminHelper
       return times
     end
   end
-
 end

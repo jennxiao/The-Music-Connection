@@ -1,25 +1,27 @@
 class Match < ActiveRecord::Base
-  belongs_to :tutor
-  belongs_to :teacher
-  belongs_to :parent
+  belongs_to :tutor, foreign_key: :tutors_id
+  belongs_to :teacher, foreign_key: :teachers_id
+  belongs_to :parent, foreign_key: :parents_id
 
   validates :score,   presence: true, 
-                      numericality: { only_integer: true }, 
-                      maximum: AdminHelper.MAX_WEIGHT, 
-                      minimum: 0
+                      numericality: {   
+                        :only_integer => true,
+                        :less_than_or_equal_to => 1000,
+                        :greater_than_or_equal_to => 0
+                      }
   validates :forced,  inclusion: { in: [true, false] }
 
-  validate :one_tutor_one_client
+  validate :one_tutor_one_student
   
-  def one_tutor_one_client
-    if !tutor.present?
-      errors.add("Tutor missing in match")
+  def one_tutor_one_student
+    if tutor.nil?
+      errors.add(:tutor, "Tutor missing in match")
     end
-    if !teacher.present? && !parent.present?
-      errors.add("Client missing in match")
+    if teacher.nil? && parent.nil?
+      errors.add(:teacher, "Student missing in match")
     end
-    if teacher.present? && parent.present?
-      errors.add("Both teacher and parent present in match (must be one to one):", :teacher, :parent)
+    if !teacher.nil? && !parent.nil?
+      errors.add(:teacher, "Two students present in match (must be one to one)")
     end
   end
   
