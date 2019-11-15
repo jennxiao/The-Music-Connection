@@ -28,6 +28,8 @@ When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
     field = "question[minor]"
   when /^Experiences/
     field = "question[exp]"
+  when /^Teacher Name/
+	field = "question[teacher_name]"
   end
 
   fill_in field, with: value
@@ -56,8 +58,14 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
     field = "question[exp]"
   when /^Preferred Student/
     field = "question[preference]"
+  when /^Teacher Name/
+	field = "question[teacher_name]"
+  when /^Class Name/
+	  field = "question[class_name]"
+  when /^School/
+	field = "question[school_name]"
   end
-
+  
   fill_in field, with: value
 end
 
@@ -70,6 +78,10 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
     field = "question[time]"
   when /^Instrument/
     field = "question[instrument]"
+  when /^Class Time/
+	field = "question[weekday][]"
   end
+  
   select(value, :from => field)
 end
+

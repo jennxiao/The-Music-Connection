@@ -7,7 +7,7 @@
     <div class="tab">
       <div class="form-group required">
         <label for="name">Teacher Name</label>
-        <input type="text" name="question[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
+        <input id="teacher_name_field" type="text" name="question[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
         <small class="form-text text-muted">Please enter your full name here!</small>
       </div>
       <div class="form-group required">
@@ -108,7 +108,7 @@
 
             <div class="instrument_box">
               <div class="paddedBox">
-                <input type="checkbox" name="question[instrument][]" value="Piano"> Piano <br>
+                <input type="checkbox" id="Piano" name="question[instrument][]" value="Piano"> Piano <br>
                 <input type="checkbox" name="question[instrument][]" value="Guitar"> Guitar <br>
                 <input type="checkbox" name="question[instrument][]" value="Ukelele"> Ukelele <br>
                 <input type="checkbox" name="question[instrument][]" value="Voice"> Voice

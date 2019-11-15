@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+#AdminSettings.create(:form_open => true,
+#					 :salt => "PLACEHOLDER",
+#					 :password_hash => "PLACEHOLDER",
+#					 :last_updated => DateTime.new(2001,2,3,4,5,6),
+#					 :email => "anthonyfzhou@berkeley.edu",
+#					 :session_id => "PLACEHOLDER")
