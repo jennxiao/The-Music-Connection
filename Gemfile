@@ -46,6 +46,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3', '~> 1.3.13'
   gem 'byebug'
+  gem 'therubyracer', :platforms => :ruby # Solves linux console error some versions of rails give if no javascript runtime environment is given
 end
 
 group :development do

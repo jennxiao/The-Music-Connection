@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191109070243) do
+ActiveRecord::Schema.define(version: 20191118052326) do
 
   create_table "admin_settings", force: :cascade do |t|
     t.boolean  "form_open"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20191109070243) do
     t.boolean  "piano_home"
     t.boolean  "past_app"
     t.boolean  "lunch"
+    t.boolean  "matched_before"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20191109070243) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "grade"
+    t.boolean  "matched_before"
   end
 
   create_table "tutors", force: :cascade do |t|
