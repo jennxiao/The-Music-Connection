@@ -46,6 +46,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3', '~> 1.3.13'
   gem 'byebug'
+  #Added guard to watch for when we modify code or test files
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-cucumber'
+  gem 'guard-shell'
 end
 
 group :development do

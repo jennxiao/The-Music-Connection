@@ -64,3 +64,6 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 .DS_Store
+
+# Ignore application configuration
+/config/application.yml
