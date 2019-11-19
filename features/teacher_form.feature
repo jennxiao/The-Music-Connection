@@ -6,26 +6,56 @@ Feature:
 	I should see all available instruments
 
 Background: User visits home page first
+
 	Given I am on the home page
 
-Scenario: Happy path testing
+Scenario: Basic Happy path testing
 
 	Then I am on the teacher form
 
-	When I fill in "Teacher Name" with "Anthony Zhou"	
-	When I fill in "Phone Number" with "847-873-2739"
-	When I fill in "Email Address" with "anthonyfzhou@berkeley.edu"
+	And I fill in the teacher form with basic information
 
-	Then I press "Next"
-
-	When I fill in "Class Name" with "Example Class"
-	And I fill in "School" with "Berkeley Elementary"
-
-	And I select "Monday" from "Class Time"
 	And I check "Piano"
 	Then I press "Submit"
 	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
 
-Scenario: Sad path testing
+Scenario: Basic Sad path testing
 
 	Given I am on the teacher form
+
+Scenario: Adding 1 Other intstrument Happy Path Testing
+
+	Given I am on the teacher form
+
+	And I fill in the teacher form with basic information
+
+	And I fill in "Other" with "Harpsichord"
+	Then I press "Submit"
+	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
+
+Scenario: Adding 1+ other instruments Happy Path Testing
+
+	Given I am on the teacher form
+
+	And I fill in the teacher form with basic information
+
+	And I fill in "Other" with "Harpsichord"
+	Then I press "add_instrument"
+	And I fill in "Other" with "Bongos"
+	Then I press "Submit"
+	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
+
+Scenario: Removing an "Other" Instrument
+
+	Given I am on the teacher form
+
+	And I fill in the teacher form with basic information
+
+	And I fill in "Other" with "Harpsichord"
+	Then I press "add_instrument"
+	And I fill in "Other" with "Bongos"
+	Then I press "rem_instrument"
+	Then I press "Submit"
+	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
+
+

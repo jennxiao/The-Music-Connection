@@ -59,7 +59,6 @@ class FormsController < ApplicationController
       grade: grade, availabilities: availabilities, instrument: instruments, comment: comment,
       number_of_matches: number_of_matches, matched: false}
     teacher.save!
-    puts teacher
     render 'thank_you'
   end
 
