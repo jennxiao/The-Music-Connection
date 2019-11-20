@@ -51,6 +51,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
+  gem 'mini_racer' # Solves linux console error some versions of rails give if no javascript runtime environment is given
 end
 
 group :development do

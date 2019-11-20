@@ -28,6 +28,8 @@ When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
     field = "question[minor]"
   when /^Experiences/
     field = "question[exp]"
+  when /^Teacher Name/
+	field = "question[teacher_name]"
   end
 
   fill_in field, with: value
@@ -56,8 +58,16 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
     field = "question[exp]"
   when /^Preferred Student/
     field = "question[preference]"
+  when /^Teacher Name/
+	field = "question[teacher_name]"
+  when /^Class Name/
+	  field = "question[class_name]"
+  when /^School/
+	field = "question[school_name]"
+  when /^Other/
+	field = "other_instrument"
   end
-
+  
   fill_in field, with: value
 end
 
@@ -70,6 +80,21 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
     field = "question[time]"
   when /^Instrument/
     field = "question[instrument]"
+  when /^Class Time/
+	field = "question[weekday][]"
   end
+  
   select(value, :from => field)
+end
+
+When /^(?:|I )fill in the teacher form with basic information/ do
+	steps %Q{
+		And I fill in "Teacher Name" with "Anthony Zhou"
+		And I fill in "Phone Number" with "847-873-2739"
+		And I fill in "Email Address" with "anthonyfzhou@berkeley.edu"
+		And I press "Next"
+		And I fill in "Class Name" with "Example Class"
+		And I fill in "School" with "Berkeley Elementary"
+		And I select "Monday" from "Class Time"
+	}
 end
