@@ -34,11 +34,14 @@ ratings:
   - "**.js"
   - "**.module"
 exclude_paths:
+- bin/
 - config/
+- coverage/
 - db/
-- vendor/
-- app/assets/
-- app/controllers/
-- app/helpers/
-- app/models/
 - features/
+- lib/
+- log/
+- script/
+- spec/
+- tmp/
+- vendor/

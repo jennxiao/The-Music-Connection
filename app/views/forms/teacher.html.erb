@@ -7,7 +7,7 @@
     <div class="tab">
       <div class="form-group required">
         <label for="name">Teacher Name</label>
-        <input type="text" name="question[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
+        <input id="teacher_name_field" type="text" name="question[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
         <small class="form-text text-muted">Please enter your full name here!</small>
       </div>
       <div class="form-group required">
@@ -127,6 +127,16 @@
               </div>
             </div>
           </div>
+          <div class="form-group" id="other-instruments">
+              <label for="other_instrument">Other:</label>
+              <input id="other_instrument" type="text" name="question[instrument][]" class="form-control other_instrument" placeholder="ex. Harpischord">
+            </div>
+          <button type="button" class="btn btn-primary btn-sm" id="add_instrument">
+            Add Another Instrument
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="rem_instrument">
+            Remove Last Instrument
+          </button>
         </div>
         <button type="button" class="btn btn-primary btn-sm" id="add_class">
           Add Another Class
