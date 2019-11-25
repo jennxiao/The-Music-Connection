@@ -31,21 +31,21 @@
             <div class="row class_row form-group required">
               <div class="">
                 <label for="class_name">Class Name</label>
-                <input type="text" name="question[class_name][]" class="form-control" placeholder="ex. Piano Beginner">
+                <input type="text" name="question[class_name]" class="form-control" placeholder="ex. Piano Beginner">
               </div>
             </div>
             <!-- school name -->
             <div class="row class_row">
               <div class="form-group required">
                 <label for="school_name">School</label>
-                <input type="text" name="question[school_name][]" class="form-control" placeholder="ex. Berkeley elementary school">
+                <input type="text" name="question[school_name]" class="form-control" placeholder="ex. Berkeley elementary school">
               </div>
             </div>
             <!-- gradelevel -->
             <div class="row class_row">
               <div class="form-group dropdown-group required">
                 <label for="grade">Grade Level</label>
-                <select class="form-control" name="question[grade][]">
+                <select class="form-control" name="question[grade]">
                   <option>6</option>
                   <option>7</option>
                   <option>8</option>
@@ -62,7 +62,7 @@
                 <label>Time Availability</label>
                 <div class="time-group row">
                   <div class="col-md-4" id="day_of_week">
-                    <select class="form-control" name="question[weekday][]">
+                    <select class="form-control" name="question[weekday]">
                       <option disabled selected value> -- Day of the Week -- </option>
                       <option value="Monday">Monday</option>
                       <option value="Tuesday">Tuesday</option>
@@ -74,10 +74,10 @@
                     </select>
                   </div>
                   <div class="col-md-4" id="start_time">
-                    <input class="form-control" name="question[start_time][]" type="time" value="13:00" id="example-time-input" step="1800">
+                    <input class="form-control" name="question[start_time]" type="time" value="13:00" id="example-time-input" step="1800">
                   </div>
                   <div class="col-md-4" id="end_time">
-                    <input class="form-control" name="question[end_time][]" type="time" value="15:00" id="example-time-input" step="1800">
+                    <input class="form-control" name="question[end_time]" type="time" value="15:00" id="example-time-input" step="1800">
                   </div>
                 </div>
               </div>

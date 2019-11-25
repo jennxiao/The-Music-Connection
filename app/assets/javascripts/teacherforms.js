@@ -5,6 +5,18 @@ var jump = 1; //unit of traversal of question flow
 var time_count = 0;
 
 
+function changeName() {
+  
+    elements_to_change = cln.getElementsByClassName("form-control");
+
+    first_element = elements_to_change[0];
+
+    first_element.name = "question1[class_name][]";
+
+    console.log(first_element.name);
+}
+
+
 function init() {
   //Show only the first tab and the corresponding buttons
   hide_all_tabs();
@@ -73,7 +85,6 @@ function init() {
   document.getElementById("rem_class").style.display = "none";
   var rem_class = document.getElementById("rem_class");
   rem_class.addEventListener('click', function () {
-    console.log("rem class clicked!")
     var len = document.getElementsByClassName("class-group").length;
     var elem = document.getElementsByClassName("class-group")[len - 1];
     document.getElementById("class-groups").removeChild(elem);
@@ -82,15 +93,12 @@ function init() {
     }
   });
 
-  
+
   //Event Listener for adding/removing Other instruments
   var add_instrument = document.getElementById("add_instrument");
   add_instrument.addEventListener('click', function() {
-    console.log("we clicked!");
     var original = document.getElementsByClassName("form-control other_instrument")[0];
     var cln = original.cloneNode(true);
-    console.log("this is the original: ", original)
-    console.log("thisis the clone: ", cln)
     document.getElementById("other-instruments").appendChild(cln);
     if (document.getElementsByClassName("other_instrument").length > 1) {
       document.getElementById("rem_instrument").style.display = "inline-block";
