@@ -1,4 +1,4 @@
-class Teacher < ActiveRecord::Base
+class Class < ActiveRecord::Base
     include ContactValidation
     
     validates :class_name,          exclusion:  { in: [nil] }

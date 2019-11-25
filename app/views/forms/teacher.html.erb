@@ -22,27 +22,29 @@
       </div>
     </div>
     <div class="tab">
-      <h1>Add Classes Below</h1>
       <div class="form-group required">
-        <div id="class-groups form-group">
-         <div class="form-group class_box">
-            <label style="margin: 10px">Class _</label>
-            <div class="class-group row class_row form-group required">
+        <div id="class-groups">
+         <div class="class-group form-group class_box">
+            <label style="margin: 10px">New Class</label>
+            <!-- class name -->
+            <div class="row class_row form-group required">
               <div class="">
                 <label for="class_name">Class Name</label>
-                <input type="text" name="question[class_name]" class="form-control" placeholder="ex. Piano Beginner">
+                <input type="text" name="question[class_name][]" class="form-control" placeholder="ex. Piano Beginner">
               </div>
             </div>
-            <div class="class-group row class_row">
+            <!-- school name -->
+            <div class="row class_row">
               <div class="form-group required">
                 <label for="school_name">School</label>
-                <input type="text" name="question[school_name]" class="form-control" placeholder="ex. Berkeley elementary school">
+                <input type="text" name="question[school_name][]" class="form-control" placeholder="ex. Berkeley elementary school">
               </div>
             </div>
-            <div class="class-group row class_row">
+            <!-- gradelevel -->
+            <div class="row class_row">
               <div class="form-group dropdown-group required">
                 <label for="grade">Grade Level</label>
-                <select class="form-control" name="question[grade]">
+                <select class="form-control" name="question[grade][]">
                   <option>6</option>
                   <option>7</option>
                   <option>8</option>
@@ -53,9 +55,10 @@
                 </select>
               </div>
             </div>
-            <div class="class-group row class_row form-group dropdown-group required">
+            <!-- time group -->
+            <div class="class_row form-group dropdown-group required">
               <div id="time-groups">
-                <label>Class Time</label>
+                <label>Time Availability</label>
                 <div class="time-group row">
                   <div class="col-md-4" id="day_of_week">
                     <select class="form-control" name="question[weekday][]">
@@ -64,21 +67,29 @@
                       <option value="Tuesday">Tuesday</option>
                       <option value="Wednesday">Wednesday</option>
                       <option value="Thursday">Thursday</option>
-                      <option value="Friday" >Friday</option>
+                      <option value="Friday">Friday</option>
                       <option value="Saturday">Saturday</option>
                       <option value="Sunday">Sunday</option>
                     </select>
                   </div>
                   <div class="col-md-4" id="start_time">
-                    <input class="form-control" name="question[start_time][]" type="time" value="13:00:00">
+                    <input class="form-control" name="question[start_time][]" type="time" value="13:00" id="example-time-input" step="1800">
                   </div>
                   <div class="col-md-4" id="end_time">
-                    <input class="form-control" name="question[end_time][]" type="time" value="15:00:00">
+                    <input class="form-control" name="question[end_time][]" type="time" value="15:00" id="example-time-input" step="1800">
                   </div>
+                </div>
               </div>
+              <button type="button" class="btn btn-primary btn-sm" id="add_time">
+                Add More Time Availability
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" id="rem_time">
+                Remove Time Availability
+              </button>
+              <small class="form-text text-muted">Select the time you are requesting.</small>
             </div>
-          </div>
-            <div class="class-group row class_row form-group dropdown-group required">
+            <!-- instruments -->
+            <div class="row class_row form-group dropdown-group required">
               <div id="instruments">
                 <label>Instrument/Singing</label>
                 <div class="instrument">
@@ -135,5 +146,5 @@
     <button type="submit" id="sub_btn" class="btn btn-primary">Submit</button>
   </form>
 
-<%= javascript_include_tag('forms.js') %>
+<%= javascript_include_tag('teacherforms.js') %>
 <%= stylesheet_link_tag    'forms', media: 'all', 'data-turbolinks-track' => true %>
