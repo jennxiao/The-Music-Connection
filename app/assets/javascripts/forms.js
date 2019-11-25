@@ -65,6 +65,7 @@ function init() {
   //Event Listener for adding/removing Other instruments
   var add_instrument = document.getElementById("add_instrument");
   add_instrument.addEventListener('click', function() {
+    console.log("we clicked!");
     var original = document.getElementsByClassName("form-control other_instrument")[0];
     var cln = original.cloneNode(true);
     console.log("this is the original: ", original)
