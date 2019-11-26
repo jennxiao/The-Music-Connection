@@ -8,6 +8,6 @@ class Teacher < ActiveRecord::Base
   validates :instrument,          presence: true
   validates :instrument,             exclusion:  { in: [nil] }
   #has_many :classes
-  accepts_nested_attributes_for :classes, :reject_if => :all_blank, :allow_destroy => true
+#  accepts_nested_attributes_for :classes, :reject_if => :all_blank, :allow_destroy => true
 
 end
