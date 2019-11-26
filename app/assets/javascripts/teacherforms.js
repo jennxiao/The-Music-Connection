@@ -3,17 +3,32 @@ var cur_tab = 0;
 var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
+var class_counter = 0;
 
 
 function changeName() {
+<<<<<<< HEAD
 
     elements_to_change = cln.getElementsByClassName("form-control");
+=======
+  var original = document.getElementsByClassName("class-group")[0];
+  var cln = original.cloneNode(true);
+  elements_to_change = cln.getElementsByClassName("form-control");
+  class_counter += 1;
+>>>>>>> 61b4d639f406870ddd51bfa66843135711921355
 
-    first_element = elements_to_change[0];
-
-    first_element.name = "question1[class_name][]";
-
-    console.log(first_element.name);
+  for (i=0; i < elements_to_change.length; i++) { 
+    element = elements_to_change[i];
+    console.log(element.value);
+    rest_of_name = element.name.substr(element.name.indexOf("["));
+    new_name = "question" + class_counter.toString();
+    element.name = new_name + rest_of_name;
+    console.log(new_name + rest_of_name);
+  }
+  document.getElementById("class-groups").appendChild(cln);
+  if (document.getElementsByClassName("class-group").length > 1) {
+    document.getElementById("rem_class").style.display = "inline-block";
+  } 
 }
 
 
@@ -73,14 +88,20 @@ function init() {
 
   //Event Listener for adding/removing classes
   var add_class = document.getElementById("add_class");
-  add_class.addEventListener('click', function() {
-    var original = document.getElementsByClassName("class-group")[0];
-    var cln = original.cloneNode(true);
-    document.getElementById("class-groups").appendChild(cln);
-    if (document.getElementsByClassName("class-group").length > 1) {
-      document.getElementById("rem_class").style.display = "inline-block";
-    }
-  });
+  add_class.addEventListener('click', changeName);
+  // add_class.addEventListener('click', function() {
+  //   var original = document.getElementsByClassName("class-group")[0];
+  //   var cln = original.cloneNode(true);
+  //   elements_to_change = cln.getElementsByClassName("form-control");
+  //   first_element = elements_to_change[0];
+  //   rest_of_name = first_element.name.substr(first_element.name.indexOf("["));
+  //   new_name = "question" + class_counter.toString();
+  //   console.log(new_name + rest_of_name);
+  //   document.getElementById("class-groups").appendChild(cln);
+  //   if (document.getElementsByClassName("class-group").length > 1) {
+  //     document.getElementById("rem_class").style.display = "inline-block";
+  //   }
+  // });
 
   document.getElementById("rem_class").style.display = "none";
   var rem_class = document.getElementById("rem_class");
