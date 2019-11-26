@@ -6,7 +6,7 @@ var time_count = 0;
 
 
 function changeName() {
-  
+
     elements_to_change = cln.getElementsByClassName("form-control");
 
     first_element = elements_to_change[0];
@@ -92,30 +92,40 @@ function init() {
       document.getElementById("rem_class").style.display = "none";
     }
   });
-
-
-  //Event Listener for adding/removing Other instruments
-  var add_instrument = document.getElementById("add_instrument");
-  add_instrument.addEventListener('click', function() {
-    var original = document.getElementsByClassName("form-control other_instrument")[0];
-    var cln = original.cloneNode(true);
-    document.getElementById("other-instruments").appendChild(cln);
-    if (document.getElementsByClassName("other_instrument").length > 1) {
-      document.getElementById("rem_instrument").style.display = "inline-block";
-    }
-  });
-
-  document.getElementById("rem_instrument").style.display = "none";
-  var rem_time = document.getElementById("rem_instrument");
-  rem_time.addEventListener('click', function () {
-    var len = document.getElementsByClassName("other_instrument").length;
-    var elem = document.getElementsByClassName("other_instrument")[len - 1];
-    document.getElementById("other-instruments").removeChild(elem);
-    if (document.getElementsByClassName("other_instrument").length <= 1) {
-      document.getElementById("rem_instrument").style.display = "none";
-    }
-  });
 }
+
+//Event Listener for adding Other instruments
+var add_instrument = document.getElementById("add_instrument");
+
+function addInstrument() {
+
+  var original = document.getElementsByClassName("form-control other_instrument")[0];
+  var cln = original.cloneNode(true);
+  document.getElementById("other-instruments").appendChild(cln);
+  if (document.getElementsByClassName("other_instrument").length > 1) {
+    document.getElementById("rem_instrument").style.display = "inline-block";
+  }
+
+}
+
+add_instrument.addEventListener('click', addInstrument);
+
+
+//Event Listener for removing other instruments
+document.getElementById("rem_instrument").style.display = "none";
+
+var rem_time = document.getElementById("rem_instrument");
+
+function removeInstrument() {
+  var len = document.getElementsByClassName("other_instrument").length;
+  var elem = document.getElementsByClassName("other_instrument")[len - 1];
+  document.getElementById("other-instruments").removeChild(elem);
+  if (document.getElementsByClassName("other_instrument").length <= 1) {
+    document.getElementById("rem_instrument").style.display = "none";
+  }
+}
+
+rem_time.addEventListener('click', removeInstrument);
 
 //Displays the 'other' text field for custom instrument
 function display_other(elem) {
