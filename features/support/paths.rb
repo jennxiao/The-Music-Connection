@@ -17,7 +17,8 @@ module NavigationHelpers
     when /^the tutor form/ then '/forms/tutor'
     when /^success page/ then ''
 	
-	when /^the teacher form/ then '/forms/teacher'
+  when /^the teacher form/ then '/forms/teacher'
+  when /^the parent form/ then '/forms/parent'
 	when /^the admin form/ then '/admin'
 
     # Add more mappings here.

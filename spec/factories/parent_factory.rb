@@ -9,7 +9,7 @@ FactoryGirl.define do
     availabilities '1'
     instrument 'Piano&Violin'
     experiences '6 months'
-    pastapp 'Yes'
+    past_app 'Yes'
     lunch 'Yes'
     number_of_matches 0
     matched false

@@ -1,8 +1,8 @@
 Feature:
 
-	As a parent
-	So that I can select the right instruments for my child
-	When I am on the parent form
+	As a teacher
+	So that I can select the right instruments for my class
+	When I am on the teacher form
 	I should see all available instruments
 
 Background: User visits home page first
