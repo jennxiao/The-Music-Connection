@@ -74,9 +74,6 @@ end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   case field
-
-  when /^Name/
-    field = "question[name]"
   when /^Email/
     field = "question[email]"
   when /^Name/
@@ -96,7 +93,7 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   when /^Preferred Student/
     field = "question[preference]"
   when /^Teacher Name/
-	field = "question[teacher_name]"
+    field = "question[teacher_name]"
   when /^Class Name/
 	  field = "question[class_name]"
   when /^School/
@@ -104,7 +101,7 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   when /^Other/
 	  field = "other_instrument"
   when /^Student Name/
-      field = "question[name]"
+    field = "question[name]"
   when /^Phone Number/
     field = "question[phone]"
   when /^Email/
@@ -113,6 +110,7 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
     field = "question[address]"
   end
   
+  save_and_open_page 
   fill_in field, with: value
 end
 
@@ -144,33 +142,4 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   end
   
   select(value, :from => field)
-end
-
-When /^(?:|I )fill in the teacher form with basic information/ do
-	steps %Q{
-		And I fill in "Teacher Name" with "Anthony Zhou"
-		And I fill in "Phone Number" with "847-873-2739"
-		And I fill in "Email Address" with "anthonyfzhou@berkeley.edu"
-		And I press "Next"
-		And I fill in "Class Name" with "Example Class"
-		And I fill in "School" with "Berkeley Elementary"
-		And I select "Monday" from "Class Time"
-	}
-end
-
-When /^(?:|I )fill in the parent form with basic information/ do
-	steps %Q{
-		And I fill in "Student Name" with "Anthony Zhou"
-		And I fill in "Phone Number" with "847-873-2739"
-    And I fill in "Email Address" with "anthonyfzhou@berkeley.edu"
-    And I fill in "Address" with "10597 Stony Ridge Way"
-    And I select "6" from "Grade"
-    And I select "Tuesday" from "Parent Time Availability"
-    And I press "Next"
-    And I select "No" from "Piano Home"
-    And I select "Violin" from "Parent Instrument"
-    And I select "1-2 years" from "Experience"
-    And I select "No" from "Past App"
-    And I select "No" from "Lunch"
-	}
 end
