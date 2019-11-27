@@ -1,4 +1,3 @@
-
 window.onload = init;
 var index = 0;
 var i = 0;
@@ -41,7 +40,6 @@ function init() {
       clearInterval(typeInterval);
     }
   }
-
 
   var scroll_btn = document.getElementById("scroll_btn");
   scroll_btn.addEventListener('click', function(){
