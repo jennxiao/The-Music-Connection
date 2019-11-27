@@ -1,40 +1,42 @@
 window.onload = init;
-var index = 0;
-var i = 0;
 
 function init() {
   var text = ["Connecting .People", "Through |Music"];
+  var text_index = 0;
+  var char_index = 0;
   var typeInterval = setInterval(typeWriter, 200);
   var element = document.querySelector(".motto");
   var green = false;
   var red = false;
 
   function typeWriter() {
-    var elem = element.children[index];
+    var elem = element.children[text_index];
     if (elem) {
-      if (text[index].charAt(i) == ".") {
-        i++;
+      if (text[text_index].charAt(char_index) == ".") {
+        char_index += 1;
         green = true;
-      } else if (text[index].charAt(i) == "|") {
-        i++;
+      } else if (text[text_index].charAt(char_index) == "|") {
+        char_index += 1;
         red = true;
       }
       if (green){
-        elem.innerHTML = elem.innerHTML + "<span class='green-underline'>" + text[index].charAt(i) + "</span>";
+        elem.innerHTML += "<span class='green-underline'>" + text[text_index].charAt(char_index) + "</span>";
       } else if (red) {
-        elem.innerHTML = elem.innerHTML + "<span class='red-underline'>" + text[index].charAt(i) + "</span>";
+        elem.innerHTML += "<span class='red-underline'>" + text[text_index].charAt(char_index) + "</span>";
       } else {
-        elem.innerHTML = elem.innerHTML + text[index].charAt(i);
+        elem.innerHTML += text[text_index].charAt(char_index);
       }
-      i++;
-      if (i == text[index].length) {
-        i = 0;
-        element.children[index].style.paddingBottom = "0";
-        element.children[index].classList.remove("typewriter");
-        index = index + 1;
-        element.children[index].classList.add("typewriter");
-        green = false;
-        red = false;
+      char_index += 1;
+      if (char_index == text[text_index].length) {
+        char_index = 0;
+        element.children[text_index].style.paddingBottom = "0";
+        element.children[text_index].classList.remove("typewriter");
+        text_index += 1;
+        if (text_index <= text.length - 1) {
+          element.children[text_index].classList.add("typewriter");
+          green = false;
+          red = false;
+        }
       }
     } else {
       clearInterval(typeInterval);
@@ -45,7 +47,7 @@ function init() {
   scroll_btn.addEventListener('click', function(){
     var elem = document.querySelector(".row");
     elem.scrollIntoView({
-  behavior: 'smooth'
+      behavior: 'smooth'
     });
   });
 }
