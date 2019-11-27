@@ -7,15 +7,12 @@ var class_counter = 0;
 
 
 function changeName() {
-<<<<<<< HEAD
 
-    elements_to_change = cln.getElementsByClassName("form-control");
-=======
+  elements_to_change = cln.getElementsByClassName("form-control");
   var original = document.getElementsByClassName("class-group")[0];
   var cln = original.cloneNode(true);
   elements_to_change = cln.getElementsByClassName("form-control");
   class_counter += 1;
->>>>>>> 61b4d639f406870ddd51bfa66843135711921355
 
   for (i=0; i < elements_to_change.length; i++) { 
     element = elements_to_change[i];
