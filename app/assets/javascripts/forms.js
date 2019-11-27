@@ -41,7 +41,6 @@ function init() {
   //Event Listener for adding/removing classes
   var add_class = document.getElementById("add_class");
   add_class.addEventListener('click', function() {
-    console.log("add class clicked!")
     var original = document.getElementsByClassName("class-group")[0];
     var cln = original.cloneNode(true);
     document.getElementById("class-groups").appendChild(cln);
