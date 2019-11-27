@@ -1,3 +1,40 @@
+Given "form is {word}" do | word |
+  state = false
+  if word == "open"
+    state = true
+  end
+  settings = AdminSettings.last
+  if settings.nil?
+    settings = AdminSettings.new
+    settings.attributes = {
+      form_open: false,
+      salt: "salt",
+      password_hash: BCrypt::Password.create('password'),
+      last_updated: Time.at(1),
+      email: 'placeholder@tmc.com',
+      session_id: 'placeholder'
+    }
+  end
+  a = AdminSettings.new
+  a.attributes = {
+    form_open: state,
+    salt: settings.salt,
+    password_hash: settings.password_hash,
+    last_updated: settings.last_updated,
+    email: settings.email,
+    session_id: settings.session_id
+  }
+  a.save
+end
+
+Then "I should see a link to {string}" do | link |
+  page.should have_link(href: link)
+end
+
+Then "I should not see a link to {string}" do | link |
+  page.should_not have_link(href: link)
+end
+
 When(/^I fill the form with:$/) do | table |
   datas = table.hashes.first
   datas.each do |label, value|

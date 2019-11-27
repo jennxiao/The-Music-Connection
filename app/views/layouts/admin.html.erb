@@ -22,6 +22,9 @@
     <% if flash[:notice] %>
         <div class="alert alert-success"><%= flash[:notice] %></div>
     <% end %>
+    <% if flash[:password] %>
+        <div class="alert alert-warning"><%= flash[:password] %></div>
+    <% end %>
 </div>
 </body>
 </html>

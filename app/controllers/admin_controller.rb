@@ -26,7 +26,9 @@ class AdminController < ApplicationController
 
   def welcome
     if default_password?
-      flash[:notice] = 'Password is at default value: please update ASAP!'
+      flash[:password] = 'Password is at default value: please update ASAP!'
+    else
+      flash[:password] = ''
     end
   end
 
@@ -45,17 +47,17 @@ class AdminController < ApplicationController
 
   def open_form
     change_settings({ new_form_open: true })
-    flash[:notice] = 'Form is now opened!'
+    flash[:notice] = 'Form opened'
     redirect_to '/admin/welcome'
   end
 
   def close_form
     change_settings({ new_form_open: false })
-    flash[:notice] = 'Form has been closed!'
+    flash[:notice] = 'Form closed'
     redirect_to '/admin/welcome'
   end
 
-  def debug_calculate
+  def generate_matches
     m = Matcher.calculate
     # m = Match.all
     @calculated = []
@@ -78,29 +80,7 @@ class AdminController < ApplicationController
       end
       @calculated.push(entry)
     end
-    render 'debug_calculate'
-  end
-
-  def generate_matches
-    @tutors = Tutor.where("tutors.comment != '' or tutors.preferred_student_class != ''")
-    @teachers = Teacher.where.not(comment: [nil, ""])
-    @parents = Parent.where.not(comment: [nil, ""])
     render 'generate_matches'
-  end
-
-  def run_algo
-    Matcher.calculate
-    flash[:notice] = 'Matching has been completed!'
-    redirect_to '/admin/welcome'
-  end
-
-  def results
-    @tt_pairs = Match.where("lower(tutee_id) LIKE 't%'")
-    @tp_pairs = Match.where("lower(tutee_id) LIKE 'p%'")
-  end
-
-  def getRandomColor
-    return "#" + (0..2).map{"%0x" % (rand * 0x80 + 0x80)}.join
   end
 
   def match_pair

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191109070243) do
+ActiveRecord::Schema.define(version: 20191118052326) do
 
   create_table "admin_settings", force: :cascade do |t|
     t.boolean  "form_open"

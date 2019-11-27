@@ -7,6 +7,7 @@ module Login
     # Verify that the database is not empty,
     # and fix it with default settings if it is.
     # Default settings must be changed by admin ASAP
+    # TODO: move this functionality to db:seed instead
     def verify_login
       if AdminSettings.first.nil?
         a = AdminSettings.new

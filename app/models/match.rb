@@ -6,12 +6,12 @@ class Match < ActiveRecord::Base
   validates :score,   presence: true, 
                       numericality: {   
                         :only_integer => true,
-                        :less_than_or_equal_to => 1000,
                         :greater_than_or_equal_to => 0
                       }
   validates :forced,  inclusion: { in: [true, false] }
 
   validate :one_tutor_one_student
+  validate :max_score_cap_validator
   
   def one_tutor_one_student
     if tutor.nil?
@@ -22,6 +22,13 @@ class Match < ActiveRecord::Base
     end
     if !teacher.nil? && !parent.nil?
       errors.add(:teacher, "Two students present in match (must be one to one)")
+    end
+  end
+  
+  def max_score_cap_validator
+    Matcher.MAX_WEIGHT + 1
+    if score > Matcher.MAX_WEIGHT
+      errors.add(:score, "Score value too high")
     end
   end
   

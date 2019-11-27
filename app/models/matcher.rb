@@ -3,9 +3,9 @@ require 'munkres'
 # This class contains all the logic for matching students to teachers and tutors
 class Matcher
   @@MAX_WEIGHT = 1000
+  mattr_accessor :MAX_WEIGHT
 
   class << self
-    attr_accessor :MAX_WEIGHT
   
     def calculate
       a, m1, m2, m3 = get_matches
