@@ -71,3 +71,4 @@ yarn-debug.log*
 
 # Ignore coverage tests results
 /coverage
+/spec/coverage
