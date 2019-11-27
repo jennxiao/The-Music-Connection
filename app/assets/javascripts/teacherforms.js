@@ -3,6 +3,30 @@ var cur_tab = 0;
 var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
+var class_counter = 0;
+
+
+function changeName() {
+
+  elements_to_change = cln.getElementsByClassName("form-control");
+  var original = document.getElementsByClassName("class-group")[0];
+  var cln = original.cloneNode(true);
+  elements_to_change = cln.getElementsByClassName("form-control");
+  class_counter += 1;
+
+  for (i=0; i < elements_to_change.length; i++) { 
+    element = elements_to_change[i];
+    console.log(element.value);
+    rest_of_name = element.name.substr(element.name.indexOf("["));
+    new_name = "question" + class_counter.toString();
+    element.name = new_name + rest_of_name;
+    console.log(new_name + rest_of_name);
+  }
+  document.getElementById("class-groups").appendChild(cln);
+  if (document.getElementsByClassName("class-group").length > 1) {
+    document.getElementById("rem_class").style.display = "inline-block";
+  } 
+}
 
 
 function init() {
@@ -61,19 +85,24 @@ function init() {
 
   //Event Listener for adding/removing classes
   var add_class = document.getElementById("add_class");
-  add_class.addEventListener('click', function() {
-    var original = document.getElementsByClassName("class-group")[0];
-    var cln = original.cloneNode(true);
-    document.getElementById("class-groups").appendChild(cln);
-    if (document.getElementsByClassName("class-group").length > 1) {
-      document.getElementById("rem_class").style.display = "inline-block";
-    }
-  });
+  add_class.addEventListener('click', changeName);
+  // add_class.addEventListener('click', function() {
+  //   var original = document.getElementsByClassName("class-group")[0];
+  //   var cln = original.cloneNode(true);
+  //   elements_to_change = cln.getElementsByClassName("form-control");
+  //   first_element = elements_to_change[0];
+  //   rest_of_name = first_element.name.substr(first_element.name.indexOf("["));
+  //   new_name = "question" + class_counter.toString();
+  //   console.log(new_name + rest_of_name);
+  //   document.getElementById("class-groups").appendChild(cln);
+  //   if (document.getElementsByClassName("class-group").length > 1) {
+  //     document.getElementById("rem_class").style.display = "inline-block";
+  //   }
+  // });
 
   document.getElementById("rem_class").style.display = "none";
   var rem_class = document.getElementById("rem_class");
   rem_class.addEventListener('click', function () {
-    console.log("rem class clicked!")
     var len = document.getElementsByClassName("class-group").length;
     var elem = document.getElementsByClassName("class-group")[len - 1];
     document.getElementById("class-groups").removeChild(elem);
@@ -82,6 +111,39 @@ function init() {
     }
   });
 }
+
+//Event Listener for adding Other instruments
+var add_instrument = document.getElementById("add_instrument");
+
+function addInstrument() {
+
+  var original = document.getElementsByClassName("form-control other_instrument")[0];
+  var cln = original.cloneNode(true);
+  document.getElementById("other-instruments").appendChild(cln);
+  if (document.getElementsByClassName("other_instrument").length > 1) {
+    document.getElementById("rem_instrument").style.display = "inline-block";
+  }
+
+}
+
+add_instrument.addEventListener('click', addInstrument);
+
+
+//Event Listener for removing other instruments
+document.getElementById("rem_instrument").style.display = "none";
+
+var rem_time = document.getElementById("rem_instrument");
+
+function removeInstrument() {
+  var len = document.getElementsByClassName("other_instrument").length;
+  var elem = document.getElementsByClassName("other_instrument")[len - 1];
+  document.getElementById("other-instruments").removeChild(elem);
+  if (document.getElementsByClassName("other_instrument").length <= 1) {
+    document.getElementById("rem_instrument").style.display = "none";
+  }
+}
+
+rem_time.addEventListener('click', removeInstrument);
 
 //Displays the 'other' text field for custom instrument
 function display_other(elem) {
