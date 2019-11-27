@@ -48,10 +48,8 @@ group :development, :test do
   gem 'byebug'
   #Added guard to watch for when we modify code or test files
   gem 'guard'
-  gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
-  gem 'mini_racer' # Solves linux console error some versions of rails give if no javascript runtime environment is given
 end
 
 group :development do
@@ -77,7 +75,6 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels' # basic imperative step defs
   gem 'database_cleaner' # required by Cucumber
-  gem 'launchy'
 end
 
 gem 'bundler'
