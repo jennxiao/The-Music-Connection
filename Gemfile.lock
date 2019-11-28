@@ -146,7 +146,6 @@ GEM
     json (1.8.6)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (7.3.492.27.1)
     listen (3.2.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -162,8 +161,6 @@ GEM
     mime-types-data (3.2019.1009)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    mini_racer (0.2.8)
-      libv8 (>= 6.9.411)
     minitest (5.13.0)
     multi_json (1.14.1)
     multi_test (0.1.2)
@@ -311,7 +308,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  mini_racer
   munkres (~> 0.1.0)
   pg (~> 0.20)
   pusher

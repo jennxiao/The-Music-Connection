@@ -110,7 +110,6 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
     field = "question[address]"
   end
   
-  save_and_open_page 
   fill_in field, with: value
 end
 

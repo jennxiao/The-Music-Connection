@@ -7,17 +7,17 @@
     <div class="tab">
       <div class="form-group required">
         <label for="name">Teacher Name</label>
-        <input id="teacher_name_field" type="text" name="question0[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
+        <input id="teacher_name_field" type="text" name="question[teacher_name]" class="form-control" placeholder="ex. First Middle Last">
         <small class="form-text text-muted">Please enter your full name here!</small>
       </div>
       <div class="form-group required">
         <label for="phone">Phone Number</label>
-        <input type="text" name="question0[phone]" class="form-control" placeholder="ex. 000-000-0000" id="phone_number_form" maxlength="12" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+        <input type="text" name="question[phone]" class="form-control" placeholder="ex. 000-000-0000" id="phone_number_form" maxlength="12" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
         <small class="form-text text-muted">Please enter your phone number here!</small>
       </div>
       <div class="form-group email-group required">
         <label for="email">Email address</label>
-        <input type="text" name="question0[email]" class="form-control email" placeholder="ex. TMC@gmail.com" >
+        <input type="text" name="question[email]" class="form-control email" placeholder="ex. TMC@gmail.com" >
         <small class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
     </div>

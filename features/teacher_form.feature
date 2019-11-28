@@ -7,14 +7,15 @@ Feature:
 
 Background: User visits home page first
 
+	Given form is open
 	Given I am on the home page
 
 Scenario: Basic Happy path testing
 
 	Then I am on the teacher form
 
-	And I fill in the teacher form with basic information
-
+	And I fill in class "1" with basic information
+	
 	And I check "Piano"
 	Then I press "Submit"
 	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
@@ -27,7 +28,7 @@ Scenario: Adding 1 Other instrument Happy Path Testing
 
 	Given I am on the teacher form
 
-	And I fill in the teacher form with basic information
+	And I fill in class "1" with basic information
 
 	And I fill in "Other" with "Harpsichord"
 	Then I press "Submit"
@@ -37,7 +38,7 @@ Scenario: Adding 1+ other instruments Happy Path Testing
 
 	Given I am on the teacher form
 
-	And I fill in the teacher form with basic information
+	And I fill in class "1" with basic information
 
 	And I fill in "Other" with "Harpsichord"
 	Then I press "add_instrument"
@@ -49,7 +50,7 @@ Scenario: Removing an "Other" Instrument
 
 	Given I am on the teacher form
 
-	And I fill in the teacher form with basic information
+	And I fill in class "1" with basic information
 
 	And I fill in "Other" with "Harpsichord"
 	Then I press "add_instrument"
