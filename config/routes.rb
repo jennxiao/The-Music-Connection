@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
 
+  get '/' => 'welcome#index'
+
+  # Admin page - admin authentication
   get  'admin' => 'admin#home'
   post 'admin/login'
   get  'admin/update_settings'
   post 'admin/update_settings' => 'admin#update_settings_post'
   get  'admin/logout' => 'admin#logout'
-
+  
+  # Admin page - admin actions
   get  'admin/close_form'
   get  'admin/open_form'
   get  'admin/debug_calculate'
-  
+
   get  'admin/generate_matches' => 'admin#generate_matches'
   get  'admin/results'
 
@@ -17,79 +21,30 @@ Rails.application.routes.draw do
   post 'admin/match_pair' => 'admin#match_pair'
   put  'admin/undo_pair' => 'admin#undo_pair'
 
-  resources :tutors
-  resources :teachers
-  resources :parents
-
-  get  '/forms' => 'forms#index'
-
-  get  'forms/teacher'
-  post 'forms/teacher' => 'forms#teacher'
-  post 'forms/teacher_submit' => 'forms#teacher_submit'
-
-  get  'forms/tutor'
-  post 'forms/tutor' => 'forms#tutor'
-  post 'forms/tutor_submit' => 'forms#tutor_submit'
-
-  get  'forms/parent'
-  post 'forms/parent_submit' => 'forms#parent_submit'
-
-
   get 'admin/welcome'
   get 'admin/reset_matching'
   get 'admin/reset_database'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-  # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  # Forms
+  get  '/forms' => 'forms#index'
+  # Teacher
+  get  'forms/teacher'
+  post 'forms/teacher' => 'forms#teacher'
+  post 'forms/teacher_submit' => 'forms#teacher_submit'
+  # Tutor
+  get  'forms/tutor'
+  post 'forms/tutor' => 'forms#tutor'
+  post 'forms/tutor_submit' => 'forms#tutor_submit'
+  # Parent
+  get  'forms/parent'
+  post 'forms/parent_submit' => 'forms#parent_submit'
+  
+  # Errors
+  get '/403' => 'errors#permission_denied'
+  get '/404' => 'errors#not_found'
+  get '/422' => 'errors#unacceptable'
+  get '/500' => 'errors#internal_error'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # Any other route goes to 404
+  # get '*a' => redirect("/404")
 end

@@ -1,26 +1,15 @@
 class FormsController < ApplicationController
+  before_action :check_if_open, only: [:teacher, :parent, :tutor]
+
   def index
     redirect_to '/'
   end
 
   def teacher
-    if !session[:form_open]
-      render text: "form closed!"
-    end
   end
-
   def parent
-    if !session[:form_open]
-      render text: "form closed!"
-    end
   end
-
   def tutor
-    if !session[:form_open]
-      render text: "form closed!"
-    end
-    session[:q_page] = 0
-    @q_page = 0
   end
 
   def teacher_submit
@@ -178,6 +167,13 @@ class FormsController < ApplicationController
     tutor.save!
 
     render 'thank_you'
+  end
+
+  private
+  def check_if_open
+    if !session[:form_open]
+      redirect_to '/403'
+    end
   end
 
 end

@@ -6,7 +6,6 @@ class Matcher
   mattr_accessor :MAX_WEIGHT
 
   class << self
-  
     def calculate
       a, m1, m2, m3 = get_matches
       b = run_matches(a, m1, m2, m3)
