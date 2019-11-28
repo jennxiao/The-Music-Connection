@@ -1,60 +1,39 @@
-Feature:
-
+Feature: Teacher submits application
 	As a teacher
-	So that I can select the right instruments for my class
-	When I am on the teacher form
-	I should see all available instruments
+	So that a tutor from TMC can help teach my class
+	When I visit the TMC website
+	I should be able to submit an application for my class
 
-Background: User visits home page first
+  Background: Teacher visits home page first
+    Given form is open
+    And I am on the home page
+    Then I am on the teacher form
 
-	Given form is open
-	Given I am on the home page
+  Scenario: Teacher submits application with valid parameters (happy path)
+    And I fill in the teacher form with basic information
+    And I check "Piano"
+    Then I press "Submit"
+    Then I should see "Your form has been submitted. We will be sending out the results through email soon."
 
-Scenario: Basic Happy path testing
+  Scenario: Teacher adds instrument not listed (happy path)
+    And I fill in the teacher form with basic information
+    And I fill in "Other" with "Harpsichord"
+    Then I press "Submit"
+    Then I should see "Your form has been submitted. We will be sending out the results through email soon."
 
-	Then I am on the teacher form
+  Scenario: Teacher adds multiple instruments not listed (happy path)
+    And I fill in the teacher form with basic information
+    And I fill in "Other" with "Harpsichord"
+    Then I press "add_instrument"
+    And I fill in "Other" with "Bongos"
+    Then I press "Submit"
+    Then I should see "Your form has been submitted. We will be sending out the results through email soon."
 
-	And I fill in class "1" with basic information
-	
-	And I check "Piano"
-	Then I press "Submit"
-	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
-
-Scenario: Basic Sad path testing
-
-	Given I am on the teacher form
-
-Scenario: Adding 1 Other instrument Happy Path Testing
-
-	Given I am on the teacher form
-
-	And I fill in class "1" with basic information
-
-	And I fill in "Other" with "Harpsichord"
-	Then I press "Submit"
-	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
-
-Scenario: Adding 1+ other instruments Happy Path Testing
-
-	Given I am on the teacher form
-
-	And I fill in class "1" with basic information
-
-	And I fill in "Other" with "Harpsichord"
-	Then I press "add_instrument"
-	And I fill in "Other" with "Bongos"
-	Then I press "Submit"
-	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
-
-Scenario: Removing an "Other" Instrument
-
-	Given I am on the teacher form
-
-	And I fill in class "1" with basic information
-
-	And I fill in "Other" with "Harpsichord"
-	Then I press "add_instrument"
-	And I fill in "Other" with "Bongos"
-	Then I press "rem_instrument"
-	Then I press "Submit"
-	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
+  Scenario: Teacher removes added but extraneous instrument (happy path)
+    And I fill in the teacher form with basic information
+    And I fill in "Other" with "Harpsichord"
+    Then I press "add_instrument"
+    And I fill in "Other" with "Bongos"
+    Then I press "rem_instrument"
+    Then I press "Submit"
+    Then I should see "Your form has been submitted. We will be sending out the results through email soon."

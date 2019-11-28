@@ -1,4 +1,5 @@
-When /^(?:|I )fill in class "(.*)" with basic information/ do |class_num|
+When /^(?:|I )fill in the teacher form with basic information/ do
+  save_and_open_page
 	steps %Q{
 		And I fill in "Teacher Name" with "Anthony Zhou"
 		And I fill in "Phone Number" with "847-873-2739"

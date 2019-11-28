@@ -3,30 +3,30 @@
     <p class="h2">Parent Form</p>
   </div>
 
-  <form method='POST', action='/forms/parent_submit'>
+  <form id="allForm" method="POST" action="/forms/parent_submit">
     <div class="tab">
       <div class="form-group required">
         <label for="name">Student Name</label>
-        <input type="text" name="question[name]" class="form-control" placeholder="ex. First Middle Last">
+        <input type="text" name="question[name]" class="form-control required-text" placeholder="ex. First Middle Last">
         <small class="form-text text-muted">Please submit one form per student!</small>
       </div>
       <div class="form-group required">
         <label for="phone">Phone Number</label>
-        <input type="tel" name="question[phone]" class="form-control" placeholder="ex. 000-000-0000">
+        <input type="tel" name="question[phone]" class="form-control phone-number-input" placeholder="ex. 000-000-0000">
         <small class="form-text text-muted">Please enter your phone number here!</small>
       </div>
       <div class="form-group email-group required">
         <label for="email">Email address</label>
-        <input type="text" name="question[email]" class="form-control" placeholder="ex. TMC@gmail.com">
+        <input type="text" name="question[email]" class="form-control email" placeholder="ex. TMC@gmail.com">
         <small class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group required">
         <label for="address">Address</label>
-        <input type="text" name="question[address]" class="form-control" placeholder="123 Street, Berkeley, CA 94704">
+        <input type="text" name="question[address]" class="form-control required-text" placeholder="123 Street, Berkeley, CA 94704">
       </div>
       <div class="form-group dropdown-group required">
         <label for="grade">Grade Level</label>
-        <select class="form-control" name="question[grade]">
+        <select class="form-control required-text" name="question[grade]">
           <option>6</option>
           <option>7</option>
           <option>8</option>
@@ -37,34 +37,36 @@
         </select>
       </div>
 
-      <div class="form-group dropdown-group required">
-        <div id="time-groups">
-          <label>Time Availability</label>
-          <div class="time-group row">
-            <div class="col-md-4" id="day_of_week">
-              <select class="form-control" name="question[weekday][]">
-                <option disabled selected value> -- Day of the Week -- </option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-            </div>
-            <div class="col-md-4" id="start_time">
-              <input class="form-control" name="question[start_time][]" type="time" value="13:00" id="example-time-input" step="1800">
-            </div>
-            <div class="col-md-4" id="end_time">
-              <input class="form-control" name="question[end_time][]" type="time" value="15:00" id="example-time-input" step="1800">
+      <div id="time-groups" class="form-group dropdown-group required">
+        <div id="all-times-holder">
+          <div class="time-holder">
+            <label>Time Availability</label>
+            <div class="time-group row">
+              <div class="col-md-4">
+                <select class="form-control required-text" name="question[weekday][]">
+                  <option disabled selected value> -- Day of the Week -- </option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+              </div>
+              <div class="col-md-4" id="start_time">
+                <input class="form-control" name="question[start_time][]" type="time" value="13:00" step="1800">
+              </div>
+              <div class="col-md-4" id="end_time">
+                <input class="form-control" name="question[end_time][]" type="time" value="15:00" step="1800">
+              </div>
             </div>
           </div>
         </div>
         <button type="button" class="btn btn-primary btn-sm" id="add_time">
           Add More Time Availability
         </button>
-        <button type="button" class="btn btn-primary btn-sm" id="rem_time">
+        <button type="button" class="btn btn-primary btn-sm" id="rem_time" style="display:none">
           Remove Time Availability
         </button>
         <small class="form-text text-muted">Select the time you are requesting.</small>
@@ -74,26 +76,28 @@
     <div class="tab">
       <div class="form-group dropdown-group required">
         <label for="piano_home">Do you own a piano at home?</label>
-        <select class="form-control" name="question[piano_home]">
+        <select class="form-control required-text" name="question[piano_home]">
           <option>No</option>
           <option>Yes</option>
         </select>
       </div>
 
-      <div class="form-group dropdown-group required">
-        <div id="instruments">
-          <label>Instrument/Singing</label>
-          <div class="instrument">
-            <select class="form-control" name="question[instrument][]">
-              <option disabled selected value> -- select an option -- </option>
-              <option value="Violin">Violin</option>
-              <option value="Cello">Cello</option>
-              <option value="Guitar">Guitar</option>
-              <option value="Piano">Piano</option>
-              <option value="Singing">Piano</option>
-              <option value="Others" >Others</option>
-            </select>
-            <input class="form-control instr_other" type="text" style="display:none;" name="question[others][]" placeholder="Specify instrument">
+      <div id="instruments-group" class="form-group dropdown-group required">
+        <div id="all-instruments-holder">
+          <div class="instrument-entry">
+            <label>Instrument/Singing</label>
+            <div class="instrument">
+              <select class="form-control required-text instrument-selector" name="question[instrument][]">
+                <option disabled selected value> -- Select an option -- </option>
+                <option value="Violin">Violin</option>
+                <option value="Cello">Cello</option>
+                <option value="Guitar">Guitar</option>
+                <option value="Piano">Piano</option>
+                <option value="Singing">Singing</option>
+                <option value="Other">Other</option>
+              </select>
+              <input class="form-control instr-other" type="text" style="display:none;" name="question[others][]" placeholder="Specify instrument">
+            </div>
           </div>
         </div>
         <button type="button" class="btn btn-primary btn-sm" id="add_instr">
@@ -107,27 +111,27 @@
 
       <div class="form-group dropdown-group required">
         <label for="extra">Experience</label>
-        <select class="form-control" name="question[experiences]" id="experiences">
-          <option value="< 6 months"> < 6 months </option>
+        <select class="form-control required-text" name="question[experiences]" id="experiences">
+          <option value="< 6 months"> &lt; 6 months </option>
           <option value="6 months-1 year"> 6 months-1 year</option>
-          <option value="1-2 years "> 1-2 years </option>
-          <option value="2-3 years "> 2-3 years  </option>
-          <option value="3-4 years "> 3-4 years  </option>
-          <option value="4+ years" > 4+ years </option>
+          <option value="1-2 years"> 1-2 years </option>
+          <option value="2-3 years"> 2-3 years </option>
+          <option value="3-4 years"> 3-4 years </option>
+          <option value="4+ years"> 4+ years </option>
         </select>
         <small class="form-text text-muted">If you have any involvement with other musical group, please write them down here!</small>
       </div>
 
       <div class="form-group dropdown-group required">
         <label>Have you applied to TMC before?</label>
-        <select class="form-control" name="question[pastapp]">
+        <select class="form-control required-text" name="question[pastapp]">
           <option>No</option>
           <option>Yes</option>
         </select>
       </div>
       <div class="form-group dropdown-group required">
         <label for="lunch">Do you qualify for free/reduced lunch?</label>
-        <select class="form-control" name="question[lunch]">
+        <select class="form-control required-text" name="question[lunch]">
           <option>No</option>
           <option>Yes</option>
         </select>
@@ -146,5 +150,6 @@
   </form>
 
 
-<%= javascript_include_tag('forms.js') %>
+<%= javascript_include_tag('forms_engine.js') %>
+<%= javascript_include_tag('forms_parent.js') %>
 <%= stylesheet_link_tag    'forms', media: 'all', 'data-turbolinks-track' => true %>

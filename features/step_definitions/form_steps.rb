@@ -28,11 +28,11 @@ Given "form is {word}" do | word |
 end
 
 Then "I should see a link to {string}" do | link |
-  page.should have_link(href: link)
+  expect(page).to have_link(href: path_to(link))
 end
 
 Then "I should not see a link to {string}" do | link |
-  page.should_not have_link(href: link)
+  expect(page).not_to have_link(href: path_to(link))
 end
 
 When(/^I fill the form with:$/) do | table |
@@ -66,7 +66,7 @@ When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   when /^Experiences/
     field = "question[exp]"
   when /^Teacher Name/
-	field = "question[teacher_name]"
+    field = "question[teacher_name]"
   end
 
   fill_in field, with: value
@@ -109,7 +109,7 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   when /^Address/
     field = "question[address]"
   end
-  
+
   fill_in field, with: value
 end
 
