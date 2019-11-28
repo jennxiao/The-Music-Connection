@@ -34,7 +34,7 @@ const Engine = {
         }
       } else {
         var val = Engine.special_features[Engine.current_tab].override_next();
-        if (val != 0) {
+        if (val !== 0) {
           Engine.tab_history.push(Engine.current_tab);
           Engine.current_tab += val;
           Engine.showTab(Engine.current_tab);
@@ -126,22 +126,35 @@ const Driver = {
   }
 }
 
+function markValidation(element, isValid) {
+  if (!isValid) {
+    element.classList.add("invalid");
+  } else {
+    element.classList.remove("invalid");
+  }
+}
+
 function _defaultValidator() {
   if (Engine.special_features[Engine.current_tab].override_next) {
     return false;
   }
-  var mark_validation = function(i, v) {
-    if (!v) {
-      i.classList.add("invalid");
-    } else {
-      i.classList.remove("invalid");
-    }
-  }
+
   var tab = document.getElementsByClassName("tab")[Engine.current_tab];
   var valid = true;
+  
+  valid = valid && validateRadioGroups(tab);
+  valid = valid && validateTextInputs(tab);
+  valid = valid && validateEmailInputs(tab);
+  valid = valid && validatePhoneInputs(tab);
+
+  return valid;
+}
+
+function validateRadioGroups(tab) {
   // Radio button validation
   // This class applied to the div surrounding the radio buttons
   var radio_groups = tab.getElementsByClassName("radio-group");
+  var valid = true;
   for (var i = 0; i < radio_groups.length; i++) {
     var radio_group = radio_groups[i];
     if (!radio_group.classList.contains("required")) {
@@ -155,29 +168,50 @@ function _defaultValidator() {
         break;
       }
     }
-    mark_validation(radio_group, test_check);
+    markValidation(radio_group, test_check);
     valid = valid && test_check;
   }
+  return valid;
+}
+
+function validateTextInputs(tab) {
   // Textbox and Dropdown validation
   // This class applied to the input directly
+  // i.e. <input class="required-text"...></input>
+  var valid = true;
   var required_text_groups = tab.getElementsByClassName("required-text");
   for (var i = 0; i < required_text_groups.length; i++) {
     var test = (required_text_groups[i].value !== "");
-    mark_validation(required_text_groups[i], test);
+    markValidation(required_text_groups[i], test);
     valid = valid && test;
   }
+  return valid;
+}
 
+function validateEmailInputs(tab) {
   // Email validation
+  // Class applied to input directly
+  var valid = true;
   // This hurts my soul
-  // Also applied to input directly
   var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   var email_groups = tab.getElementsByClassName("email");
   for (var i = 0; i < email_groups.length; i++) {
     var test = email_groups[i].value.match(email_regex);
-    mark_validation(email_groups[i], test);
+    markValidation(email_groups[i], test);
     valid = valid && test;
   }
-  
-  // TODO: Phone number validation
+  return valid;
+}
+
+function validatePhoneInputs(tab) {
+  var valid = true;
+  // sigh
+  var phone_regex = /^\d{3}-\d{3}-\d{4}/;
+  var phone_inputs = document.getElementsByClassName("phone-number-input");
+  for (var i = 0; i < phone_inputs.length; i++) {
+    var test = phone_inputs[i].value.match(phone_regex) && (phone_inputs[i].value.length === 12);
+    markValidation(phone_inputs[i], test);
+    valid = valid && test;
+  }
   return valid;
 }
