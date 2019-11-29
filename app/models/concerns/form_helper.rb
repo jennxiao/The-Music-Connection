@@ -1,33 +1,33 @@
+# frozen_string_literal: true
+
 module FormHelper
   extend ActiveSupport::Concern
 
-  def convert_to_boolean(r, p="yes")
-    if r.nil?
-      return false
-    end
-    return r.strip.downcase == p
+  def convert_to_boolean(res, pos = 'yes')
+    return false if res.nil?
+    res.strip.downcase == pos
   end
 
-  def serialize_instruments(h, o)
-    str = ""
+  def serialize_instruments(instr, other)
+    str = ''
     j = 0
-    for i in 0...h.count do
-      if h[i] == "Other"
-        str += (o[j] + ",")
+    (0...instr.count).each do |i|
+      if instr[i] == 'Other'
+        str += (other[j] + ',')
         j += 1
       else
-        str += (h[i] + ",")
+        str += (instr[i] + ',')
       end
     end
-    return str.chomp(",")
+    str.chomp(',')
   end
 
-  def serialize_availabilities(d, s, e)
-    str = ""
-    for i in 0...d.count do
-      a = Availability.new(d[i], s[i], e[i])
+  def serialize_availabilities(day, start_time, end_time)
+    str = ''
+    (0...day.count).each do |i|
+      a = Availability.new(day[i], start_time[i], end_time[i])
       str += Availability.serialize(a)
     end
-    return str
+    str
   end
 end

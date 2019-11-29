@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class FormsController < ApplicationController
-  before_action :check_if_open, only: [:teacher, :parent, :tutor]
+  before_action :check_if_open, only: %i[teacher parent tutor]
 
   def index
     redirect_to '/'
@@ -7,25 +9,23 @@ class FormsController < ApplicationController
 
   # Redirect to the appropriate form
   # (see config/routes.rb)
-  def teacher
-  end
-  def parent
-  end
-  def tutor
-  end
+  def teacher; end
+
+  def parent; end
+
+  def tutor; end
 
   def teacher_submit
-    #only the first question object has these fields
+    # only the first question object has these fields
     name = params[:question0][:teacher_name]
     phone = params[:question0][:phone]
     email = params[:question0][:email]
 
     p params
-    for i in 0...params.count do 
-      question_num = ("question" + i.to_s).to_sym
-      if params[question_num] == nil
-        next
-      end
+    (0...params.count).each do |i|
+      question_num = ('question' + i.to_s).to_sym
+      next if params[question_num].nil?
+
       class_name = params[question_num][:class_name]
       school_name = params[question_num][:school_name]
       grade = params[question_num][:grade]
@@ -36,51 +36,45 @@ class FormsController < ApplicationController
       comment = params[question_num][:comment]
       others = params[question_num][:others]
       number_of_matches = 0
-      instruments = ""
+      instruments = ''
       other_count = 1
-      for i in 0...instrument.count do
-        if instrument[i] === "Others"
-          instruments += (others[other_count] + "&")
+      (0...instrument.count).each do |i|
+        if instrument[i] === 'Others'
+          instruments += (others[other_count] + '&')
           other_count += 1
         else
-          instruments += (instrument[i] + "&")
+          instruments += (instrument[i] + '&')
         end
       end
-      instruments = instruments.chomp("&")
+      instruments = instruments.chomp('&')
       availabilities = ''
-      for i in 0...weekday.count do 
+      (0...weekday.count).each do |i|
         a = Availability.new(weekday[i], start_time[i], end_time[i])
         availabilities += Availability.serialize(a)
       end
       teacher = Teacher.new
-      teacher.attributes = {name: name, phone: phone,
-        email: email, class_name: class_name, school_name: school_name,
-        grade: grade, availabilities: availabilities, instrument: instruments, comment: comment,
-        number_of_matches: number_of_matches, matched: false}
+      teacher.attributes = { name: name, phone: phone,
+                             email: email, class_name: class_name, school_name: school_name,
+                             grade: grade, availabilities: availabilities, instrument: instruments, comment: comment,
+                             number_of_matches: number_of_matches, matched: false }
       teacher.save!
     end
     render 'thank_you'
   end
 
   def parent_submit
-    if Parent.new_from_form(params[:question])
-      render 'thank_you' and return
-    end
-    redirect_to '/500' 
+    render('thank_you') && return if Parent.new_from_form(params[:question])
+    redirect_to '/500'
   end
 
   def tutor_submit
-    if Tutor.new_from_form(params[:question])
-      render 'thank_you' and return
-    end
+    render('thank_you') && return if Tutor.new_from_form(params[:question])
     redirect_to '/500'
   end
 
   private
-  def check_if_open
-    if !session[:form_open]
-      redirect_to '/403'
-    end
-  end
 
+  def check_if_open
+    redirect_to '/403' unless session[:form_open]
+  end
 end

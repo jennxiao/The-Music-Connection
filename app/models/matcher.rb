@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'munkres'
 
 # This class contains all the logic for matching students to teachers and tutors
@@ -9,10 +11,11 @@ class Matcher
     def calculate
       a, m1, m2, m3 = get_matches
       b = run_matches(a, m1, m2, m3)
-      return b
+      b
     end
 
     private
+
     # Generate every possible pairing
     # and return corresponding matrix
     def get_matches
@@ -20,10 +23,10 @@ class Matcher
       tutor_index = {}
       teacher_index = {}
       parent_index = {}
-      a = Tutor.order("id ASC").all
-      b = Teacher.order("id ASC").all
-      c = Parent.order("id ASC").all
-      d = Match.order("id ASC").all
+      a = Tutor.order('id ASC').all
+      b = Teacher.order('id ASC').all
+      c = Parent.order('id ASC').all
+      d = Match.order('id ASC').all
       matrix = [] # Index by (tutor, student)
       a.each do |tutor|
         row = []
@@ -38,10 +41,10 @@ class Matcher
         tutor_index[matrix.length] = tutor.id
         matrix.push(row)
       end
-      
+
       # padding to square
       while matrix.length > matrix[0].length
-        matrix.each do |r, i|
+        matrix.each do |_r, i|
           matrix[i].push(0)
         end
       end
@@ -52,28 +55,28 @@ class Matcher
         end
         matrix.push(r)
       end
-      
+
       # Set manual matching weights
       d.each do |match|
         r = tutor_index[match.tutor]
         col = -1
-        if match.teacher.nil?
-          col = parent_index[match.parent]
-        else
-          col = teacher_index[match.teacher]
-        end
-        matrix.each do |en, i|
+        col = if match.teacher.nil?
+                parent_index[match.parent]
+              else
+                teacher_index[match.teacher]
+              end
+        matrix.each do |_en, i|
           matrix[i][col] = 0
         end
-        matrix[r].each do |en, i|
+        matrix[r].each do |_en, i|
           matrix[r][i] = 0
         end
         matrix[r][col] = @@MAX_WEIGHT
       end
-      return matrix, 
-             tutor_index, 
-             teacher_index, 
-             parent_index
+      [matrix,
+       tutor_index,
+       teacher_index,
+       parent_index]
     end
 
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
@@ -93,7 +96,7 @@ class Matcher
             forced: false,
             score: matrix_deep_copy[row_id][column_id]
           }
-        else 
+        else
           ma = Match.new
           ma.attributes = {
             tutor: Tutor.find_by(id: tutor_index[row_id]),
@@ -105,16 +108,17 @@ class Matcher
         end
         ma.save
       end
-      return Match.all
+      Match.all
     end
 
+    # Determine the score assigned to a tutor-student pairing
+    # TODO: Implement this properly
     def heuristic(tutor, teacher, parent)
       if parent.nil?
-        return 10
-      else 
-        return 10
+        10
+      else
+        10
       end
     end
   end
-
 end

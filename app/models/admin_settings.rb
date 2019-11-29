@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminSettings < ActiveRecord::Base
   validates :form_open,         inclusion: { in: [true, false] }
   validates :salt,              presence: true
@@ -6,5 +8,4 @@ class AdminSettings < ActiveRecord::Base
   validates :email,             presence: true,
                                 format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :session_id,        presence: true
-                                
 end
