@@ -30,26 +30,26 @@ class Tutor < ActiveRecord::Base
   validates :prev_again,      inclusion: { in: [true, false] }
   validates :comment,         exclusion: { in: [nil] }
 
-  def self.new_from_form(r)
+  def self.new_from_form(res)
     tutor = Tutor.new
     tutor.attributes = {
-      name: r[:name],
-      phone: r[:phone],
-      email: r[:email],
-      sid: r[:sid],
-      year: r[:year],
-      major: r[:major],
-      minor: r[:minor],
-      experiences: r[:exp],
-      availabilities: serialize_availabilities(r[:weekday], r[:start_time], r[:end_time]),
-      preferred_grade: r[:preferred_grade],
-      in_class: convert_to_boolean(r[:in_class]),
-      private: convert_to_boolean(r[:private]),
-      instrument: serialize_instruments(r[:instrument], r[:others]),
-      returning: convert_to_boolean(r[:returning], 'returning'),
-      prev_again: convert_to_boolean(r[:prev_again]),
-      preferred_student_class: r[:preferred_student_class],
-      comment: r[:comment],
+      name: res[:name],
+      phone: res[:phone],
+      email: res[:email],
+      sid: res[:sid],
+      year: res[:year],
+      major: res[:major],
+      minor: res[:minor],
+      experiences: res[:exp],
+      availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
+      preferred_grade: res[:preferred_grade],
+      in_class: convert_to_boolean(res[:in_class]),
+      private: convert_to_boolean(res[:private]),
+      instrument: serialize_instruments(res[:instrument], res[:others]),
+      returning: convert_to_boolean(res[:returning], 'returning'),
+      prev_again: convert_to_boolean(res[:prev_again]),
+      preferred_student_class: res[:preferred_student_class],
+      comment: res[:comment],
       number_of_matches: 0,
       matched: false
     }

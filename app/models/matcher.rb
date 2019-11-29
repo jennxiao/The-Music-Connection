@@ -1,24 +1,21 @@
 # frozen_string_literal: true
-
 require 'munkres'
 
-# This class contains all the logic for matching students to teachers and tutors
+# All logic for matching tutors to students
 class Matcher
   @@MAX_WEIGHT = 1000
   mattr_accessor :MAX_WEIGHT
 
   class << self
     def calculate
-      a, m1, m2, m3 = get_matches
-      b = run_matches(a, m1, m2, m3)
-      b
+      a, m1, m2, m3 = generate_matrix
+      run_matches(a, m1, m2, m3)
     end
 
     private
-
     # Generate every possible pairing
     # and return corresponding matrix
-    def get_matches
+    def generate_matrix
       Match.where(forced: false).delete_all
       tutor_index = {}
       teacher_index = {}
@@ -44,8 +41,8 @@ class Matcher
 
       # padding to square
       while matrix.length > matrix[0].length
-        matrix.each do |_r, i|
-          matrix[i].push(0)
+        matrix.each do |r|
+          r.push(0)
         end
       end
       while matrix.length < matrix[0].length
@@ -87,25 +84,13 @@ class Matcher
         row_id = pairing[0]
         column_id = pairing[1]
         ma = Match.new
-
-        if !teacher_index[column_id].nil?
-          ma.attributes = {
-            tutor: Tutor.find_by(id: tutor_index[row_id]),
-            teacher: Teacher.find_by(id: teacher_index[column_id]),
-            parent: nil,
-            forced: false,
-            score: matrix_deep_copy[row_id][column_id]
-          }
-        else
-          ma = Match.new
-          ma.attributes = {
-            tutor: Tutor.find_by(id: tutor_index[row_id]),
-            teacher: nil,
-            parent: Parent.find_by(id: parent_index[column_id]),
-            forced: false,
-            score: matrix_deep_copy[row_id][column_id]
-          }
-        end
+        ma.attributes = {
+          tutor: Tutor.find_by(id: tutor_index[row_id]),
+          teacher: Teacher.find_by(id: teacher_index[column_id]),
+          parent: Parent.find_by(id: parent_index[column_id]),
+          forced: false,
+          score: matrix_deep_copy[row_id][column_id]
+        }
         ma.save
       end
       Match.all

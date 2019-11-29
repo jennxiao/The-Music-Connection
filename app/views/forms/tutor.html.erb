@@ -25,9 +25,15 @@
       <input type="text" name="question[sid]" class="form-control required-text" placeholder="ex. 3032179600">
       <small class="form-text text-muted">Please enter your SID here!</small>
     </div>
-    <div class="form-group required">
+    <div class="form-group dropdown-group required">
       <label for="question[year]">Year</label>
-      <input type="text" name="question[year]" class="form-control required-text" placeholder="ex. Sophomore">
+      <select class="form-control required-text" name="question[year]">
+        <option value="Freshman"> Freshman </option>
+        <option value="Sophomore"> Sophomore </option>
+        <option value="Junior"> Junior </option>
+        <option value="Senior"> Senior </option>
+        <option value="Other"> Other </option>
+      </select>
       <small class="form-text text-muted">Please enter your year here!</small>
     </div>
     <div class="form-group">
@@ -42,7 +48,7 @@
     </div>
 
     <div class="form-group dropdown-group required">
-      <label for="extra">Experiences</label>
+      <label for="question[exp]">Experiences</label>
       <select class="form-control required-text" name="question[exp]">
         <option value="1-5 years"> 1-5 years </option>
         <option value="5-10 years"> 5-10 years </option>

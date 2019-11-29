@@ -24,21 +24,21 @@ class Parent < ActiveRecord::Base
 
   # The fields number_of_matches, matched are unused
 
-  def self.new_from_form(r)
+  def self.new_from_form(res)
     parent = Parent.new
     parent.attributes = {
-      name: r[:name],
-      phone: r[:phone],
-      email: r[:email],
-      address: r[:address],
-      grade: r[:grade],
-      availabilities: serialize_availabilities(r[:weekday], r[:start_time], r[:end_time]),
-      piano_home: convert_to_boolean(r[:piano_home]),
-      instrument: serialize_instruments(r[:instrument], r[:others]),
-      experiences: r[:experiences],
-      past_app: convert_to_boolean(r[:pastapp]),
-      lunch: convert_to_boolean(r[:lunch]),
-      comment: r[:comment],
+      name: res[:name],
+      phone: res[:phone],
+      email: res[:email],
+      address: res[:address],
+      grade: res[:grade],
+      availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
+      piano_home: convert_to_boolean(res[:piano_home]),
+      instrument: serialize_instruments(res[:instrument], res[:others]),
+      experiences: res[:experiences],
+      past_app: convert_to_boolean(res[:pastapp]),
+      lunch: convert_to_boolean(res[:lunch]),
+      comment: res[:comment],
       number_of_matches: 0,
       matched: false,
       matched_before: false

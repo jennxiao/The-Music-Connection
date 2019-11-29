@@ -80,6 +80,7 @@ class AdminController < ApplicationController
       end
       @calculated.push(entry)
     end
+    puts @calculated
     render 'generate_matches'
   end
 

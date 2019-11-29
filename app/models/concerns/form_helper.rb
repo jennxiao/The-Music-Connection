@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# Shared helper methods for processing form input
 module FormHelper
   extend ActiveSupport::Concern
 
