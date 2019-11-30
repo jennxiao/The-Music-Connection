@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 describe TutorsController do
   describe 'GET index' do
-    let!(:tutor) {FactoryGirl.create(:tutor)}
+    let!(:tutor) { FactoryGirl.create(:tutor) }
 
     it 'should assign instance variable for tutors' do
       get :index
@@ -16,9 +18,9 @@ describe TutorsController do
       expect(tutor.preferred_grade).to eql(Tutor.first.preferred_grade)
       expect(tutor.in_class).to eql(Tutor.first.in_class)
       expect(tutor.availabilities).to eql(Tutor.first.availabilities)
-     # expect(tutor.availabilities.weekday).to eql(Tutor.first.availabilities.weekday)
-     # expect(tutor.availabilities.start_time).to eql(Tutor.first.availabilities.start_time)
-     # expect(tutor.availabilities.end_time).to eql(Tutor.first.availabilities.end_time)
+      # expect(tutor.availabilities.weekday).to eql(Tutor.first.availabilities.weekday)
+      # expect(tutor.availabilities.start_time).to eql(Tutor.first.availabilities.start_time)
+      # expect(tutor.availabilities.end_time).to eql(Tutor.first.availabilities.end_time)
       expect(tutor.instrument).to eql(Tutor.first.instrument)
       expect(tutor.private).to eql(Tutor.first.private)
       expect(tutor.returning).to eql(Tutor.first.returning)

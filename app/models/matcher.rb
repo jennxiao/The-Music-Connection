@@ -15,6 +15,7 @@ class Matcher
     private
     # Generate every possible pairing
     # and return corresponding matrix
+    # rubocop:disable MethodLength
     def generate_matrix
       Match.where(forced: false).delete_all
       tutor_index = {}
@@ -75,7 +76,7 @@ class Matcher
        teacher_index,
        parent_index]
     end
-
+    # rubocop:disable MethodLength
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
       matrix_deep_copy = Marshal.load(Marshal.dump(matrix))
       m = Munkres.new(matrix, 2)
@@ -98,6 +99,7 @@ class Matcher
 
     # Determine the score assigned to a tutor-student pairing
     # TODO: Implement this properly
+    # rubocop:disable MethodLength
     def heuristic(tutor, teacher, parent)
       if parent.nil?
         10

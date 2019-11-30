@@ -4,3 +4,13 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/*'
+    - 'coverage/*'
+    - 'features/step_definitions/web_steps.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/NumericLiterals:
+  Enabled: false

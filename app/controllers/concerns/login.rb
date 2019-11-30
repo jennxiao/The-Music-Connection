@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-
 require 'bcrypt'
+
+# Module which handles admin user authentication
 module Login
   extend ActiveSupport::Concern
 

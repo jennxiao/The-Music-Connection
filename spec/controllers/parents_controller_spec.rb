@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 describe ParentsController do
   describe 'GET index' do
-    let!(:parent) {FactoryGirl.create(:parent)}
+    let!(:parent) { FactoryGirl.create(:parent) }
 
     it 'should assign instance variable for parents' do
       get :index
