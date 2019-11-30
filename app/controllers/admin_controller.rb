@@ -84,6 +84,24 @@ class AdminController < ApplicationController
     render 'generate_matches'
   end
 
+  def reset_database
+  
+  end
+
+  def confirm_reset_database
+    confirmation = params[:reset_confirmation]
+    if confirmation == 'Yes'
+      Teacher.delete_all
+      Tutor.delete_all
+      Parent.delete_all
+      Match.delete_all
+      flash[:notice] = 'Database reset'
+    else
+      flash[:notice] = 'Database NOT reset'
+    end
+    redirect_to '/admin/welcome'    
+  end
+
   def match_pair
     response = JSON.parse(request.body.read)
     Tutor.find(response['tutor_id'][1..-1]).matched = 'true'
@@ -111,15 +129,6 @@ class AdminController < ApplicationController
     result&.destroy_all
     puts 'successfully destroyed!'
     render text: ''
-  end
-
-  def reset_database
-    Teacher.delete_all
-    Tutor.delete_all
-    Parent.delete_all
-    Match.delete_all
-    flash[:notice] = 'Database has been reset!'
-    redirect_to '/admin/welcome'
   end
 
   def reset_matching
