@@ -84,9 +84,7 @@ class AdminController < ApplicationController
     render 'generate_matches'
   end
 
-  def reset_database
-  
-  end
+  def reset_database; end
 
   def confirm_reset_database
     confirmation = params[:reset_confirmation]
@@ -99,7 +97,7 @@ class AdminController < ApplicationController
     else
       flash[:notice] = 'Database NOT reset'
     end
-    redirect_to '/admin/welcome'    
+    redirect_to '/admin/welcome'
   end
 
   def match_pair

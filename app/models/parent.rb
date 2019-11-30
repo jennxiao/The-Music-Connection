@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model representing a parent (private student)
 class Parent < ActiveRecord::Base
   include ContactValidation
   extend FormHelper
@@ -23,7 +24,7 @@ class Parent < ActiveRecord::Base
   validates :matched_before,  inclusion: { in: [true, false] }
 
   # The fields number_of_matches, matched are unused
-
+  # rubocop:disable AbcSize
   def self.new_from_form(res)
     parent = Parent.new
     parent.attributes = {
@@ -32,7 +33,9 @@ class Parent < ActiveRecord::Base
       email: res[:email],
       address: res[:address],
       grade: res[:grade],
+      # rubocop:disable LineLength
       availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
+      # rubocop:enable LineLength
       piano_home: convert_to_boolean(res[:piano_home]),
       instrument: serialize_instruments(res[:instrument], res[:others]),
       experiences: res[:experiences],
@@ -45,4 +48,6 @@ class Parent < ActiveRecord::Base
     }
     parent.save
   end
+
+  # rubocop:enable AbcSize
 end

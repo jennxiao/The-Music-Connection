@@ -1,10 +1,12 @@
 # frozen_string_literal: true
+
 # Shared helper methods for processing form input
 module FormHelper
   extend ActiveSupport::Concern
 
   def convert_to_boolean(res, pos = 'yes')
     return false if res.nil?
+
     res.strip.downcase == pos
   end
 

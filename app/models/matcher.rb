@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-require 'munkres'
 
+require 'munkres'
 # All logic for matching tutors to students
 class Matcher
   @@MAX_WEIGHT = 1000
@@ -13,6 +13,7 @@ class Matcher
     end
 
     private
+
     # Generate every possible pairing
     # and return corresponding matrix
     # rubocop:disable MethodLength
@@ -76,7 +77,8 @@ class Matcher
        teacher_index,
        parent_index]
     end
-    # rubocop:disable MethodLength
+
+    # rubocop:enable MethodLength
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
       matrix_deep_copy = Marshal.load(Marshal.dump(matrix))
       m = Munkres.new(matrix, 2)
@@ -99,8 +101,7 @@ class Matcher
 
     # Determine the score assigned to a tutor-student pairing
     # TODO: Implement this properly
-    # rubocop:disable MethodLength
-    def heuristic(tutor, teacher, parent)
+    def heuristic(_tutor, _teacher, parent)
       if parent.nil?
         10
       else

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model representing a tutor
 class Tutor < ActiveRecord::Base
   include ContactValidation
   extend FormHelper
@@ -30,6 +31,8 @@ class Tutor < ActiveRecord::Base
   validates :prev_again,      inclusion: { in: [true, false] }
   validates :comment,         exclusion: { in: [nil] }
 
+  # rubocop:disable MethodLength
+  # rubocop:disable AbcSize
   def self.new_from_form(res)
     tutor = Tutor.new
     tutor.attributes = {
@@ -41,7 +44,9 @@ class Tutor < ActiveRecord::Base
       major: res[:major],
       minor: res[:minor],
       experiences: res[:exp],
+      # rubocop:disable LineLength
       availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
+      # rubocop:enable LineLength
       preferred_grade: res[:preferred_grade],
       in_class: convert_to_boolean(res[:in_class]),
       private: convert_to_boolean(res[:private]),
@@ -55,4 +60,6 @@ class Tutor < ActiveRecord::Base
     }
     tutor.save
   end
+  # rubocop:enable MethodLength
+  # rubocop:enable AbcSize
 end

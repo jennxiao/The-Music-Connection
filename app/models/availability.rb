@@ -31,6 +31,7 @@ class Availability
       # a starts before b starts
       # a ends after b ends
       return b.end_time - b.start_time if a.end_time > b.end_time
+
       # regular case overlap
       a.end_time - b.start_time
     end

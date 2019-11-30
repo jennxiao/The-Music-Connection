@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Shared validations for all clients
 module ContactValidation
   extend ActiveSupport::Concern
