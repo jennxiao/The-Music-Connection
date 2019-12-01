@@ -1,23 +1,29 @@
-FactoryGirl.define do
+# frozen_string_literal: true
+
+FactoryBot.define do
   factory :tutor do
-    name 'No name'
-    phone '818-348-3833'
-    email 'musicconnection@gmail.com'
-    sid "303032009"
-    year '9'
-    major 'CS'
-    minor 'CS'
-    experiences '6 months'
-    availabilities '1'
-    preferred_grade '7~9'
-    in_class 'yes'
-    instrument 'Piano'
-    private 'yes'
-    returning 'Yes'
-    prev_again 'Yes'
-    preferred_student_class 'none'
-    comment 'no comment'
-    number_of_matches 0
-    matched false
+    name { 'Tutor Name' }
+    phone { '123-456-7890' }
+    email { 'tutor@website.com' }
+    year { 'Freshman' }
+    major { 'Major field of study' }
+    minor { 'Minor field of study' }
+    experiences { '1-5 years' }
+    # rubocop:disable LineLength
+    availabilities { 'Sunday&1970-01-01 13:00:00 -0800&1970-01-01 15:00:00 -0800;' }
+    # rubocop:enable LineLength
+    preferred_grade { 'Grade 9-12' }
+    instrument { 'Violin' }
+    preferred_student_class { 'Preferred student or class' }
+    comment { 'Tutor comment' }
+    number_of_matches { 0 }
+    matched { false }
+    sid { 3255354212 }
+    in_class { false }
+
+    private { true }
+
+    returning { true }
+    prev_again { true }
   end
 end

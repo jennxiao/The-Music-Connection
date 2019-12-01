@@ -91,11 +91,17 @@ var events = [
       var a = document.getElementById("Member Commitment Policy");
       var b = document.getElementById("Attendance Policy");
       var valid = 1;
-      if (!a.checked || !b.checked) {
-        document.getElementById("mandatory-check").classList.add("invalid");
+      if (!a.checked) {
+        document.getElementById("mandatory-commitment-holder").classList.add("invalid");
         valid = 0;
       } else {
-        document.getElementById("mandatory-check").classList.remove("invalid");
+        document.getElementById("mandatory-commitment-holder").classList.remove("invalid");
+      }
+      if (!b.checked) {
+        document.getElementById("attendance-holder").classList.add("invalid");
+        valid = 0;
+      } else {
+        document.getElementById("attendance-holder").classList.remove("invalid");
       }
       return valid;
     }      

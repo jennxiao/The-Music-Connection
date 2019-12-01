@@ -1,4 +1,6 @@
-FactoryGirl.define do
+# frozen_string_literal: true
+
+FactoryBot.define do
   factory :teacher do
     name 'No name'
     phone '818-348-3833'
