@@ -3,11 +3,11 @@
 require 'rails_helper'
 describe AdminController do
   describe 'POST run_algo' do
-    let!(:parent) { FactoryGirl.create(:parent) }
-    let!(:teacher) { FactoryGirl.create(:teacher) }
-    let!(:tutor) { FactoryGirl.create(:tutor) }
-    let!(:availability) { FactoryGirl.create(:availability) }
-    let!(:tutor2) { FactoryGirl.create(:tutor, private: 'no') }
+    let!(:parent) { FactoryBot.create(:parent) }
+    let!(:teacher) { FactoryBot.create(:teacher) }
+    let!(:tutor) { FactoryBot.create(:tutor) }
+    let!(:availability) { FactoryBot.create(:availability) }
+    let!(:tutor2) { FactoryBot.create(:tutor, private: 'no') }
 
     it 'should stay on the admin page' do
       post :run_algo
