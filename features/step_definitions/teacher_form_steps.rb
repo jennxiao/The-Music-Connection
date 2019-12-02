@@ -17,6 +17,7 @@ end
 
 #Steps for type input areas
 When /^(?:|I )fill in class "(.*)" "([^"]*)" with "([^"]*)"$/ do |class_num, field, value|
+
   case field
 	  
   when /^Class Name/

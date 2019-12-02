@@ -58,9 +58,11 @@
             </div>
             <!-- time group -->
             <div class="class_row form-group dropdown-group required">
-              <div id="time-groups">
+              <!-- This is the element where we append -->
+              <div id="time-groups0" class="time-groups">
                 <label>Time Availability</label>
-                <div class="time-group row">
+                <!-- This is the element where we derive the original -->
+                <div class="time-group row 0" id="time_item0" name="time-item0">
                   <div class="col-md-4" id="day_of_week">
                     <select class="form-control" name="question0[weekday][]">
                       <option disabled selected value> -- Day of the Week -- </option>
@@ -81,10 +83,10 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="btn btn-primary btn-sm" id="add_time">
+              <button type="button" class="btn btn-primary btn-sm time_button" id="add_time0">
                 Add More Time Availability
               </button>
-              <button type="button" class="btn btn-primary btn-sm" id="rem_time">
+              <button type="button" class="btn btn-primary btn-sm time_button" id="rem_time0">
                 Remove Time Availability
               </button>
               <small class="form-text text-muted">Select the time you are requesting.</small>
@@ -125,14 +127,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group other-instruments" id="other-instruments">
+                <!-- This is element to append to -->
+                <div class="form-group other-instruments" id="other-instruments0">
                     <label for="other_instrument">Other:</label>
-                    <input id="other_instrument0" type="text" name="question0[instrument][]" class="form-control other_instrument" placeholder="ex. Harpischord">
+                    <!-- This is element where we derive the original -->
+                    <input id="other_instrument0" type="text" name="question0[instrument][]" class="form-control other_instrument 0" placeholder="ex. Harpischord">
                 </div>
-                <button type="button" class="btn btn-primary btn-sm" id="add_instrument">
+                <button type="button" class="btn btn-primary btn-sm add_instrument" id="add_instrument0">
                   Add Another Instrument
                 </button>
-                <button type="button" class="btn btn-primary btn-sm" id="rem_instrument">
+                <button type="button" class="btn btn-primary btn-sm rem_instrument" id="rem_instrument0">
                   Remove Last Instrument
                 </button>
               </div>

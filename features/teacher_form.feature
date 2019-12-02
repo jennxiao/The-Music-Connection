@@ -28,7 +28,7 @@ Feature: Teacher submits application
     And I fill in the teacher form with basic information
     Then I fill in class "0" with basic information
     And I fill in class "0" "Other" with "Harpsichord"
-    Then I press "add_instrument"
+    Then I press "add_instrument0"
     And I fill in class "0" "Other" with "Bongos"
     Then I press "Submit"
     Then I should see "Your form has been submitted. We will be sending out the results through email soon."
@@ -37,8 +37,8 @@ Feature: Teacher submits application
     And I fill in the teacher form with basic information
     Then I fill in class "0" with basic information
     And I fill in class "0" "Other" with "Harpsichord"
-    Then I press "add_instrument"
+    Then I press "add_instrument0"
     And I fill in class "0" "Other" with "Bongos"
-    Then I press "rem_instrument"
+    Then I press "rem_instrument0"
     Then I press "Submit"
     Then I should see "Your form has been submitted. We will be sending out the results through email soon."

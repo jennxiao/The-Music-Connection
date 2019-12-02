@@ -4,9 +4,10 @@ var array = new Array(); //history of the page traversal
 var jump = 1; //unit of traversal of question flow
 var time_count = 0;
 var class_counter = 0;
+var instrument_number = 19;
 
-// Update the names of the new class
-function changeName() {
+// add new class
+function addClass() {
 
   // Generate clone of class HTML div
   var original = document.getElementsByClassName("class-group")[0];
@@ -29,35 +30,71 @@ function changeName() {
     element = ids_to_change[j];
     element.id = element.id.slice(0, element.id.length - 1) + class_counter.toString();
     element.checked = false;
-    console.log(element.id);
   }
 
-  // Remove the extra "other_instrument fields
+  // Remove the extra other_instrument fields
   var len = cln.getElementsByClassName("other_instrument").length;
+  other_instruments = cln.getElementsByClassName("other-instruments")[0];
   while (len > 1) {
     var elem = cln.getElementsByClassName("other_instrument")[len - 1];
-    cln.getElementsByClassName("other-instruments")[0].removeChild(elem);
+    other_instruments.removeChild(elem);
     len = cln.getElementsByClassName("other_instrument").length;
   }
 
-  // Update the "other_instrument id"
-  other_instrument = cln.getElementsByClassName("form-control other_instrument");
-  other_instrument[0].id = other_instrument[0].id.slice(0, other_instrument[0].id.length - 1) + class_counter.toString();
+  // Remove the extra time availability fields
+  var len = cln.getElementsByClassName("time-group row").length;
+  var time_list = cln.getElementsByClassName("time-groups")[0];
+  while (len > 1) {
+    var last_elem = cln.getElementsByClassName("time-group row 0")[len - 1];
+    time_list.removeChild(last_elem);
+    len -= 1;
+  }
 
-  // Bind the add_instrument function to the new button
-  
+  // Update the other_instrument id
+  field = cln.getElementsByClassName("form-control other_instrument")[0];
+  field.id = field.id.slice(0, field.id.length - 1) + class_counter.toString();
+
+  // Update the add instrument, remove instrument ids, and other-instruments
+  other_instruments.id = other_instruments.id.slice(0, other_instruments.id.length - 1) + class_counter.toString();
+  class_item = cln.getElementsByClassName("form-control other_instrument 0")[0];
+  class_item.id = "other_instrument" + class_counter.toString();
+  class_item.classList.remove("0");
+  class_item.classList.add(class_counter.toString());
+  add = cln.getElementsByClassName("btn btn-primary btn-sm add_instrument")[0];
+  add.id = add.id.slice(0, add.id.length - 1) + class_counter.toString();
+  remove = cln.getElementsByClassName("btn btn-primary btn-sm rem_instrument")[0];
+  remove.id = remove.id.slice(0, remove.id.length - 1) + class_counter.toString();
+
+
+  // Update the add time availability id's
+  time_buttons = cln.getElementsByClassName("time_button");
+  for (k=0; k < time_buttons.length; k++) {
+    var current = time_buttons[k]
+    current.id = current.id.slice(0, current.id.length - 1) + class_counter.toString();
+  }
+  time_item = cln.getElementsByClassName("time-group")[0];
+  time_item.id = "time_item" + class_counter.toString();
+  time_item.classList.remove("0");
+  time_item.classList.add(class_counter.toString());
+  time_groups = cln.getElementsByClassName("time-groups")[0];
+  time_groups.id = "time-groups" + class_counter.toString();
+
 
   // Append the updated clone to the form and update the form
   document.getElementById("class-groups").appendChild(cln);
   if (document.getElementsByClassName("class-group").length > 1) {
     document.getElementById("rem_class").style.display = "inline-block";
   } 
+
+  bindInstrumentButton(class_counter);
+  bindTimeButton(class_counter);
+
 }
 
 
 function init() {
-  //Show only the first tab and the corresponding buttons
 
+  //Show only the first tab and the corresponding buttons
   hide_all_tabs();
   show_tab(cur_tab);
   //Event Listener for prev, next, and submit
@@ -88,46 +125,16 @@ function init() {
       phoneNumberForm.value += "-";
     }
   }
-  //Event Listener for adding/removing time availability
-  var add_time = document.getElementById("add_time");
-  add_time.addEventListener('click', function() {
-    var original = document.getElementsByClassName("time-group")[0];
-    var cln = original.cloneNode(true);
-    document.getElementById("time-groups").appendChild(cln);
-    if (document.getElementsByClassName("time-group").length > 1) {
-      document.getElementById("rem_time").style.display = "inline-block";
-    }
-  });
 
-  document.getElementById("rem_time").style.display = "none";
-  var rem_time = document.getElementById("rem_time");
-  rem_time.addEventListener('click', function () {
-    var len = document.getElementsByClassName("time-group").length;
-    var elem = document.getElementsByClassName("time-group")[len - 1];
-    document.getElementById("time-groups").removeChild(elem);
-    if (document.getElementsByClassName("time-group").length <= 1) {
-      document.getElementById("rem_time").style.display = "none";
-    }
-  });
+  bindInstrumentButton(0);
+  bindTimeButton(0);
 
-  //Event Listener for adding/removing classes
+  //Event Listener for adding classes
   var add_class = document.getElementById("add_class");
-  add_class.addEventListener('click', changeName);
+  add_class.addEventListener('click', addClass);
 
-  // add_class.addEventListener('click', function() {
-  //   var original = document.getElementsByClassName("class-group")[0];
-  //   var cln = original.cloneNode(true);
-  //   elements_to_change = cln.getElementsByClassName("form-control");
-  //   first_element = elements_to_change[0];
-  //   rest_of_name = first_element.name.substr(first_element.name.indexOf("["));
-  //   new_name = "question" + class_counter.toString();
-  //   console.log(new_name + rest_of_name);
-  //   document.getElementById("class-groups").appendChild(cln);
-  //   if (document.getElementsByClassName("class-group").length > 1) {
-  //     document.getElementById("rem_class").style.display = "inline-block";
-  //   }
-  // });
 
+  // Event Listener for removing classes
   document.getElementById("rem_class").style.display = "none";
   var rem_class = document.getElementById("rem_class");
   rem_class.addEventListener('click', function () {
@@ -141,38 +148,95 @@ function init() {
 
 }
 
-//Event Listener for adding Other instruments
-var add_instrument = document.getElementById("add_instrument");
+//Function to bind "add instrument" button to respective section
+function bindInstrumentButton(class_num) {
+  var class_num_string = class_num.toString();
+  var add_button = document.getElementById("add_instrument" + class_num_string);
+  var rem_button = document.getElementById("rem_instrument" + class_num_string);
+  var instrument_list = document.getElementById("other-instruments" + class_num_string);
+  var other_instruments = document.getElementsByName("question" + class_num_string + "[instrument][]");
+  // var list_of_other = document.getElementsByClassName("form-control other_instrument");
+  var length = 1;
 
-function addInstrument() {
+  // Bind add instrument button
+  add_button.addEventListener("click", function() {
 
-  var original = document.getElementsByClassName("form-control other_instrument")[0];
-  var cln = original.cloneNode(true);
-  document.getElementById("other-instruments").appendChild(cln);
-  if (document.getElementsByClassName("other_instrument").length > 1) {
-    document.getElementById("rem_instrument").style.display = "inline-block";
-  }
+    var original = document.getElementById("other_instrument" + class_num_string);
+    var cln = original.cloneNode(true);
+    cln.value = "";
+
+    instrument_list.appendChild(cln);
+    length += 1;
+
+    if (length > 1) {
+      displayRemoveButton(class_num);
+    }
+
+  });
+
+  // Hide and bind remove instrument button
+  rem_button.style.display = "none";
+  rem_button.addEventListener("click", function() {
+
+    var instruments = document.getElementsByClassName("form-control other_instrument " + class_num_string);
+    instrument_list.removeChild(instruments[length - 1]);
+    length -= 1;
+
+    if (length <= 1) {
+      hideRemoveButton(class_num);
+    }
+  });
+}
+
+function bindTimeButton(class_num) {
+  var class_num_string = class_num.toString();
+  var add_button = document.getElementById("add_time" + class_num_string);
+  var rem_button = document.getElementById("rem_time" + class_num_string);
+  var time_list = document.getElementById("time-groups" + class_num_string);
+  var length = 1;
+
+  add_button.addEventListener("click", function() {
+
+    var original = document.getElementById("time_item" + class_num_string);
+    var cln = original.cloneNode(true);
+    time_list.appendChild(cln);
+
+    length += 1;
+    if (length > 1) {
+      displayRemoveTime(class_num);
+    }
+
+  });
+
+  rem_button.style.display = "none";
+  rem_button.addEventListener("click", function() {
+    console.log(class_num_string);
+    var last_elem = document.getElementsByClassName("time-group row " + class_num_string)[length -1];
+    time_list.removeChild(last_elem);
+    length -= 1;
+
+    if (length <= 1) {
+      hideRemoveTime(class_num);
+    }
+  });
 
 }
 
-add_instrument.addEventListener('click', addInstrument);
-
-
-//Event Listener for removing other instruments
-document.getElementById("rem_instrument").style.display = "none";
-
-var rem_time = document.getElementById("rem_instrument");
-
-function removeInstrument() {
-  var len = document.getElementsByClassName("other_instrument").length;
-  var elem = document.getElementsByClassName("other_instrument")[len - 1];
-  document.getElementById("other-instruments").removeChild(elem);
-  if (document.getElementsByClassName("other_instrument").length <= 1) {
-    document.getElementById("rem_instrument").style.display = "none";
-  }
+function displayRemoveTime(class_num) {
+  document.getElementById("rem_time" + class_num.toString()).style.display = "inline-block";
 }
 
-rem_time.addEventListener('click', removeInstrument);
+function hideRemoveTime(class_num) {
+  document.getElementById("rem_time" + class_num.toString()).style.display = "none";
+}
+
+function displayRemoveButton(class_num) {
+  document.getElementById("rem_instrument" + class_num.toString()).style.display = "inline-block";
+}
+
+function hideRemoveButton(class_num) {
+  document.getElementById("rem_instrument" + class_num.toString()).style.display = "none";
+}
 
 //Displays the 'other' text field for custom instrument
 function display_other(elem) {

@@ -16,12 +16,12 @@ Scenario: Teacher adds 1 class and submits
 	Then I fill in class "0" with basic information
 	And I check class "0" "Piano"
 
-	Then I press "add_class"
+	Then I press "Add Another Instrument"
 
 	And I fill in class "1" with basic information
 	And I check class "1" "Piano"
 
-	Then I press submit
+	Then I press Submit
 
 	Then I should see "Your form has been submitted. We will be sending out the results through email soon."
 
