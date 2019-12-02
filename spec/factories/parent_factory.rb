@@ -6,9 +6,7 @@ FactoryBot.define do
     phone { '321-654-0987' }
     email { 'parent@website.com' }
     address { 'Parent Address' }
-    # rubocop:disable LineLength
-    availabilities { 'Sunday&1970-01-01 13:00:00 -0800&1970-01-01 15:00:00 -0800;' }
-    # rubocop:enable LineLength
+    availabilities { 'Sunday&13:00:00&15:00:00;' }
     instrument { 'Piano,Violin' }
     experiences { '3-4 years' }
     comment { 'Parent comment' }
