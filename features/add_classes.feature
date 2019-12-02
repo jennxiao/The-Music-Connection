@@ -9,17 +9,17 @@ Background: Form is open and User visits home page first
 
 	Given form is open
 	Given I am on the home page
+	Then I am on the teacher form
 
 Scenario: Teacher adds 1 class and submits
 
-	Then I am on the teacher form
+	Then I fill in class "0" with basic information
+	And I check class "0" "Piano"
 
-	And I fill in class "1" with basic information
-
-	And I check "Piano"
 	Then I press "add_class"
 
-	And I fill in class "2" with basic information
+	And I fill in class "1" with basic information
+	And I check class "1" "Piano"
 
 	Then I press submit
 

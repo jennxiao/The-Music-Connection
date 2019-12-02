@@ -17,9 +17,11 @@ class FormsController < ApplicationController
 
   def teacher_submit
     # only the first question object has these fields
-    name = params[:question0][:teacher_name]
-    phone = params[:question0][:phone]
-    email = params[:question0][:email]
+    name = params[:question][:teacher_name]
+    phone = params[:question][:phone]
+    email = params[:question][:email]
+	
+#	NEED A CHECK IN INSTRUMENTS FIELD OF HASH BECAUSE THE "OTHER INSTRUMENT FIELD SENDS A BLANK STRING IF NO INSTRUMENT IS TYPED IN"
 
     p params
     (0...params.count).each do |i|
