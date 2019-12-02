@@ -17,6 +17,7 @@ engines:
     exclude_paths:
       - "spec/"
       - "app/assets/"
+      - "features/"
     config:
       languages:
         ruby:
