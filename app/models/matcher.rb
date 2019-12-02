@@ -3,7 +3,7 @@
 require 'munkres'
 # All logic for matching tutors to students
 class Matcher
-  @@MAX_WEIGHT = 1000
+  @@MAX_WEIGHT = 10000
   mattr_accessor :MAX_WEIGHT
 
   class << self
@@ -101,11 +101,49 @@ class Matcher
 
     # Determine the score assigned to a tutor-student pairing
     # TODO: Implement this properly
-    def heuristic(_tutor, _teacher, parent)
-      if parent.nil?
-        10
+    def heuristic(tutor, teacher, parent)
+      if !parent.nil?
+        overlapping_time = 0
+
+        # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
+        Availability.deserialize(parent[:availabilities]).each do |a|
+          max_overlap = 0
+          Availability.deserialize(tutor[:availabilities]).each do |b|
+            overlap = Availability.overlap(a, b).div(60)
+            if overlap > max_overlap
+              max_overlap = overlap
+            end
+          end
+          overlapping_time += max_overlap
+        end
+
+        if parent[:past_app]
+          overlapping_time += 5
+        end
+        if parent[:lunch]
+          overlapping_time += 8
+        end
+        puts "Parent:"
+        puts overlapping_time
+        return overlapping_time
       else
-        10
+        overlapping_time = 0
+
+        # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
+        Availability.deserialize(teacher[:availabilities]).each do |a|
+          max_overlap = 0
+          Availability.deserialize(tutor[:availabilities]).each do |b|
+            overlap = Availability.overlap(a, b).div(60)
+            if overlap > max_overlap
+              max_overlap = overlap
+            end
+          end
+          overlapping_time += max_overlap
+        end
+
+        puts "Teacher:"
+        puts overlapping_time
+        return overlapping_time
       end
     end
   end
