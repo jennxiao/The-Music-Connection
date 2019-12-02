@@ -5,23 +5,49 @@ var jump = 1; //unit of traversal of question flow
 var time_count = 0;
 var class_counter = 0;
 
-
+// Update the names of the new class
 function changeName() {
 
-  elements_to_change = cln.getElementsByClassName("form-control");
+  // Generate clone of class HTML div
   var original = document.getElementsByClassName("class-group")[0];
   var cln = original.cloneNode(true);
   elements_to_change = cln.getElementsByClassName("form-control");
+  ids_to_change = cln.getElementsByClassName("form-control checkbox")
   class_counter += 1;
 
+  // Update the names
   for (i=0; i < elements_to_change.length; i++) { 
     element = elements_to_change[i];
-    console.log(element.value);
     rest_of_name = element.name.substr(element.name.indexOf("["));
     new_name = "question" + class_counter.toString();
     element.name = new_name + rest_of_name;
-    console.log(new_name + rest_of_name);
+    element.value = null;
   }
+
+  // Update the checkbox id's
+  for (j = 0; j < ids_to_change.length; j++) {
+    element = ids_to_change[j];
+    element.id = element.id.slice(0, element.id.length - 1) + class_counter.toString();
+    element.checked = false;
+    console.log(element.id);
+  }
+
+  // Remove the extra "other_instrument fields
+  var len = cln.getElementsByClassName("other_instrument").length;
+  while (len > 1) {
+    var elem = cln.getElementsByClassName("other_instrument")[len - 1];
+    cln.getElementsByClassName("other-instruments")[0].removeChild(elem);
+    len = cln.getElementsByClassName("other_instrument").length;
+  }
+
+  // Update the "other_instrument id"
+  other_instrument = cln.getElementsByClassName("form-control other_instrument");
+  other_instrument[0].id = other_instrument[0].id.slice(0, other_instrument[0].id.length - 1) + class_counter.toString();
+
+  // Bind the add_instrument function to the new button
+  
+
+  // Append the updated clone to the form and update the form
   document.getElementById("class-groups").appendChild(cln);
   if (document.getElementsByClassName("class-group").length > 1) {
     document.getElementById("rem_class").style.display = "inline-block";
@@ -31,6 +57,7 @@ function changeName() {
 
 function init() {
   //Show only the first tab and the corresponding buttons
+
   hide_all_tabs();
   show_tab(cur_tab);
   //Event Listener for prev, next, and submit
@@ -86,6 +113,7 @@ function init() {
   //Event Listener for adding/removing classes
   var add_class = document.getElementById("add_class");
   add_class.addEventListener('click', changeName);
+
   // add_class.addEventListener('click', function() {
   //   var original = document.getElementsByClassName("class-group")[0];
   //   var cln = original.cloneNode(true);
@@ -110,6 +138,7 @@ function init() {
       document.getElementById("rem_class").style.display = "none";
     }
   });
+
 }
 
 //Event Listener for adding Other instruments
