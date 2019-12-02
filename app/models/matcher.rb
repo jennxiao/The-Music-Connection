@@ -123,6 +123,10 @@ class Matcher
         if parent[:lunch]
           overlapping_time += 8
         end
+        if parent[:matched_before]
+          overlapping_time += 10
+        end
+
         puts "Parent:"
         puts overlapping_time
         return overlapping_time

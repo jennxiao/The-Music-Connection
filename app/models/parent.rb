@@ -44,7 +44,7 @@ class Parent < ActiveRecord::Base
       comment: res[:comment],
       number_of_matches: 0,
       matched: false,
-      matched_before: false
+      matched_before: convert_to_boolean(res[:matched_in_past_semester])
     }
     parent.save
   end
