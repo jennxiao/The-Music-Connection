@@ -1,8 +1,8 @@
-/* Flexible form engine that allows custom 
+/**
+ * Flexible form engine that allows custom 
  * scripting of input fields via special_features
  *
- * TODO: write documentation (LOL)
- * I admit this is not easily readable
+ * TODO: write documentation
  */
 const Engine = {
   START_TAB: 0,
@@ -10,62 +10,13 @@ const Engine = {
   tab_history: [],
   special_features: {},
   init: function(features) {
+    Engine._initPrevButton();
+    Engine._initNextButton();
+    Engine._initSubmitButton();
+    Engine._initPhoneNumberEnforcement();
+
+    // Initialize special features
     Engine.special_features = features;
-
-    // Previous button functionality
-    var prev_btn = document.getElementById("prev_btn");
-    var next_btn = document.getElementById("next_btn");
-    prev_btn.addEventListener('click', function back_button_tab() {
-      if (Engine.tab_history.length > 0) {
-        Engine.current_tab = Engine.tab_history.pop();
-      } else {
-        Engine.current_tab = Engine.START_TAB;
-      }
-      Engine.showTab(Engine.current_tab);
-    });
-    // Next button functionality
-    // Note that this is NOT symmetric to prev_btn
-    next_btn.addEventListener('click', function next_button_tab() {
-      if (!Engine.special_features[Engine.current_tab].override_next) {
-          if (_defaultValidator()) {
-          Engine.tab_history.push(Engine.current_tab);
-          Engine.current_tab += 1;
-          Engine.showTab(Engine.current_tab);
-        }
-      } else {
-        var val = Engine.special_features[Engine.current_tab].override_next();
-        if (val !== 0) {
-          Engine.tab_history.push(Engine.current_tab);
-          Engine.current_tab += val;
-          Engine.showTab(Engine.current_tab);
-        }
-      }
-    });
-    // Validator for submission
-    document.getElementById("allForm").addEventListener('submit', function(evt) {
-      evt.returnValue = _defaultValidator();
-    });
-
-    // Phone format enforcement
-    var add_hyphens = function enforce_phone_number_format(evt) {
-      if (evt.key === "Backspace" || evt.key === "Delete") {
-        return true;
-      }
-      var numberValue = evt.currentTarget.value;
-      if (numberValue.length === 3) {
-        numberValue += "-";
-      } else if (numberValue.length === 7) {
-        numberValue += "-";
-      }
-      evt.currentTarget.value = numberValue;
-    }
-    var phone_inputs = document.getElementsByClassName("phone-number-input");
-    for (var i = 0; i < phone_inputs.length; i += 1) {
-      phone_inputs[i].setAttribute("maxlength", "12"); 
-      phone_inputs[i].addEventListener('keydown', add_hyphens);
-    }
-
-    // Custom events
     for (var i = 0; i < document.getElementsByClassName("tab").length; i += 1) {
       var custom_events = Engine.special_features[i].events;
       for (var j = 0; j < custom_events.length; j += 1) {
@@ -93,7 +44,65 @@ const Engine = {
     var on_last_tab = (tab_num === (tabs.length - 1));
     document.getElementById("sub_btn").style.display = (on_last_tab ? "inline" : "none");
     document.getElementById("next_btn").style.display = (!on_last_tab ? "inline" : "none");
-
+  },
+  _initPrevButton: function() {
+    // Previous button functionality
+    var prev_btn = document.getElementById("prev_btn");
+    var next_btn = document.getElementById("next_btn");
+    prev_btn.addEventListener('click', function back_button_tab() {
+      if (Engine.tab_history.length > 0) {
+        Engine.current_tab = Engine.tab_history.pop();
+      } else {
+        Engine.current_tab = Engine.START_TAB;
+      }
+      Engine.showTab(Engine.current_tab);
+    });
+  },
+  _initNextButton: function() {
+    // Next button functionality
+    // Note that this is NOT symmetric to prev_btn
+    next_btn.addEventListener('click', function next_button_tab() {
+      if (!Engine.special_features[Engine.current_tab].override_next) {
+          if (Validations.defaultValidator()) {
+          Engine.tab_history.push(Engine.current_tab);
+          Engine.current_tab += 1;
+          Engine.showTab(Engine.current_tab);
+        }
+      } else {
+        var val = Engine.special_features[Engine.current_tab].override_next();
+        if (val !== 0) {
+          Engine.tab_history.push(Engine.current_tab);
+          Engine.current_tab += val;
+          Engine.showTab(Engine.current_tab);
+        }
+      }
+    });
+  },
+  _initSubmitButton: function() {
+    // Validator for submission
+    document.getElementById("allForm").addEventListener('submit', function(evt) {
+      evt.returnValue = Validations.defaultValidator();
+    });
+  },
+  _initPhoneNumberEnforcement: function() {
+    // Phone format enforcement
+    var add_hyphens = function enforce_phone_number_format(evt) {
+      if (evt.key === "Backspace" || evt.key === "Delete") {
+        return true;
+      }
+      var numberValue = evt.currentTarget.value;
+      if (numberValue.length === 3) {
+        numberValue += "-";
+      } else if (numberValue.length === 7) {
+        numberValue += "-";
+      }
+      evt.currentTarget.value = numberValue;
+    }
+    var phone_inputs = document.getElementsByClassName("phone-number-input");
+    for (var i = 0; i < phone_inputs.length; i += 1) {
+      phone_inputs[i].setAttribute("maxlength", "12"); 
+      phone_inputs[i].addEventListener('keydown', add_hyphens);
+    }
   }
 }
 
@@ -126,92 +135,90 @@ const Driver = {
   }
 }
 
-function markValidation(element, isValid) {
-  if (!isValid) {
-    element.classList.add("invalid");
-  } else {
-    element.classList.remove("invalid");
-  }
-}
-
-function _defaultValidator() {
-  if (Engine.special_features[Engine.current_tab].override_next) {
-    return false;
-  }
-
-  var tab = document.getElementsByClassName("tab")[Engine.current_tab];
-  var valid = true;
-  
-  valid = valid && validateRadioGroups(tab);
-  valid = valid && validateTextInputs(tab);
-  valid = valid && validateEmailInputs(tab);
-  valid = valid && validatePhoneInputs(tab);
-
-  return valid;
-}
-
-function validateRadioGroups(tab) {
-  // Radio button validation
-  // This class applied to the div surrounding the radio buttons
-  var radio_groups = tab.getElementsByClassName("radio-group");
-  var valid = true;
-  for (var i = 0; i < radio_groups.length; i++) {
-    var radio_group = radio_groups[i];
-    if (!radio_group.classList.contains("required")) {
-      continue;
+const Validations = {
+  markValidation: function(element, isValid) {
+    if (!isValid) {
+      element.classList.add("invalid");
+    } else {
+      element.classList.remove("invalid");
     }
-    var radios = radio_group.getElementsByTagName("input");
-    var test_check = false;
-    for (var j = 0; j < radios.length; j++) {
-      if (radios[j].checked) {
-        test_check = true;
-        break;
+  },
+  defaultValidator: function() {
+    if (Engine.special_features[Engine.current_tab].override_next) {
+      return false;
+    }
+
+    var tab = document.getElementsByClassName("tab")[Engine.current_tab];
+    var valid = true;
+    
+    valid = valid && Validations.validateRadioGroups(tab);
+    valid = valid && Validations.validateTextInputs(tab);
+    valid = valid && Validations.validateEmailInputs(tab);
+    valid = valid && Validations.validatePhoneInputs(tab);
+
+    return valid;
+  },
+  validateRadioGroups: function(tab) {
+    // Radio button validation
+    // This class applied to the div surrounding the radio buttons
+    // Check if every radio group has exactly one radio button selected
+    var radio_groups = tab.getElementsByClassName("radio-group");
+    var valid = true;
+    for (var i = 0; i < radio_groups.length; i++) {
+      var radio_group = radio_groups[i];
+      if (!radio_group.classList.contains("required")) {
+        continue;
       }
+      var radios = radio_group.getElementsByTagName("input");
+      var test_check = 0;
+      for (var j = 0; j < radios.length; j++) {
+        if (radios[j].checked) {
+          test_check += 1;
+        }
+      }
+      var past_test = (test_check === 1);
+      Validations.markValidation(radio_group, past_test);
+      valid = valid && past_test;
     }
-    markValidation(radio_group, test_check);
-    valid = valid && test_check;
+    return valid;
+  },
+  validateTextInputs: function(tab) {
+    // Textbox and Dropdown validation
+    // This class applied to the input directly
+    // i.e. <input class="required-text"...></input>
+    var valid = true;
+    var required_text_groups = tab.getElementsByClassName("required-text");
+    for (var i = 0; i < required_text_groups.length; i++) {
+      var test = (required_text_groups[i].value !== "");
+      Validations.markValidation(required_text_groups[i], test);
+      valid = valid && test;
+    }
+    return valid;
+  },
+  validateEmailInputs: function(tab) {
+    // Email validation
+    // Class applied to input directly
+    var valid = true;
+    // This hurts my soul
+    var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var email_groups = tab.getElementsByClassName("email");
+    for (var i = 0; i < email_groups.length; i++) {
+      var test = email_groups[i].value.match(email_regex);
+      Validations.markValidation(email_groups[i], test);
+      valid = valid && test;
+    }
+    return valid;
+  },
+  validatePhoneInputs: function(tab) {
+    var valid = true;
+    // sigh
+    var phone_regex = /^\d{3}-\d{3}-\d{4}/;
+    var phone_inputs = document.getElementsByClassName("phone-number-input");
+    for (var i = 0; i < phone_inputs.length; i++) {
+      var test = phone_inputs[i].value.match(phone_regex) && (phone_inputs[i].value.length === 12);
+      Validations.markValidation(phone_inputs[i], test);
+      valid = valid && test;
+    }
+    return valid;
   }
-  return valid;
-}
-
-function validateTextInputs(tab) {
-  // Textbox and Dropdown validation
-  // This class applied to the input directly
-  // i.e. <input class="required-text"...></input>
-  var valid = true;
-  var required_text_groups = tab.getElementsByClassName("required-text");
-  for (var i = 0; i < required_text_groups.length; i++) {
-    var test = (required_text_groups[i].value !== "");
-    markValidation(required_text_groups[i], test);
-    valid = valid && test;
-  }
-  return valid;
-}
-
-function validateEmailInputs(tab) {
-  // Email validation
-  // Class applied to input directly
-  var valid = true;
-  // This hurts my soul
-  var email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var email_groups = tab.getElementsByClassName("email");
-  for (var i = 0; i < email_groups.length; i++) {
-    var test = email_groups[i].value.match(email_regex);
-    markValidation(email_groups[i], test);
-    valid = valid && test;
-  }
-  return valid;
-}
-
-function validatePhoneInputs(tab) {
-  var valid = true;
-  // sigh
-  var phone_regex = /^\d{3}-\d{3}-\d{4}/;
-  var phone_inputs = document.getElementsByClassName("phone-number-input");
-  for (var i = 0; i < phone_inputs.length; i++) {
-    var test = phone_inputs[i].value.match(phone_regex) && (phone_inputs[i].value.length === 12);
-    markValidation(phone_inputs[i], test);
-    valid = valid && test;
-  }
-  return valid;
 }
