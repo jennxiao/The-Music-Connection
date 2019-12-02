@@ -210,7 +210,6 @@ function bindTimeButton(class_num) {
 
   rem_button.style.display = "none";
   rem_button.addEventListener("click", function() {
-    console.log(class_num_string);
     var last_elem = document.getElementsByClassName("time-group row " + class_num_string)[length -1];
     time_list.removeChild(last_elem);
     length -= 1;
