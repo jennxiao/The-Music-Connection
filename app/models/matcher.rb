@@ -105,6 +105,17 @@ class Matcher
       if !parent.nil?
         overlapping_time = 0
 
+        tutor_instruments = tutor[:instrument].split(",")
+        parent_instruments = parent[:instrument].split(",")
+
+        tutor_instruments.each do |i1|
+          parent_instruments.each do |i2|
+            if i1 == i2
+              overlapping_time += 5
+            end
+          end
+        end
+
         #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
         lower_grade = tutor[:preferred_grade][6].to_i
         higher_grade = tutor[:preferred_grade][8].to_i
@@ -147,6 +158,17 @@ class Matcher
         return overlapping_time
       else
         overlapping_time = 0
+
+        tutor_instruments = tutor[:instrument].split(",")
+        teacher_instruments = teacher[:instrument].split("&")
+
+        tutor_instruments.each do |i1|
+          teacher_instruments.each do |i2|
+            if i1 == i2
+              overlapping_time += 10
+            end
+          end
+        end
 
         #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
         lower_grade = tutor[:preferred_grade][6].to_i
