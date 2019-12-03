@@ -9,6 +9,9 @@
     <th>Parent name (or nil)</th>
     <th>Parent ID (or nil)</th>
     <th>Score</th>
+    <th>Tutor Info</th>
+    <th>Teacher Info</th>
+    <th>Parent Info</th>
   </tr>
   <% @calculated.each do |match| %>
   <tr>
@@ -19,6 +22,17 @@
     <td><%= match[:parent_name] %></td>
     <td><%= match[:parent] %></td>
     <td><%= match[:score] %></td>
+    <td><%= Tutor.where(id: match[:tutor]).inspect %></td>
+    <td><%= if match[:teacher].to_i != 0
+              Teacher.where(id: match[:teacher]).inspect
+            else
+              match[:teacher]
+            end %></td>
+    <td><%= if match[:parent].to_i != 0
+              Parent.where(id: match[:parent]).inspect
+            else
+              match[:parent]
+            end %></td>
   </tr>
   <% end %>
 </table>
