@@ -105,6 +105,21 @@ class Matcher
       if !parent.nil?
         overlapping_time = 0
 
+        #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
+        lower_grade = tutor[:preferred_grade][6].to_i
+        higher_grade = tutor[:preferred_grade][8].to_i
+        if !(tutor[:preferred_grade][9] == nil)
+          higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
+        end
+        actual_grade = parent[:grade].to_i
+
+        while lower_grade <= higher_grade
+          if actual_grade == lower_grade
+            overlapping_time += 15
+          end
+          lower_grade += 1
+        end
+
         # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
         Availability.deserialize(parent[:availabilities]).each do |a|
           max_overlap = 0
@@ -132,6 +147,21 @@ class Matcher
         return overlapping_time
       else
         overlapping_time = 0
+
+        #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
+        lower_grade = tutor[:preferred_grade][6].to_i
+        higher_grade = tutor[:preferred_grade][8].to_i
+        if !(tutor[:preferred_grade][9] == nil)
+          higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
+        end
+        actual_grade = teacher[:grade].to_i
+
+        while lower_grade <= higher_grade
+          if actual_grade == lower_grade
+            overlapping_time += 15
+          end
+          lower_grade += 1
+        end
 
         # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
         Availability.deserialize(teacher[:availabilities]).each do |a|
