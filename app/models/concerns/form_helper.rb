@@ -15,7 +15,7 @@ module FormHelper
     j = 0
     (0...instr.count).each do |i|
       if instr[i] == 'Other'
-        str += (other[j] + ',')
+        str += (other[j].gsub(/[^a-zA-Z]/, '') + ',')
         j += 1
       else
         str += (instr[i] + ',')
