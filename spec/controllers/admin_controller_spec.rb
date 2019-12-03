@@ -1,44 +1,24 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-describe AdminController do
-  describe 'POST run_algo' do
-    let!(:parent) { FactoryBot.create(:parent) }
-    let!(:teacher) { FactoryBot.create(:teacher) }
-    let!(:tutor) { FactoryBot.create(:tutor) }
-    let!(:availability) { FactoryBot.create(:availability) }
-    let!(:tutor2) { FactoryBot.create(:tutor, private: 'no') }
 
-    it 'should stay on the admin page' do
-      post :run_algo
-      expect(response).to redirect_to('/admin/welcome')
+# Monkeypatch: see https://github.com/rails/rails/issues/34790
+if RUBY_VERSION>='2.6.0'
+  if Rails.version < '5'
+    class ActionController::TestResponse < ActionDispatch::TestResponse
+      def recycle!
+        # hack to avoid MonitorMixin double-initialize error:
+        @mon_mutex_owner_object_id = nil
+        @mon_mutex = nil
+        initialize
+      end
     end
-    it 'should increase the number of matches' do
-      expect { post :run_algo }.to change { Match.count }.by(2)
-    end
+  else
+    puts "Monkeypatch for ActionController::TestResponse no longer needed"
   end
-  describe 'GET open_form' do
-    it 'should stay on the admin page' do
-      get :open_form
-      expect(response).to redirect_to('/admin/welcome')
-    end
-  end
-  describe 'GET close_form' do
-    it 'should stay on the admin page' do
-      get :close_form
-      expect(response).to redirect_to('/admin/welcome')
-    end
-  end
-  describe 'GET reset_database' do
-    it 'should remove all of database' do
-      get :reset_database
-      expect(Tutor.count).to eq(0)
-    end
-  end
-  describe 'GET reset_matching' do
-    it 'should remove all matches' do
-      get :reset_matching
-      expect(Match.count).to eq(0)
-    end
-  end
+end
+
+
+describe AdminController do
+  # these belong in cucumber integration tests
 end

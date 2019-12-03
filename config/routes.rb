@@ -5,24 +5,21 @@ Rails.application.routes.draw do
   # Admin page - admin authentication
   get  'admin' => 'admin#home'
   post 'admin/login'
-  get  'admin/update_settings'
-  post 'admin/update_settings' => 'admin#update_settings_post'
   get  'admin/logout' => 'admin#logout'
   
   # Admin page - admin actions
-  get  'admin/welcome'
+  get  'admin/welcome' => 'admin#welcome'
   get  'admin/close_form'
   get  'admin/open_form'
+
+  get  'admin/update_settings'
+  post 'admin/update_settings' => 'admin#update_settings_post'
 
   get  'admin/generate_matches' => 'admin#generate_matches'
   get  'admin/results'
 
   get  'admin/reset_database'
   post 'admin/confirm_reset_database' => 'admin#confirm_reset_database'
-  
-  post 'admin/run_algo' => 'admin#run_algo'
-  post 'admin/match_pair' => 'admin#match_pair'
-  put  'admin/undo_pair' => 'admin#undo_pair'
 
   get 'admin/reset_matching'
 

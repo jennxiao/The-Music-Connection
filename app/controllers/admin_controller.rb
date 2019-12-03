@@ -48,13 +48,13 @@ class AdminController < ApplicationController
   def open_form
     change_settings(new_form_open: true)
     flash[:notice] = 'Form opened'
-    redirect_to '/admin/welcome'
+    redirect_to('/admin/welcome') && return
   end
 
   def close_form
     change_settings(new_form_open: false)
     flash[:notice] = 'Form closed'
-    redirect_to '/admin/welcome'
+    redirect_to('/admin/welcome') && return
   end
 
   def generate_matches
@@ -97,7 +97,7 @@ class AdminController < ApplicationController
     else
       flash[:notice] = 'Database NOT reset'
     end
-    redirect_to '/admin/welcome'
+    redirect_to('/admin/welcome') && return
   end
 
   def match_pair
