@@ -76,6 +76,8 @@ group :test do
   gem 'simplecov', :require => false
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels' # basic imperative step defs
+  gem 'selenium-webdriver' # JavaScript testing for cucumber
+  gem 'puma' # JavaScript testing for cucumber
   gem 'database_cleaner' # required by Cucumber
   gem 'launchy'
 end
