@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'bundler', '1.17.3'
+
 gem 'bootstrap', '~> 4.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
@@ -42,6 +44,9 @@ gem 'munkres', '~> 0.1.0'
 # part 2: Storing Sensitive Data
 gem 'attr_encrypted'
 
+# Docker dependency
+gem 'tzinfo-data'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3', '~> 1.3.13'
@@ -82,5 +87,3 @@ group :test do
   gem 'database_cleaner' # required by Cucumber
   gem 'launchy'
 end
-
-gem 'bundler'

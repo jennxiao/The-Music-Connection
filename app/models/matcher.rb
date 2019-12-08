@@ -14,8 +14,13 @@ class Matcher
 
     private
 
-    # Generate every possible pairing
-    # and return corresponding matrix
+    # (Re)generate and calculate a score for every tutor/student pairing.
+    #
+    # Deletes recalculates all Matches in the database that are not "forced"
+    # i.e. set by manual matching. 
+    #
+    # Returns a matrix indexed by (tutor, student) and the hashes that
+    # maps (matrix index => client ID) for tutor, teacher, parent respectively.
     # rubocop:disable MethodLength
     def generate_matrix
       Match.where(forced: false).delete_all
@@ -26,7 +31,7 @@ class Matcher
       b = Teacher.order('id ASC').all
       c = Parent.order('id ASC').all
       d = Match.order('id ASC').all
-      matrix = [] # Index by (tutor, student)
+      matrix = []
       a.each do |tutor|
         row = []
         b.each do |teacher|
@@ -41,7 +46,7 @@ class Matcher
         matrix.push(row)
       end
 
-      # padding to square
+      # Pad matrix to square (required by munkres library)
       while matrix.length > matrix[0].length
         matrix.each do |r|
           r.push(0)
@@ -78,6 +83,7 @@ class Matcher
        parent_index]
     end
 
+    # Wrapper method for munkres. Saves results in Matches database.
     # rubocop:enable MethodLength
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
       matrix_deep_copy = Marshal.load(Marshal.dump(matrix))
@@ -99,8 +105,7 @@ class Matcher
       Match.all
     end
 
-    # Determine the score assigned to a tutor-student pairing
-    # TODO: Implement this properly
+    # Determines the score assigned to a tutor-student pairing
     def heuristic(tutor, teacher, parent)
       if !parent.nil?
         overlapping_time = 0
