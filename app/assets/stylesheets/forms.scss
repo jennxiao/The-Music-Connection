@@ -17,9 +17,15 @@
 }
 
 .btn-xl {
-    padding: 10px 20px;
-    font-size: 35px;
-    width:75%;    //Specify your width here
+  padding: 10px 20px;
+  font-size: 35px;
+  width:75%;    //Specify your width here
+}
+
+/* for accessibility! */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: rgb(33, 73, 197) !important; 
+  border-color:  rgb(33, 73, 197) !important; 
 }
 
 .btn-group {
