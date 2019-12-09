@@ -1,38 +1,40 @@
-<h3>Calculate</h3>
+<h3>Matching Table</h3>
 
-<table style="width:90%">
-  <tr>
-    <th>Tutor name</th>
-    <th>Tutor ID</th>
-    <th>Teacher name (or nil)</th>
-    <th>Teacher ID (or nil)</th>
-    <th>Parent name (or nil)</th>
-    <th>Parent ID (or nil)</th>
-    <th>Score</th>
-    <th>Tutor Info</th>
-    <th>Teacher Info</th>
-    <th>Parent Info</th>
-  </tr>
-  <% @calculated.each do |match| %>
-  <tr>
-    <td><%= match[:tutor_name] %></td>
-    <td><%= match[:tutor] %></td>
-    <td><%= match[:teacher_name] %></td>
-    <td><%= match[:teacher] %></td>
-    <td><%= match[:parent_name] %></td>
-    <td><%= match[:parent] %></td>
-    <td><%= match[:score] %></td>
-    <td><%= Tutor.where(id: match[:tutor]).inspect %></td>
-    <td><%= if match[:teacher].to_i != 0
-              Teacher.where(id: match[:teacher]).inspect
-            else
-              match[:teacher]
-            end %></td>
-    <td><%= if match[:parent].to_i != 0
-              Parent.where(id: match[:parent]).inspect
-            else
-              match[:parent]
-            end %></td>
-  </tr>
-  <% end %>
-</table>
+<div id='table-container' style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Tutor name</th>
+      <th>Tutor ID</th>
+      <th>Teacher name</th>
+      <th>Teacher ID</th>
+      <th>Parent name</th>
+      <th>Parent ID</th>
+      <th>Score</th>
+      <th>Matched Name</th>
+      <th>Matched Phone Number</th>
+      <th>Matched Email</th>
+    </tr>
+    <% @calculated.each do |match| %>
+    <tr>
+      <td><%= match[:tutor_name] %></td>
+      <td><%= match[:tutor] %></td>
+      <td><%= match[:teacher_name] %></td>
+      <td><%= match[:teacher] %></td>
+      <td><%= match[:parent_name] %></td>
+      <td><%= match[:parent] %></td>
+      <td><%= match[:score] %></td>
+      <td><%= if match[:teacher].to_i != 0
+            matched = Teacher.where(id: match[:teacher])[0]
+          else 
+            matched = Parent.where(id: match[:parent])[0]
+          end
+          matched[:name]
+      %></td>
+      <td><%= matched[:phone]%></td>
+      <td><%= matched[:email]%></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= stylesheet_link_tag    'generate_matches', media: 'all', 'data-turbolinks-track' => true %>

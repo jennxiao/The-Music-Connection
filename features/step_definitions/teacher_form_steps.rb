@@ -46,4 +46,3 @@ When /^(?:|I )select class "(.*)" "([^"]*)" from "([^"]*)"$/ do |class_num, valu
   
   select(value, :from => field)
 end
-

@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w( welcome.css )
 Rails.application.config.assets.precompile += %w( welcome.js )
 Rails.application.config.assets.precompile += %w( teacherforms.js )
 Rails.application.config.assets.precompile += %w( forms_engine.js )
+Rails.application.config.assets.precompile += %w( generate_matches.css )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
