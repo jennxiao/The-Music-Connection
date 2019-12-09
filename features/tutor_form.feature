@@ -9,7 +9,6 @@ Feature: Tutor submits application
     And I am on the home page
     Then I am on the tutor form
 
-  @javascript
   Scenario: Tutor submits application with valid parameters (happy path)
     And I fill in the tutor form with basic information
     Then I press "Submit"

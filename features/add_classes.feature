@@ -9,7 +9,6 @@ Background: Form is open and User visits home page first
 	Given I am on the home page
 	Then I am on the teacher form
 
-@javascript
 Scenario: Teacher adds 1 class and submits
 	Then I fill in class "0" with basic information
 	And I check class "0" "Piano"
