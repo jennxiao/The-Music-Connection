@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20191118052326) do
     t.boolean  "matched"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "grade"
+    t.string  "grade"
     t.boolean  "piano_home"
     t.boolean  "past_app"
     t.boolean  "lunch"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20191118052326) do
     t.boolean  "matched"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "grade"
+    t.string  "grade"
     t.boolean  "matched_before"
   end
 
