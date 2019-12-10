@@ -54,10 +54,14 @@ class FormsController < ApplicationController
         a = Availability.new(weekday[i], start_time[i], end_time[i])
         availabilities += Availability.serialize(a)
       end
+      grades = ''
+      (0...grade.count).each do |i|
+        grades += (i.to_s + ',')
+      end
       teacher = Teacher.new
       teacher.attributes = { name: name, phone: phone,
                              email: email, class_name: class_name, school_name: school_name,
-                             grade: grade, availabilities: availabilities, instrument: instruments, comment: comment,
+                             grade: grades, availabilities: availabilities, instrument: instruments, comment: comment,
                              number_of_matches: number_of_matches, matched: false }
       teacher.save!
     end

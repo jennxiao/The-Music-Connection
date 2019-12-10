@@ -45,15 +45,17 @@
             <div class="row class_row">
               <div class="form-group dropdown-group required">
                 <label for="grade">Grade Level</label>
-                <select class="form-control" name="question0[grade]">
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
+                <div class = "checkboxes">
+                    <div class="paddedBox">
+                      <label for = "grade6"> <input class = "form-control checkbox" type="checkbox" name="question0[grade][]" value="6" id="6"> 6 &emsp;</label>
+                      <label for = "grade7"> <input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="7" id="7"> 7  &emsp;</label>
+                      <label for = "grade8"> <input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="8" id="8"> 8 &emsp; </label>
+                      <label for = "grade9"><input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="9" id="9"> 9   &emsp;</label>
+                      <label for = "grade10"><input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="10" id="10"> 10  &emsp;</label>
+                      <label for = "grade11"><input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="11" id="11"> 11  &emsp;</label>
+                      <label for = "grade12"><input class="form-control checkbox" type="checkbox" name="question0[grade][]" value="12" id="12"> 12  &emsp;</label>
+                    </div>
+                </div>
               </div>
             </div>
             <!-- time group -->
@@ -98,32 +100,32 @@
                 <div class="instrument">
                   <div class="instrument_box">
                     <div class="paddedBox">
-                      <input class = "form-control checkbox" type="checkbox" name="question0[instrument][]" value="Violin" id="Violin0"> Violin <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Viola" id="Viola0"> Viola <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Cello" id="Cello0"> Cello <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Double Bass" id="Double Bass0"> Double Bass
+                      <label for = "Violin0"> <input class = "form-control checkbox" type="checkbox" name="question0[instrument][]" value="Violin" id="Violin0"> Violin </label> <br> 
+                      <label for = "Violoa0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Viola" id="Viola0"> Viola </label> <br>
+                      <label for = "Cello0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Cello" id="Cello0"> Cello </label> <br>
+                      <label for = "Double Bass0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Double Bass" id="Double Bass0"> Double Bass </label>
                     </div>
                   </div>
                   <div class="instrument_box">
                     <div class="paddedBox">
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Flute" id="Flute0"> Flute <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Clarinet" id="Clarinet0"> Clarinet <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Saxophone" id="Saxophone0"> Saxophone <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Oboe" id="Oboe0"> Oboe <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Trumpet" id="Trumpet0"> Trumpet <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="French Horn" id="French Horn0"> French Horn <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Trombone" id="Trombone0"> Trombone <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Baritone" id="Baritone0"> Baritone <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Tuba" id="Tuba0"> Tuba <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Percussion" id="Percussion0"> Percussion
+                      <label for = "Flute0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Flute" id="Flute0"> Flute </label> <br>
+                      <label for = "Clarinet0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Clarinet" id="Clarinet0"> Clarinet  </label> <br>
+                      <label for = "Saxophone0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Saxophone" id="Saxophone0"> Saxophone  </label><br>
+                      <label for = "Oboe0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Oboe" id="Oboe0"> Oboe <br>
+                      <label for = "Trumpet0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Trumpet" id="Trumpet0"> Trumpet  </label><br>
+                      <label for = "French Horn0"> <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="French Horn" id="French Horn0"> French Horn </label> <br>
+                      <label for = "Trombone0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Trombone" id="Trombone0"> Trombone  </label><br>
+                      <label for = "Baritone0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Baritone" id="Baritone0"> Baritone </label> <br>
+                      <label for = "Tuba0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Tuba" id="Tuba0"> Tuba <br>
+                      <label for = "Percussion0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Percussion" id="Percussion0"> Percussion </label>
                     </div>
                   </div>
                   <div class="instrument_box">
                     <div class="paddedBox">
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Piano" id="Piano0"> Piano <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Guitar" id="Guitar0"> Guitar <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Ukelele" id="Ukelele0"> Ukelele <br>
-                      <input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Voice" id="Voice0"> Voice
+                      <label for = "Piano0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Piano" id="Piano0"> Piano </label><br>
+                      <label for = "Guitar0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Guitar" id="Guitar0"> Guitar </label><br>
+                      <label for = "Ukelele0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Ukelele" id="Ukelele0"> Ukelele </label><br>
+                      <label for = "Voice0"><input class="form-control checkbox" type="checkbox" name="question0[instrument][]" value="Voice" id="Voice0"> Voice </label>
                     </div>
                   </div>
                 </div>

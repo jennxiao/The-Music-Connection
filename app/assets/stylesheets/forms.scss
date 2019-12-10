@@ -55,6 +55,22 @@
 .paddedBox {
   margin: 10px;
 }
+.checkboxes {
+  background-color: rgb(230, 230, 230);
+  flex: 0 0 33%;
+}
+.paddedBox label {
+  display: inline-block;
+  padding-right: 10px;
+  padding-top: 10px;
+  white-space: nowrap;
+}
+.paddedBox label input {
+  vertical-align: middle;
+}
+.paddedBox label span {
+  vertical-align: middle;
+}
 
 .class_box {
   background-color: rgb(245, 245, 245);
