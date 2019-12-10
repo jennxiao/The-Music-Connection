@@ -10,7 +10,7 @@ class Matcher
     def calculate
       a, m1, m2, m3 = generate_matrix
       if a.length > 0
-        run_matches(a, m1, m2, m3)
+        return run_matches(a, m1, m2, m3)
       end
       []
     end
@@ -35,7 +35,7 @@ class Matcher
       c = Parent.order('id ASC').all
       d = Match.order('id ASC').all
       matrix = []
-      if a.count + b.count + c.count == 0
+      if Tutor.count + Teacher.count + Parent.count == 0
         return [matrix, {}, {}, {}]
       end
       a.each do |tutor|
