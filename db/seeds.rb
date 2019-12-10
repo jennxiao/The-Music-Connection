@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
 #Default Single Availability: Monday&13:00:00&15:00:00
 #Default created/updated: created_at: "2019-12-10 18:39:47", updated_at: "2019-12-10 18:39:47
 
@@ -46,26 +45,6 @@ default_tutor = Tutor.create({:name => "Anthony Zhou Tutor",
 							  :returning => true,
 							  :prev_again => true})
 
-#create_table "parents", force: :cascade do |t|
-#  t.string   "name"
-#  t.string   "phone"
-#  t.string   "email"
-#  t.string   "address"
-#  t.string   "availabilities"
-#  t.string   "instrument"
-#  t.string   "experiences"
-#  t.string   "comment"
-#  t.integer  "number_of_matches"
-#  t.boolean  "matched"
-#  t.datetime "created_at",        null: false
-#  t.datetime "updated_at",        null: false
-#  t.integer  "grade"
-#  t.boolean  "piano_home"
-#  t.boolean  "past_app"
-#  t.boolean  "lunch"
-#  t.boolean  "matched_before"
-#end
-
 default_parent = Parent.create({:name => "Anthony Zhou Parent",
 							    :phone => "123-456-7433",
 							    :email => "anthonyfzhouParent@berkeley.edu",
@@ -83,3 +62,13 @@ default_parent = Parent.create({:name => "Anthony Zhou Parent",
 							    :past_app => false,
 							    :lunch => false,
 							    :matched_before => false})
+
+AdminSettings.create({
+    form_open: false,
+    salt: 'salt',
+    password_hash: BCrypt::Password.create('password'),
+    last_updated: Time.at(1),
+    email: 'placeholder@tmc.com',
+    session_id: 'placeholder'
+})
+
