@@ -7,7 +7,7 @@ FactoryBot.define do
     email { 'musicconnection@gmail.com' }
     class_name { 'best class' }
     school_name { 'best school' }
-    grade { '9' } 
+    grade { '9' }
     availabilities { '1' }
     instrument { 'Piano' }
     comment { 'no comment' }

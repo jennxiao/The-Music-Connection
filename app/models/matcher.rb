@@ -9,7 +9,10 @@ class Matcher
   class << self
     def calculate
       a, m1, m2, m3 = generate_matrix
-      run_matches(a, m1, m2, m3)
+      if a.length > 0
+        run_matches(a, m1, m2, m3)
+      end
+      []
     end
 
     private
@@ -32,6 +35,9 @@ class Matcher
       c = Parent.order('id ASC').all
       d = Match.order('id ASC').all
       matrix = []
+      if a.count + b.count + c.count == 0
+        return [matrix, {}, {}, {}]
+      end
       a.each do |tutor|
         row = []
         b.each do |teacher|
@@ -82,9 +88,8 @@ class Matcher
        teacher_index,
        parent_index]
     end
-
-    # Wrapper method for munkres. Saves results in Matches database.
     # rubocop:enable MethodLength
+    # Wrapper method for munkres. Saves results in Matches database.
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
       matrix_deep_copy = Marshal.load(Marshal.dump(matrix))
       m = Munkres.new(matrix, 2)
@@ -158,8 +163,8 @@ class Matcher
           overlapping_time += 10
         end
 
-        puts "Parent:"
-        puts overlapping_time
+        # puts "Parent:"
+        # puts overlapping_time
         return overlapping_time
       else
         overlapping_time = 0
@@ -202,8 +207,8 @@ class Matcher
           overlapping_time += max_overlap
         end
 
-        puts "Teacher:"
-        puts overlapping_time
+        # puts "Teacher:"
+        # puts overlapping_time
         return overlapping_time
       end
     end
