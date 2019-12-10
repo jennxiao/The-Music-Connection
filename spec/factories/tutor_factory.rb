@@ -18,7 +18,9 @@ FactoryBot.define do
     matched { false }
     sid { 3255354212 }
     in_class { false }
+
     private { true }
+
     returning { true }
     prev_again { true }
   end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 describe Availability do
   it 'serializes' do
     a = Availability.new('Monday', '13:00:00', '15:00:00')
     s = Availability.serialize(a)
-    
+
     expect(s).to eq 'Monday&13:00:00&15:00:00;'
   end
   it 'deserializes' do
@@ -11,7 +13,7 @@ describe Availability do
     s = Availability.serialize(a)
     b = Availability.deserialize(s)[0]
     t = Availability.serialize(b)
-    
+
     expect(s).to eq 'Monday&13:00:00&15:00:00;'
     expect(t).to eq s
   end
