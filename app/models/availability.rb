@@ -23,6 +23,9 @@ class Availability
       sp = a.split(';')
       sp.each do |astr|
         akek = astr.split('&')
+        if astr.length != 3
+          next
+        end
         ret.push(Availability.new(akek[0], akek[1], akek[2]))
       end
       ret
