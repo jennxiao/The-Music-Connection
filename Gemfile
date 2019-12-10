@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '1.17.3'
+gem 'bundler', '>= 1.17.2'
 
 gem 'bootstrap', '~> 4.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -48,6 +48,7 @@ gem 'attr_encrypted'
 gem 'tzinfo-data'
 
 group :development, :test do
+  gem 'axe-matchers'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3', '~> 1.3.13'
   gem 'byebug'
