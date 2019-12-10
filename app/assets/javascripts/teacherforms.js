@@ -22,7 +22,9 @@ function addClass() {
     rest_of_name = element.name.substr(element.name.indexOf("["));
     new_name = "question" + class_counter.toString();
     element.name = new_name + rest_of_name;
-    element.value = null;
+    if (!element.classList.contains("checkbox")) {
+      element.value = null;
+    }
   }
 
   // Update the checkbox id's
