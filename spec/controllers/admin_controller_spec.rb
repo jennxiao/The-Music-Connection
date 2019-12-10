@@ -72,6 +72,34 @@ describe AdminController do
         get :welcome, nil, session
         expect(response).to have_http_status(200)
       end
+      it 'should show warning if password is default' do
+        a = AdminSettings.new
+        a.attributes = {
+          form_open: false,
+          salt: 'salt',
+          password_hash: BCrypt::Password.create('password'),
+          last_updated: Time.at(1),
+          email: 'placeholder@tmc.com',
+          session_id: 'placeholder'
+        }
+        a.save
+        get :welcome, nil, session
+        expect(flash[:password]).to be_present
+      end
+      it 'should not show warning if password is not default' do
+        a = AdminSettings.new
+        a.attributes = {
+          form_open: false,
+          salt: 'salt',
+          password_hash: BCrypt::Password.create('high entropy password'),
+          last_updated: Time.at(1),
+          email: 'placeholder@tmc.com',
+          session_id: 'placeholder'
+        }
+        a.save
+        get :welcome, nil, session
+        expect(flash[:password]).to eq('')
+      end
       it 'should allow access to update settings' do
         get :update_settings, nil, session
         expect(response).to have_http_status(200)

@@ -12,3 +12,12 @@
 #					 :last_updated => DateTime.new(2001,2,3,4,5,6),
 #					 :email => "anthonyfzhou@berkeley.edu",
 #					 :session_id => "PLACEHOLDER")
+
+AdminSettings.create({
+    form_open: false,
+    salt: 'salt',
+    password_hash: BCrypt::Password.create('password'),
+    last_updated: Time.at(1),
+    email: 'placeholder@tmc.com',
+    session_id: 'placeholder'
+})
