@@ -57,18 +57,20 @@
 }
 .checkboxes {
   background-color: rgb(230, 230, 230);
-  flex: 0 0 33%;
+  margin: 10px;
+  width: fit-content
 }
-.paddedBox label {
+.checkboxes label {
   display: inline-block;
   padding-right: 10px;
+  padding-left: 10px;
   padding-top: 10px;
   white-space: nowrap;
 }
-.paddedBox label input {
+.checkboxes label input {
   vertical-align: middle;
 }
-.paddedBox label span {
+.checkboxes label span {
   vertical-align: middle;
 }
 
