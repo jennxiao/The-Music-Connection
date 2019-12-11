@@ -9,9 +9,8 @@ class Matcher
   class << self
     def calculate
       a, m1, m2, m3 = generate_matrix
-      if a.length > 0
-        return run_matches(a, m1, m2, m3)
-      end
+      return run_matches(a, m1, m2, m3) unless a.empty?
+
       []
     end
 
@@ -20,7 +19,7 @@ class Matcher
     # (Re)generate and calculate a score for every tutor/student pairing.
     #
     # Deletes recalculates all Matches in the database that are not "forced"
-    # i.e. set by manual matching. 
+    # i.e. set by manual matching.
     #
     # Returns a matrix indexed by (tutor, student) and the hashes that
     # maps (matrix index => client ID) for tutor, teacher, parent respectively.
@@ -38,6 +37,7 @@ class Matcher
       if Tutor.count + Teacher.count + Parent.count == 0
         return [matrix, {}, {}, {}]
       end
+
       a.each do |tutor|
         row = []
         b.each do |teacher|
@@ -88,6 +88,7 @@ class Matcher
        teacher_index,
        parent_index]
     end
+
     # rubocop:enable MethodLength
     # Wrapper method for munkres. Saves results in Matches database.
     def run_matches(matrix, tutor_index, teacher_index, parent_index)
@@ -115,29 +116,25 @@ class Matcher
       if !parent.nil?
         overlapping_time = 0
 
-        tutor_instruments = tutor[:instrument].split(",")
-        parent_instruments = parent[:instrument].split(",")
+        tutor_instruments = tutor[:instrument].split(',')
+        parent_instruments = parent[:instrument].split(',')
 
         tutor_instruments.each do |i1|
           parent_instruments.each do |i2|
-            if i1 == i2
-              overlapping_time += 5
-            end
+            overlapping_time += 5 if i1 == i2
           end
         end
 
-        #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
+        # preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
         lower_grade = tutor[:preferred_grade][6].to_i
         higher_grade = tutor[:preferred_grade][8].to_i
-        if !(tutor[:preferred_grade][9] == nil)
+        unless tutor[:preferred_grade][9].nil?
           higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
         end
         actual_grade = parent[:grade].to_i
 
         while lower_grade <= higher_grade
-          if actual_grade == lower_grade
-            overlapping_time += 15
-          end
+          overlapping_time += 15 if actual_grade == lower_grade
           lower_grade += 1
         end
 
@@ -146,52 +143,40 @@ class Matcher
           max_overlap = 0
           Availability.deserialize(tutor[:availabilities]).each do |b|
             overlap = Availability.overlap(a, b).div(60)
-            if overlap > max_overlap
-              max_overlap = overlap
-            end
+            max_overlap = overlap if overlap > max_overlap
           end
           overlapping_time += max_overlap
         end
 
-        if parent[:past_app]
-          overlapping_time += 5
-        end
-        if parent[:lunch]
-          overlapping_time += 8
-        end
-        if parent[:matched_before]
-          overlapping_time += 10
-        end
+        overlapping_time += 5 if parent[:past_app]
+        overlapping_time += 8 if parent[:lunch]
+        overlapping_time += 10 if parent[:matched_before]
 
         # puts "Parent:"
         # puts overlapping_time
-        return overlapping_time
+        overlapping_time
       else
         overlapping_time = 0
 
-        tutor_instruments = tutor[:instrument].split(",")
-        teacher_instruments = teacher[:instrument].split(",")
+        tutor_instruments = tutor[:instrument].split(',')
+        teacher_instruments = teacher[:instrument].split(',')
 
         tutor_instruments.each do |i1|
           teacher_instruments.each do |i2|
-            if i1 == i2
-              overlapping_time += 10
-            end
+            overlapping_time += 10 if i1 == i2
           end
         end
 
-        #preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
+        # preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
         lower_grade = tutor[:preferred_grade][6].to_i
         higher_grade = tutor[:preferred_grade][8].to_i
-        if !(tutor[:preferred_grade][9] == nil)
+        unless tutor[:preferred_grade][9].nil?
           higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
         end
         actual_grade = teacher[:grade].to_i
 
         while lower_grade <= higher_grade
-          if actual_grade == lower_grade
-            overlapping_time += 15
-          end
+          overlapping_time += 15 if actual_grade == lower_grade
           lower_grade += 1
         end
 
@@ -200,16 +185,14 @@ class Matcher
           max_overlap = 0
           Availability.deserialize(tutor[:availabilities]).each do |b|
             overlap = Availability.overlap(a, b).div(60)
-            if overlap > max_overlap
-              max_overlap = overlap
-            end
+            max_overlap = overlap if overlap > max_overlap
           end
           overlapping_time += max_overlap
         end
 
         # puts "Teacher:"
         # puts overlapping_time
-        return overlapping_time
+        overlapping_time
       end
     end
   end

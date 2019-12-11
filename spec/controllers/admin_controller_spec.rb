@@ -133,7 +133,7 @@ describe AdminController do
         create(:tutor)
         create(:teacher)
         create(:parent)
-        post :confirm_reset_database, {:reset_confirmation => 'Yes'}, session
+        post :confirm_reset_database, { reset_confirmation: 'Yes' }, session
         expect(response).to redirect_to('/admin/welcome')
         expect(Teacher.first).to be_nil
         expect(Tutor.first).to be_nil
@@ -144,7 +144,7 @@ describe AdminController do
         create(:tutor)
         create(:teacher)
         create(:parent)
-        post :confirm_reset_database, {:reset_confirmation => 'No'}, session
+        post :confirm_reset_database, { reset_confirmation: 'No' }, session
         expect(response).to redirect_to('/admin/welcome')
         expect(Teacher.first).not_to be_nil
         expect(Tutor.first).not_to be_nil

@@ -18,7 +18,7 @@ describe Parent do
       grade: '9',
       piano_home: 't',
       pastapp: 't',
-      lunch: 't' 
+      lunch: 't'
     }
 
     expect(Parent.new_from_form(res)).to eq(true)
