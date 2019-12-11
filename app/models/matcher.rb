@@ -10,7 +10,6 @@ class Matcher
     def calculate
       a, m1, m2, m3 = generate_matrix
       return run_matches(a, m1, m2, m3) unless a.empty?
-
       []
     end
 
@@ -130,9 +129,7 @@ class Matcher
         preferred_grades.each do |x|
           x = x.to_i
         end
-        puts preferred_grades.inspect
         student_grade = parent[:grade].to_i
-        puts "K".to_i
 
         preferred_grades.each do |g|
           overlapping_time += 5 if g == student_grade
@@ -152,8 +149,6 @@ class Matcher
         overlapping_time += 8 if parent[:lunch]
         overlapping_time += 10 if parent[:matched_before]
 
-        # puts "Parent:"
-        # puts overlapping_time
         overlapping_time
       else
         overlapping_time = 0
@@ -171,13 +166,11 @@ class Matcher
         preferred_grades.each do |x|
           x = x.to_i
         end
-        puts preferred_grades.inspect
 
         teacher_grades = teacher[:grade].split(',')
         preferred_grades.each do |x|
           x = x.to_i
         end
-        puts preferred_grades.inspect
         actual_grade = teacher[:grade].to_i
 
         preferred_grades.each do |g1|
@@ -195,9 +188,6 @@ class Matcher
           end
           overlapping_time += max_overlap
         end
-
-        # puts "Teacher:"
-        # puts overlapping_time
         overlapping_time
       end
     end
