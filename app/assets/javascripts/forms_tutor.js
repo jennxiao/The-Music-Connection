@@ -1,20 +1,5 @@
-var show_other = function showInstrumentText(evt) {
-  var selection = evt.currentTarget;
-  var n = 0;
-  // i hate my life.com
-  for (let i = 0; i < document.getElementsByClassName("instrument-selector").length; i += 1) {
-    if (document.getElementsByClassName("instrument-selector")[i] === selection) {
-      n = i;
-      break;
-    }
-  }
-  var box = document.getElementsByClassName("instr-other")[n];
-  if (selection.value === "Other") {
-    box.style.display = "block";
-  } else {
-    box.style.display = "none";
-  }
-};
+var length = 1;
+document.getElementById("rem_instrument").style.display = "none";
 
 var events = [
   {
@@ -48,41 +33,34 @@ var events = [
   },  
   {
     tab_num: 1,
-    target_id: "add_instr",
+    target_id: "add_instrument",
     event_type: 'click',
     event_function: function() {
-      var original = document.getElementsByClassName("instrument-entry")[0];
+      var original = document.getElementById("other_instrument");
       var cln = original.cloneNode(true);
-      document.getElementById("all-instruments-holder").appendChild(cln);
-      var selectors = document.getElementsByClassName("instrument-selector");
-      selectors[selectors.length - 1].addEventListener('change', show_other);
-      if (document.getElementsByClassName("instrument-entry").length > 1) {
-        document.getElementById("rem_instr").style.display = "inline-block";
+      cln.value = "";
+
+      document.getElementById("other-instruments").appendChild(cln);
+      length += 1;
+
+      if (length > 1) {
+        document.getElementById("rem_instrument").style.display = "inline-block";
       }
     }
   },  
   {
     tab_num: 1,
-    target_id: "rem_instr",
+    target_id: "rem_instrument",
     event_type: 'click',
     event_function: function() {
-      var times = document.getElementsByClassName("instrument-entry");
-      if (times.length <= 1) {
-        return;
+
+      var instrument_list = document.getElementById("other-instruments");
+      instrument_list.removeChild(instrument_list.lastChild);
+      length -=1
+
+      if (length <= 1) {
+        document.getElementById("rem_instrument").style.display = "none";
       }
-      var holder = document.getElementById("all-instruments-holder");
-      holder.removeChild(holder.lastChild);
-      if (times.length <= 1) {
-        document.getElementById("rem_instr").style.display = "none";
-      }
-    }
-  },
-  {
-    tab_num: -1,
-    target_id: "",
-    event_type: '',
-    event_function: function() {
-      document.getElementsByClassName("instrument-selector")[0].addEventListener('change', show_other);
     }
   },
   {

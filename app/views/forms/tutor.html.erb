@@ -12,7 +12,7 @@
     </div>
     <div class="form-group required">
       <label for="question[phone]">Phone Number</label>
-      <input type="tel" name="question[phone]" class="form-control phone-number-input" placeholder="ex. 000-000-0000">
+      <input type="text" name="question[phone]" class="form-control phone-number-input" placeholder="ex. 000-000-0000" id="phone_number_form" maxlength="12" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
       <small class="form-text text-muted">Please enter your phone number here!</small>
     </div>
     <div class="form-group email-group required">
@@ -126,25 +126,51 @@
         <div class="instrument-entry">
           <label>Instrument/Singing</label>
           <div class="instrument">
-            <select class="form-control required-text instrument-selector" name="question[instrument][]">
-              <option disabled selected value> -- Select an option -- </option>
-              <option value="Violin">Violin</option>
-              <option value="Cello">Cello</option>
-              <option value="Guitar">Guitar</option>
-              <option value="Piano">Piano</option>
-              <option value="Singing">Singing</option>
-              <option value="Other">Other</option>
-            </select>
-            <input class="form-control instr-other" type="text" style="display:none;" name="question[others][]" placeholder="Specify instrument">
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <label for = "Violin0"> <input class = "form-control checkbox" type="checkbox" name="question[instrument][]" value="Violin" id="Violin0"> Violin </label> <br> 
+                <label for = "Violoa0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Viola" id="Viola0"> Viola </label> <br>
+                <label for = "Cello0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Cello" id="Cello0"> Cello </label> <br>
+                <label for = "Double Bass0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Double Bass" id="Double Bass0"> Double Bass </label>
+              </div>
+            </div>
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <label for = "Flute0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Flute" id="Flute0"> Flute </label> <br>
+                <label for = "Clarinet0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Clarinet" id="Clarinet0"> Clarinet  </label> <br>
+                <label for = "Saxophone0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Saxophone" id="Saxophone0"> Saxophone  </label><br>
+                <label for = "Oboe0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Oboe" id="Oboe0"> Oboe <br>
+                <label for = "Trumpet0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Trumpet" id="Trumpet0"> Trumpet  </label><br>
+                <label for = "French Horn0"> <input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="French Horn" id="French Horn0"> French Horn </label> <br>
+                <label for = "Trombone0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Trombone" id="Trombone0"> Trombone  </label><br>
+                <label for = "Baritone0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Baritone" id="Baritone0"> Baritone </label> <br>
+                <label for = "Tuba0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Tuba" id="Tuba0"> Tuba <br>
+                <label for = "Percussion0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Percussion" id="Percussion0"> Percussion </label>
+              </div>
+            </div>
+            <div class="instrument_box">
+              <div class="paddedBox">
+                <label for = "Piano0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Piano" id="Piano0"> Piano </label><br>
+                <label for = "Guitar0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Guitar" id="Guitar0"> Guitar </label><br>
+                <label for = "Ukelele0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Ukelele" id="Ukelele0"> Ukelele </label><br>
+                <label for = "Voice0"><input class="form-control checkbox" type="checkbox" name="question[instrument][]" value="Voice" id="Voice0"> Voice </label>
+              </div>
+            </div>
           </div>
+          <!-- This is element to append to -->
+          <div class="form-group other-instruments" id="other-instruments">
+              <label for="other_instrument">Other:</label>
+              <!-- This is element where we derive the original -->
+              <input id="other_instrument" type="text" name="question[instrument][]" class="form-control other_instrument 0" placeholder="ex. Harpischord">
+          </div>
+          <button type="button" class="btn btn-primary btn-sm add_instrument" id="add_instrument">
+            Add Another Instrument
+          </button>
+          <button type="button" class="btn btn-primary btn-sm rem_instrument" id="rem_instrument">
+            Remove Last Instrument
+          </button>
         </div>
       </div>
-      <button type="button" class="btn btn-primary btn-sm" id="add_instr">
-        Add More Instrument
-      </button>
-      <button type="button" class="btn btn-primary btn-sm" id="rem_instr">
-        Remove Instrument
-      </button>
       <small class="form-text text-muted">Select the instruments you would like to have lessons for.</small>
     </div>
   </div>
