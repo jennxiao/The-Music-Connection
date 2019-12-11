@@ -1,5 +1,7 @@
-When "(I )fill in the tutor form with basic information" do
-	steps %Q{
+# frozen_string_literal: true
+
+When '(I )fill in the tutor form with basic information' do
+  steps %(
 		And I fill in "Name" with "Anthony Zhou"
 		And I fill in "Phone Number" with "847-873-2739"
 		And I fill in "Email address" with "anthonyfzhou@berkeley.edu"
@@ -20,28 +22,28 @@ When "(I )fill in the tutor form with basic information" do
 		And I choose "New"
 		And I press "Next"
 		And I press "Submit"
-	}
+	)
 end
 
-When "(I )select {string} from {string} in tutor form" do |value, field|
+When '(I )select {string} from {string} in tutor form' do |value, field|
   case field
-  when "Time Availability"
-    field = "question[weekday][]"
-  when "Instrument/Singing"
-    field = "question[instrument][]"
-  when "In Class"
-    field = "question[in_class]"
-  when "Private Lessons?"
-    field = "question[private]"
-  when "Returning or New"
-    field = "question[returning]"
-  when "Prefer to work with previous student or class?"
-    field = "question[prev_again]"
-  when "Preferred Student/Class"
-    field = "question[preferred_student_class]"
-  when "Comments"
-    field = "question[comment]"
+  when 'Time Availability'
+    field = 'question[weekday][]'
+  when 'Instrument/Singing'
+    field = 'question[instrument][]'
+  when 'In Class'
+    field = 'question[in_class]'
+  when 'Private Lessons?'
+    field = 'question[private]'
+  when 'Returning or New'
+    field = 'question[returning]'
+  when 'Prefer to work with previous student or class?'
+    field = 'question[prev_again]'
+  when 'Preferred Student/Class'
+    field = 'question[preferred_student_class]'
+  when 'Comments'
+    field = 'question[comment]'
   end
-  
-  select(value, :from => field)
+
+  select(value, from: field)
 end

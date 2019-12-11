@@ -1,14 +1,14 @@
-Given "form is {word}" do | word |
+# frozen_string_literal: true
+
+Given 'form is {word}' do |word|
   state = false
-  if word == "open"
-    state = true
-  end
+  state = true if word == 'open'
   settings = AdminSettings.last
   if settings.nil?
     settings = AdminSettings.new
     settings.attributes = {
       form_open: false,
-      salt: "salt",
+      salt: 'salt',
       password_hash: BCrypt::Password.create('password'),
       last_updated: Time.at(1),
       email: 'placeholder@tmc.com',
@@ -27,18 +27,18 @@ Given "form is {word}" do | word |
   a.save
 end
 
-Then "I should see a link to {string}" do | link |
+Then 'I should see a link to {string}' do |link|
   expect(page).to have_link(href: path_to(link))
 end
 
-Then "I should not see a link to {string}" do | link |
+Then 'I should not see a link to {string}' do |link|
   expect(page).not_to have_link(href: path_to(link))
 end
 
-When(/^I fill the form with:$/) do | table |
+When(/^I fill the form with:$/) do |table|
   datas = table.hashes.first
   datas.each do |label, value|
-    fill_in(label, :with => value)
+    fill_in(label, with: value)
   end
 end
 
@@ -50,23 +50,23 @@ When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   case field
 
   when /^Email/
-    field = "question[email]"
+    field = 'question[email]'
   when /^Name/
-    field = "question[name]"
+    field = 'question[name]'
   when /^SID/
-    field = "question[sid]"
+    field = 'question[sid]'
   when /^Phone Number/
-    field = "question[phone]"
+    field = 'question[phone]'
   when /^Year/
-    field = "question[year]"
+    field = 'question[year]'
   when /^Major/
-    field = "question[major]"
+    field = 'question[major]'
   when /^Minor/
-    field = "question[minor]"
+    field = 'question[minor]'
   when /^Experiences/
-    field = "question[exp]"
+    field = 'question[exp]'
   when /^Teacher Name/
-    field = "question[teacher_name]"
+    field = 'question[teacher_name]'
   end
 
   fill_in field, with: value
@@ -75,39 +75,39 @@ end
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   case field
   when /^Email/
-    field = "question[email]"
+    field = 'question[email]'
   when /^Name/
-    field = "question[name]"
+    field = 'question[name]'
   when /^SID/
-    field = "question[sid]"
+    field = 'question[sid]'
   when /^Phone Number/
-    field = "question[phone]"
+    field = 'question[phone]'
   when /^Year/
-    field = "question[year]"
+    field = 'question[year]'
   when /^Major/
-    field = "question[major]"
+    field = 'question[major]'
   when /^Minor/
-    field = "question[minor]"
+    field = 'question[minor]'
   when /^Experiences/
-    field = "question[exp]"
+    field = 'question[exp]'
   when /^Preferred Student/
-    field = "question[preference]"
+    field = 'question[preference]'
   when /^Teacher Name/
-    field = "question[teacher_name]"
+    field = 'question[teacher_name]'
   when /^Class Name/
-	  field = "question[class_name]"
+    field = 'question[class_name]'
   when /^School/
-	  field = "question[school_name]"
+    field = 'question[school_name]'
   when /^Other/
-	  field = "other_instrument"
+    field = 'other_instrument'
   when /^Student Name/
-    field = "question[name]"
+    field = 'question[name]'
   when /^Phone Number/
-    field = "question[phone]"
+    field = 'question[phone]'
   when /^Email/
-    field = "question[email]"
+    field = 'question[email]'
   when /^Address/
-    field = "question[address]"
+    field = 'question[address]'
   end
 
   fill_in field, with: value
@@ -117,28 +117,28 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   case field
 
   when /^Experiences/
-    field = "question[exp]"
+    field = 'question[exp]'
   when /^Time Availability/
-    field = "question[time]"
+    field = 'question[time]'
   when /^Instrument/
-    field = "question[instrument]"
+    field = 'question[instrument]'
   when /^Class Time/
-  field = "question[weekday][]"
+    field = 'question[weekday][]'
   when /^Grade/
-    field = "question[grade]"
+    field = 'question[grade]'
   when /^Parent Time Availability/
-    field = "question[weekday][]"
+    field = 'question[weekday][]'
   when /^Piano Home/
-    field = "question[piano_home]"
+    field = 'question[piano_home]'
   when /^Experience/
-    field = "question[experiences]"
+    field = 'question[experiences]'
   when /^Past App/
-    field = "question[pastapp]"
+    field = 'question[pastapp]'
   when /^Lunch/
-    field = "question[lunch]"
+    field = 'question[lunch]'
   when /^Parent Instrument/
-    field = "question[instrument][]"
+    field = 'question[instrument][]'
   end
-  
-  select(value, :from => field)
+
+  select(value, from: field)
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 When /^(?:|I )fill in the parent form with basic information/ do
-	steps %Q{
+  steps %(
 		And I fill in "Student Name" with "Anthony Zhou"
 		And I fill in "Phone Number" with "847-873-2739"
 		And I fill in "Email Address" with "anthonyfzhou@berkeley.edu"
@@ -12,5 +14,5 @@ When /^(?:|I )fill in the parent form with basic information/ do
 		And I select "1-2 years" from "Experience"
 		And I select "No" from "Past App"
     	nd I select "No" from "Lunch"
-	}
+	)
 end
