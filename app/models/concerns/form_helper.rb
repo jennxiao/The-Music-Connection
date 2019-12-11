@@ -10,6 +10,15 @@ module FormHelper
     res.strip.downcase == pos
   end
 
+  def serialize_array_output(arr) 
+    str = ''
+	  (0...arr.count).each do |i|
+      str += (arr[i].to_s + ',')
+    end
+    str.chomp!(',')
+    str
+  end
+
   def serialize_instruments(instr, other)
     str = ''
     j = 0

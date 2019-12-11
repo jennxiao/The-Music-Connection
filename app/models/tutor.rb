@@ -35,12 +35,6 @@ class Tutor < ActiveRecord::Base
   # rubocop:disable AbcSize
   def self.new_from_form(res)
     tutor = Tutor.new
-	grade = res[:grade]
-	grades = ''
-	(0...grade.count).each do |i|
-	  grades += (grade[i].to_s + ',')
-	end
-	grades.chomp!(',')
     tutor.attributes = {
       name: res[:name],
       phone: res[:phone],
@@ -53,7 +47,7 @@ class Tutor < ActiveRecord::Base
       # rubocop:disable LineLength
       availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
       # rubocop:enable LineLength
-      preferred_grade: grades,
+      preferred_grade: serialize_array_output(res[:grade]),
       in_class: convert_to_boolean(res[:in_class]),
       private: convert_to_boolean(res[:private]),
       instrument: serialize_instruments(res[:instrument], res[:others]),

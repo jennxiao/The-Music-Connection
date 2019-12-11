@@ -6,8 +6,7 @@ class Parent < ActiveRecord::Base
   extend FormHelper
 
   validates :address,         presence: true
-  validates :grade,           presence: true,
-                              numericality: { only_integer: true }
+  validates :grade,           presence: true
   validates :availabilities,  presence: true
   validates :piano_home,      inclusion: { in: [true, false] }
   validates :instrument,      presence: true
@@ -32,7 +31,7 @@ class Parent < ActiveRecord::Base
       phone: res[:phone],
       email: res[:email],
       address: res[:address],
-      grade: res[:grade],
+      grade: res[:grade].to_str,
       # rubocop:disable LineLength
       availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
       # rubocop:enable LineLength
