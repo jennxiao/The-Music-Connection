@@ -121,21 +121,21 @@ class Matcher
 
         tutor_instruments.each do |i1|
           parent_instruments.each do |i2|
-            overlapping_time += 5 if i1 == i2
+            overlapping_time += 40 if i1 == i2
           end
         end
 
-        # preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
-        lower_grade = tutor[:preferred_grade][6].to_i
-        higher_grade = tutor[:preferred_grade][8].to_i
-        unless tutor[:preferred_grade][9].nil?
-          higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
-        end
-        actual_grade = parent[:grade].to_i
 
-        while lower_grade <= higher_grade
-          overlapping_time += 15 if actual_grade == lower_grade
-          lower_grade += 1
+        preferred_grades = tutor[:preferred_grade].split(',')
+        preferred_grades.each do |x|
+          x = x.to_i
+        end
+        puts preferred_grades.inspect
+        student_grade = parent[:grade].to_i
+        puts "K".to_i
+
+        preferred_grades.each do |g|
+          overlapping_time += 5 if g == student_grade
         end
 
         # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
@@ -163,21 +163,27 @@ class Matcher
 
         tutor_instruments.each do |i1|
           teacher_instruments.each do |i2|
-            overlapping_time += 10 if i1 == i2
+            overlapping_time += 40 if i1 == i2
           end
         end
 
-        # preferred grade is of the form "Grade 9-12" so want to get out that digits 9 and 12
-        lower_grade = tutor[:preferred_grade][6].to_i
-        higher_grade = tutor[:preferred_grade][8].to_i
-        unless tutor[:preferred_grade][9].nil?
-          higher_grade = higher_grade * 10 + tutor[:preferred_grade][9].to_i
+        preferred_grades = tutor[:preferred_grade].split(',')
+        preferred_grades.each do |x|
+          x = x.to_i
         end
+        puts preferred_grades.inspect
+
+        teacher_grades = teacher[:grade].split(',')
+        preferred_grades.each do |x|
+          x = x.to_i
+        end
+        puts preferred_grades.inspect
         actual_grade = teacher[:grade].to_i
 
-        while lower_grade <= higher_grade
-          overlapping_time += 15 if actual_grade == lower_grade
-          lower_grade += 1
+        preferred_grades.each do |g1|
+          teacher_grades.each do |g2|
+            overlapping_time += 5 if g1 == g2
+          end
         end
 
         # this section makes assumption that none of the availabilities for a person overlaps with their other availabilities
