@@ -107,11 +107,6 @@ RSpec.describe Matcher, :type => :model do
 				:forced => false,
 				:score => 34
 		})
-		d = Match.order('id ASC').all
-		d.each do |x|
-			puts x.inspect
-		end
 		Matcher.calculate
-		# puts Match.all.inspect
 	end
 end
