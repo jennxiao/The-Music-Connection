@@ -101,47 +101,15 @@ class AdminController < ApplicationController
   end
 
   def match_pair
-    response = JSON.parse(request.body.read)
-    Tutor.find(response['tutor_id'][1..-1]).matched = 'true'
-    client_type = response['client_id'][1..-1]
-    if client_type == 'p'
-      Parent.find(response['client_id'][1..-1]).matched = 'true'
-    else
-      Teacher.find(response['client_id'][1..-1]).matched = 'true'
-    end
-    Match.create(tutor_id: response['tutor_id'], tutee_id: response['tutor_id'], color: getRandomColor)
-    puts 'successfully matched!'
-    render text: ''
+    # TODO: implement this
   end
 
   def undo_pair
-    response = JSON.parse(request.body.read)
-    Tutor.find(response['tutor_id'][1..-1]).matched = 'false'
-    client_type = response['client_id'][1..-1]
-    if client_type == 'p'
-      Parent.find(response['client_id'][1..-1]).matched = 'false'
-    else
-      Teacher.find(response['client_id'][1..-1]).matched = 'false'
-    end
-    result = Match.where(tutor_id: response['tutor_id'], tutee_id: response['tutor_id'])
-    result&.destroy_all
-    puts 'successfully destroyed!'
-    render text: ''
+    # TODO: implement this
   end
 
   def reset_matching
-    Teacher.all.each do |t|
-      t['matched'] = false
-    end
-    Tutor.all.each do |t|
-      t['matched'] = false
-    end
-    Parent.all.each do |p|
-      p['matched'] = false
-    end
-    Match.delete_all
-    flash[:notice] = 'Matching has been reset!'
-    redirect_to '/admin/welcome'
+    # TODO: implement this
   end
 
   private
