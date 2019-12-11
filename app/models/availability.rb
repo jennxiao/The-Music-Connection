@@ -14,7 +14,7 @@ class Availability
   class << self
     def serialize(a)
       # rubocop:disable LineLength
-      a.weekday + '&' + a.start_time.strftime('%H:%M') + ':00&' + a.end_time.strftime('%H:%M') + ':00;'
+      a.weekday + ',' + a.start_time.strftime('%H:%M') + ':00,' + a.end_time.strftime('%H:%M') + ':00;'
       # rubocop:enable LineLength
     end
 
@@ -22,7 +22,7 @@ class Availability
       ret = []
       sp = a.split(';')
       sp.each do |astr|
-        akek = astr.split('&')
+        akek = astr.split(',')
         if akek.length != 3
           next
         end

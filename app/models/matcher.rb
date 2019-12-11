@@ -170,7 +170,7 @@ class Matcher
         overlapping_time = 0
 
         tutor_instruments = tutor[:instrument].split(",")
-        teacher_instruments = teacher[:instrument].split("&")
+        teacher_instruments = teacher[:instrument].split(",")
 
         tutor_instruments.each do |i1|
           teacher_instruments.each do |i2|

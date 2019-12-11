@@ -10,7 +10,7 @@ module AdminHelper
 
   def format_time(person)
     times = ''
-    person['availabilities'].split('&').each do |time|
+    person['availabilities'].split(',').each do |time|
       a = Availability.find(time.to_i)
       times += a.weekday
       times += ' '

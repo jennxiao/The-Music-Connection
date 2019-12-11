@@ -42,13 +42,13 @@ class FormsController < ApplicationController
       other_count = 1
       (0...instrument.count).each do |i|
         if instrument[i] === 'Others'
-          instruments += (others[other_count] + '&')
+          instruments += (others[other_count] + ',')
           other_count += 1
         else
-          instruments += (instrument[i] + '&')
+          instruments += (instrument[i] + ',')
         end
       end
-      instruments = instruments.chomp('&')
+      instruments = instruments.chomp(',')
       availabilities = ''
       (0...weekday.count).each do |i|
         a = Availability.new(weekday[i], start_time[i], end_time[i])
