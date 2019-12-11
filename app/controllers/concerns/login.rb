@@ -7,22 +7,11 @@ module Login
   extend ActiveSupport::Concern
 
   included do
-    # Verify that the database is not empty,
-    # and fix it with default settings if it is.
-    # Default settings must be changed by admin ASAP
-    # TODO: move this functionality to db:seed instead
+    # Verify that the database is not empty.
+    # If it is empty, then db:seed was not run.
     def verify_login
       if AdminSettings.first.nil?
-        a = AdminSettings.new
-        a.attributes = {
-          form_open: false,
-          salt: 'salt',
-          password_hash: BCrypt::Password.create('password'),
-          last_updated: Time.at(1),
-          email: 'placeholder@tmc.com',
-          session_id: 'placeholder'
-        }
-        a.save
+        redirect_to '/500'
       end
     end
 
@@ -39,7 +28,6 @@ module Login
       if BCrypt::Password.new(settings.password_hash) == password
         return settings.session_id
       end
-
       ''
     end
 
