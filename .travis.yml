@@ -2,6 +2,7 @@ os: linux
 env:
   global:
     - CC_TEST_REPORTER_ID=47bc798cf3b7d11b12d636a1e639c7b917d313e16b15af07e4ae2e1e48ebf723
+    - MOZ_HEADLESS=1
 language: ruby
 rvm: 2.4.5
 addons:
@@ -12,6 +13,7 @@ before_install:
   - mkdir geckodriver
   - tar -xzf geckodriver-v0.26.0-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
+  - sudo cp geckodriver /usr/bin
 notifications:
   - false
 before_script:
