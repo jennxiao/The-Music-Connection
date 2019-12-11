@@ -3,20 +3,23 @@ When "(I )fill in the tutor form with basic information" do
 		And I fill in "Name" with "Anthony Zhou"
 		And I fill in "Phone Number" with "847-873-2739"
 		And I fill in "Email address" with "anthonyfzhou@berkeley.edu"
-		And I fill in "SID" with "1233123123"
+		And I fill in "SID" with "3032748539"
 		And I fill in "Major" with "Computer Science"
-    And I select "Tuesday" from "Time Availability" in tutor form
+		And I select "Tuesday" from "Time Availability" in tutor form
+		And I check "K"
 		And I press "Next"
-    And I select "Violin" from "Instrument/Singing" in tutor form
+		And I check "Violin"
 		And I press "Next"
-    And I select "Yes" from "In Class" in tutor form
+		And I select "Yes"
 		And I press "Next"
-    And I select "Yes" from "Private Lessons?" in tutor form
+		And I choose "Yes"
 		And I press "Next"
-    And I check "Member Commitment Policy"
-    And I check "Attendance Policy"
+		And I check "Member Commitment Policy"
+		And I check "Attendance Policy"
 		And I press "Next"
-    And I select "New" from "Returning or New" in tutor form
+		And I choose "New"
+		And I press "Next"
+		And I press "Submit"
 	}
 end
 

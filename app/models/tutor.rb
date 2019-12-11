@@ -20,10 +20,10 @@ class Tutor < ActiveRecord::Base
                                                 '5-10 years',
                                                 '10+ years'] }
   validates :availabilities,  presence: true
-  validates :preferred_grade, presence: true,
-                              inclusion: { in: ['Grade 3-5',
-                                                'Grade 6-8',
-                                                'Grade 9-12'] }
+  validates :preferred_grade, presence: true
+#                              inclusion: { in: ['Grade 3-5',
+#                                                'Grade 6-8',
+#                                                'Grade 9-12'] }
   validates :in_class,        inclusion: { in: [true, false] }
   validates :private,         inclusion: { in: [true, false] }
   validates :instrument,      exclusion: { in: [nil] }
@@ -35,6 +35,12 @@ class Tutor < ActiveRecord::Base
   # rubocop:disable AbcSize
   def self.new_from_form(res)
     tutor = Tutor.new
+	grade = res[:grade]
+	grades = ''
+	(0...grade.count).each do |i|
+	  grades += (grade[i].to_s + ',')
+	end
+	grades.chomp!(',')
     tutor.attributes = {
       name: res[:name],
       phone: res[:phone],
@@ -47,7 +53,7 @@ class Tutor < ActiveRecord::Base
       # rubocop:disable LineLength
       availabilities: serialize_availabilities(res[:weekday], res[:start_time], res[:end_time]),
       # rubocop:enable LineLength
-      preferred_grade: res[:preferred_grade],
+      preferred_grade: grades,
       in_class: convert_to_boolean(res[:in_class]),
       private: convert_to_boolean(res[:private]),
       instrument: serialize_instruments(res[:instrument], res[:others]),
@@ -58,7 +64,7 @@ class Tutor < ActiveRecord::Base
       number_of_matches: 0,
       matched: false
     }
-    tutor.save
+    tutor.save!
   end
   # rubocop:enable MethodLength
   # rubocop:enable AbcSize
