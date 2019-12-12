@@ -7,3 +7,16 @@
 [![Build](https://travis-ci.org/jie-luo/The-Music-Connection.svg?branch=master)](https://travis-ci.org/jie-luo/The-Music-Connection)
 
 Our project is to develop a matching system for pairing music tutors in our club with the music teachers and students in the community who would like to receive support in school music programs or receive private music lessons.
+
+### Setup
+
+```
+bundle install --without production
+rake db:setup
+rails server
+```
+
+### Docker
+
+Please read Docker_README on how to set up and run this project with Docker.
+

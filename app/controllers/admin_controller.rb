@@ -90,7 +90,6 @@ class AdminController < ApplicationController
       }
       @calculated.push(entry)
     end
-    puts @calculated
     render 'display_matches'
   end
 
