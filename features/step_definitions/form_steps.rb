@@ -42,7 +42,7 @@ When(/^I fill the form with:$/) do |table|
   end
 end
 
-Then /^check to see if correct/ do
+Then /^I check to see if correct/ do
   save_and_open_page
 end
 

@@ -2,25 +2,32 @@
 
 When '(I )fill in the tutor form with basic information' do
   steps %(
-		And I fill in "Name" with "Anthony Zhou"
-		And I fill in "Phone Number" with "847-873-2739"
-		And I fill in "Email address" with "anthonyfzhou@berkeley.edu"
+		And I am on the tutor form
+		And I fill in "Name" with "Tutor Anthony Zhou"
+		And I fill in "Phone Number" with "111-111-1111"
+		And I fill in "Email address" with "Tutor@berkeley.edu"
 		And I fill in "SID" with "3032748539"
 		And I fill in "Major" with "Computer Science"
 		And I select "Tuesday" from "Time Availability" in tutor form
 		And I check "K"
 		And I press "Next"
+		  
 		And I check "Violin"
 		And I press "Next"
-		And I select "Yes"
+		  
+		And I choose "InClass_Yes"
 		And I press "Next"
-		And I choose "Yes"
+		  
+		And I choose "Private_Yes"
 		And I press "Next"
+		  
 		And I check "Member Commitment Policy"
 		And I check "Attendance Policy"
 		And I press "Next"
-		And I choose "New"
+		  
+		And I choose "radio-returning"
 		And I press "Next"
+		  
 		And I press "Submit"
 	)
 end

@@ -60,29 +60,40 @@ class AdminController < ApplicationController
   def generate_matches
     m = Matcher.calculate
     # m = Match.all
+	puts(m)
     @calculated = []
     m.each do |match|
+	  if !match.teacher.nil?
+		match_identity = match.teacher
+		identity = 'Teacher'
+		location = match_identity.school_name
+	  else
+		match_identity = match.parent
+		identity = 'Parent'
+		location = match_identity.address
+	  end
       entry = {
-        tutor: match.tutor.id,
         tutor_name: match.tutor.name,
-        score: match.score,
-        teacher: 'nil',
-        teacher_name: 'nil',
-        parent: 'nil',
-        parent_name: 'nil'
+		tutor_number: match.tutor.phone,
+		tutor_email: match.tutor.email,
+		tutor_instruments: match.tutor.instrument,
+		tutor_experience: match.tutor.experiences,
+		tutor_availabilities: match.tutor.availabilities,
+		match_identity: identity,
+		score: match.score,
+		match_name: match_identity.name,
+		match_phone: match_identity.phone,
+		match_email: match_identity.email,
+		match_instruments: match_identity.instrument,
+		match_availabilities: match_identity.availabilities,
+		match_location: location
       }
-      if !match.teacher.nil?
-        entry[:teacher] = match.teacher.id
-        entry[:teacher_name] = match.teacher.name
-      else
-        entry[:parent] = match.parent.id
-        entry[:parent_name] = match.parent.name
-      end
       @calculated.push(entry)
     end
     puts @calculated
-    render 'generate_matches'
+    render 'display_matches'
   end
+
 
   def reset_database; end
 
