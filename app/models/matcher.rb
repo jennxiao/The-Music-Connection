@@ -126,9 +126,6 @@ class Matcher
 
 
         preferred_grades = tutor[:preferred_grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
         student_grade = parent[:grade].to_i
 
         preferred_grades.each do |g|
@@ -163,15 +160,7 @@ class Matcher
         end
 
         preferred_grades = tutor[:preferred_grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
-
         teacher_grades = teacher[:grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
-        actual_grade = teacher[:grade].to_i
 
         preferred_grades.each do |g1|
           teacher_grades.each do |g2|
