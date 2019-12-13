@@ -2,6 +2,16 @@
 
 class FormsController < ApplicationController
   before_action :check_if_open, only: %i[teacher parent tutor]
+  @@tutorText = 'Thanks for Applying!'
+  @@tutorLink = 'google.com'
+  
+  def self.set_tutor_text(text)
+	  @@tutorText = text
+  end
+  
+  def self.set_tutor_link(link)
+	  @@tutorLink = link
+  end
 
   def index
     redirect_to '/'
@@ -13,7 +23,10 @@ class FormsController < ApplicationController
 
   def parent; end
 
-  def tutor; end
+  def tutor
+	  @tutorLink = @@tutorLink
+	  @tutorText = @@tutorText
+  end
 
   def teacher_submit
     # only the first question object has these fields

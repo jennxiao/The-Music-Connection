@@ -106,12 +106,12 @@ describe AdminController do
       end
       it 'should allow open form' do
         get :open_form, nil, passed_session
-        expect(response).to redirect_to('/admin/welcome')
+        expect(response).to redirect_to('/admin/edit_forms')
         expect(AdminSettings.last.form_open).to eq(true)
       end
       it 'should allow close form' do
         get :close_form, nil, passed_session
-        expect(response).to redirect_to('/admin/welcome')
+        expect(response).to redirect_to('/admin/edit_forms')
         expect(AdminSettings.last.form_open).to eq(false)
       end
       it 'should allow generate matches with empty database' do

@@ -48,13 +48,13 @@ class AdminController < ApplicationController
   def open_form
     change_settings(new_form_open: true)
     flash[:notice] = 'Form opened'
-    redirect_to('/admin/welcome') && return
+    redirect_to('/admin/edit_forms') && return
   end
 
   def close_form
     change_settings(new_form_open: false)
     flash[:notice] = 'Form closed'
-    redirect_to('/admin/welcome') && return
+    redirect_to('/admin/edit_forms') && return
   end
 
   def generate_matches
@@ -98,6 +98,7 @@ class AdminController < ApplicationController
 	@tutors = Tutor.all
 	@parents = Parent.all
 	@classes = Teacher.all
+	
   end
 
   def export_database
@@ -108,6 +109,21 @@ class AdminController < ApplicationController
 	respond_to do |format|
 	  format.xlsx
 	end
+  end
+
+  def edit_forms
+  end
+
+  def update_link
+	  FormsController.set_tutor_link(params[:tutor_link])
+	  flash[:notice] = 'Tutor link has been updated!'
+	  redirect_to('/admin/edit_forms') && return
+  end
+
+  def update_text
+	  FormsController.set_tutor_text(params[:tutor_text])
+	  flash[:notice] = 'Tutor text has been updated!'
+	  redirect_to('/admin/edit_forms') && return
   end
 
   def reset_database; end
