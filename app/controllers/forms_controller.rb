@@ -58,6 +58,7 @@ class FormsController < ApplicationController
       (0...grade.count).each do |i|
         grades += (i.to_s + ',')
       end
+	  grades.chomp!(',')
       teacher = Teacher.new
       teacher.attributes = { name: name, phone: phone,
                              email: email, class_name: class_name, school_name: school_name,

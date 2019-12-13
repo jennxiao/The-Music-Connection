@@ -20,11 +20,11 @@ AdminSettings.create({
 case Rails.env
 when "development"
   default_teacher = Teacher.create({:name => "Anthony Zhou Teacher",
-                    :phone => "123-456-7433",
+                    :phone => "111-456-7433",
                     :email => "anthonyfzhouTeacher@berkeley.edu",
                     :class_name => "Default Class",
                     :school_name => "Default School",
-                    :availabilities => "Monday&13:00:00&15:00:00",
+                    :availabilities => "Monday,13:00:00,15:00:00",
                     :instrument => "Piano",
                     :comment => "",
                     :number_of_matches => 0,
@@ -35,14 +35,14 @@ when "development"
                     :matched_before => false })
 
   default_tutor = Tutor.create({:name => "Anthony Zhou Tutor",
-                  :phone => "123-456-7433",
+                  :phone => "222-456-7433",
                   :email => "anthonyfzhouTutor@berkeley.edu",
                   :year => "Sophomore",
                   :major => "Computer Science",
                   :minor => "",
                   :experiences => "1-5 years",
-                  :availabilities => "Monday&13:00:00&15:00:00",
-                  :preferred_grade => "Grade 6-8",
+                  :availabilities => "Monday,13:00:00,15:00:00",
+                  :preferred_grade => "1",
                   :instrument => "Piano",
                   :preferred_student_class => "",
                   :comment => "",
@@ -57,10 +57,10 @@ when "development"
                   :prev_again => true})
 
   default_parent = Parent.create({:name => "Anthony Zhou Parent",
-                    :phone => "123-456-7433",
+                    :phone => "333-456-7433",
                     :email => "anthonyfzhouParent@berkeley.edu",
                     :address => "2110 Haste St, Apt 403",
-                    :availabilities => "Monday&13:00:00&15:00:00",
+                    :availabilities => "Monday,13:00:00,15:00:00",
                   :instrument => "Piano",
                     :experiences => "< 6 months",
                     :comment => "",

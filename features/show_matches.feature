@@ -18,7 +18,5 @@ Scenario: display match with teacher (happy path)
 	Then I log in as admin
 	And I follow "Generate Matches"
 
-	And I check to see if correct
-	
 	Then I should see "Tutor Anthony Zhou"
 	Then I should see "111-111-1111"

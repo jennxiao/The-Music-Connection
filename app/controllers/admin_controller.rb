@@ -78,21 +78,29 @@ class AdminController < ApplicationController
 		tutor_email: match.tutor.email,
 		tutor_instruments: match.tutor.instrument,
 		tutor_experience: match.tutor.experiences,
-		tutor_availabilities: match.tutor.availabilities,
+		tutor_availabilities: match.tutor.availabilities.split(';'),
 		match_identity: identity,
 		score: match.score,
 		match_name: match_identity.name,
 		match_phone: match_identity.phone,
 		match_email: match_identity.email,
 		match_instruments: match_identity.instrument,
-		match_availabilities: match_identity.availabilities,
+		match_availabilities: match_identity.availabilities.split(';'),
 		match_location: location
       }
+	  puts(entry)
       @calculated.push(entry)
     end
     render 'display_matches'
   end
 
+  def display_database
+	@tutors = Tutor.all
+	@parents = Parent.all
+	@classes = Teacher.all
+  end
+
+  
 
   def reset_database; end
 
