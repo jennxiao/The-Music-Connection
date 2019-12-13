@@ -1,11 +1,20 @@
-<%= link_to "Open Form", admin_open_form_path %><br>
-<%= link_to "Close Form", admin_close_form_path %><br>
-<form method='POST', action='/admin/update_link'>
-	<input type="text" name="tutor_link"><br>
-	<%= button_to 'Update Link', admin_update_link_path %>
-</form>
-
-<form method='POST', action='/admin/update_text'>
-	<textarea name="tutor_text"></textarea><br>
-	<%= button_to 'Update Tutor Text', admin_update_text_path %>
-</form>
+<div style="margin-bottom: 10px">
+	<%= link_to "Open Form", admin_open_form_path %><br>
+</div>
+<div style="margin-bottom: 10px">
+	<%= link_to "Close Form", admin_close_form_path %><br>
+</div>
+<div style="margin-bottom: 10px">
+	<h4>Edit Tutor Link</h4>
+	<form method='POST', action='/admin/update_link'>
+		<input type="text" name="tutor_link" style="margin-bottom: 10px"><br>
+		<%= button_to 'Update Link', admin_update_link_path %>
+	</form>
+</div>
+<div style="margin-bottom: 10px">
+	<h4>Edit Tutor Form Text</h4>
+	<form method='POST', action='/admin/update_text'>
+		<textarea name="tutor_text" style="margin-bottom: 10px"></textarea><br>
+		<%= button_to 'Update Tutor Text', admin_update_text_path %>
+	</form>
+</div>
