@@ -20,3 +20,6 @@ rails server
 
 Please read Docker_README on how to set up and run this project with Docker.
 
+### App Usage
+
+For admin controls, please use the '/admin' path to locate the controls. The default password is set to "password" and should be changed immediately once use of the app begins. 
