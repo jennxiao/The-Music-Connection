@@ -100,7 +100,15 @@ class AdminController < ApplicationController
 	@classes = Teacher.all
   end
 
-  
+  def export_database
+	@tutors = Tutor.all
+	@parents = Parent.all
+	@teachers = Teacher.all
+	  
+	respond_to do |format|
+	  format.xlsx
+	end
+  end
 
   def reset_database; end
 

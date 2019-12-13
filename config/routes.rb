@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get  'admin/reset_database'
   post 'admin/confirm_reset_database' => 'admin#confirm_reset_database'
 
+  get 'admin/export_database' => 'admin#export_database', as: 'admin_export'
+  
   get 'admin/reset_matching'
 
   # Forms

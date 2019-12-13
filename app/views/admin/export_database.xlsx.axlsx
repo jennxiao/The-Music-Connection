@@ -1,0 +1,33 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Tutors") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(Name Phone Email Year Major Minor Experiences Availabilities Preferred_Grade Instruments SID In_Class? Private? Returning? Prefer_Previous? Previous_Class/Student_Preferred Comment)
+  
+  # each user is a row on your spreadsheet
+  @tutors.each do |tutor|
+    sheet.add_row [tutor.name, tutor.phone, tutor.email, tutor.year, tutor.major, 
+    			   tutor.minor, tutor.experiences, tutor.availabilities.split(';'),
+    			   tutor.preferred_grade, tutor.instrument, tutor.sid, tutor.in_class, tutor.private, tutor.returning, tutor.prev_again, tutor.preferred_student_class, tutor.comment]
+  end
+end
+
+wb.add_worksheet(name: "Teachers") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(Name Phone Email Class_Name School_Name Availabilities Grades Instruments Comment)
+  
+  # each user is a row on your spreadsheet
+  @teachers.each do |teacher|
+    sheet.add_row [teacher.name, teacher.phone, teacher.email, teacher.class_name, teacher.school_name, teacher.availabilities.split(';'), teacher.grade, teacher.instrument, teacher.comment]
+  end
+end
+
+wb.add_worksheet(name: "Parents") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(Name Phone Email Address Availabilities Grades Instruments Experiences Piano_At_Home? Applied_Before? Free/Reduced_Lunch? Matched_Before? Comment)
+  
+  # each user is a row on your spreadsheet
+  @parents.each do |parent|
+    sheet.add_row [parent.name, parent.phone, parent.email, parent.address, parent.availabilities.split(';'), parent.grade, parent.instrument, parent.experiences, parent.piano_home, parent.past_app, parent.lunch, parent.matched_before, parent.comment]
+  end
+end

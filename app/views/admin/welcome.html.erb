@@ -5,6 +5,7 @@
 <%= link_to "Close Form", admin_close_form_path %><br>
 <%= link_to "Generate Matches", admin_generate_matches_path %><br>
 <%= link_to "Display Database Entries", admin_display_database_path %><br>
+<%= link_to "Export Database Entries As Spreadsheet", admin_export_path(format: "xlsx") %><br>
 <%= link_to "Reset Database", admin_reset_database_path %><br>
 <%= link_to "Logout", admin_logout_path %>
 </html>
