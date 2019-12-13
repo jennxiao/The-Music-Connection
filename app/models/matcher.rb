@@ -127,12 +127,7 @@ class Matcher
 
 
         preferred_grades = tutor[:preferred_grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
-        puts preferred_grades.inspect
         student_grade = parent[:grade].to_i
-        puts "K".to_i
 
         preferred_grades.each do |g|
           overlapping_time += 5 if g == student_grade
@@ -168,17 +163,7 @@ class Matcher
         end
 
         preferred_grades = tutor[:preferred_grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
-        puts preferred_grades.inspect
-
         teacher_grades = teacher[:grade].split(',')
-        preferred_grades.each do |x|
-          x = x.to_i
-        end
-        puts preferred_grades.inspect
-        actual_grade = teacher[:grade].to_i
 
         preferred_grades.each do |g1|
           teacher_grades.each do |g2|
