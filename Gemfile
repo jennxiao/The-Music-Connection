@@ -47,6 +47,10 @@ gem 'attr_encrypted'
 # Docker dependency
 gem 'tzinfo-data'
 
+# Xlsx export dependency
+gem 'axlsx'
+gem 'axlsx_rails'
+
 group :development, :test do
   gem 'axe-matchers'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

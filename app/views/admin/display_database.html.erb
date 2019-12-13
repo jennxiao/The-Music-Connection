@@ -1,0 +1,116 @@
+<div class="display-container">
+	<h3>Tutors</h3>
+	<div class="table-container">
+		<table>
+			<tr class="headers-row">
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Year</th>
+				<th>Major</th>
+				<th>Minor</th>
+				<th>Experience</th>
+				<th>Availabilities</th>
+				<th>Preferred Grades</th>
+				<th>Instruments</th>
+				<th>SID</th>
+				<th>Available to Teach In Class?</th>
+				<th>Available to Teach Private?</th>
+				<th>Returning?</th>
+				<th>Prefer to Work with Previous Student/Class?</th>
+				<th>Preferred Previous Student/Class</th>
+			</tr>
+			<% @tutors.each do |tutor| %>
+			<tr>
+          		<td><%= tutor[:name] %></td>
+          		<td><%= tutor[:phone] %></td>
+          		<td><%= tutor[:email] %></td>
+          		<td><%= tutor[:year] %></td>
+          		<td><%= tutor[:major] %></td>
+          		<td><%= tutor[:minor] %></td>
+          		<td><%= tutor[:experiences] %></td>
+          		<td><%= tutor[:availabilities].split(';') %></td>
+          		<td><%= tutor[:preferred_grade] %></td>
+          		<td><%= tutor[:instrument] %></td>
+          		<td><%= tutor[:sid] %></td>
+          		<td><%= tutor[:in_class] ? 'Yes' : 'No' %></td>
+          		<td><%= tutor[:private] ? 'Yes' : 'No' %></td>
+          		<td><%= tutor[:returning] ? 'Yes' : 'No' %></td>
+          		<td><%= tutor[:prev_again] ? 'Yes' : 'No' %></td>
+          		<td><%= tutor[:preferred_student_class] %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>
+<div class="display-container">
+	<h3>Classes</h3>
+	<div class="table-container">
+		<table>
+			<tr class="headers-row">
+				<th>Teacher Name</th>
+				<th>Teacher Phone</th>
+				<th>Teacher Email</th>
+				<th>Class Name</th>
+				<th>School Name</th>
+				<th>Availabilities</th>
+				<th>Instruments</th>
+				<th>Grades</th>
+				<th>Comment</th>
+			</tr>
+			<% @classes.each do |classs| %>
+			<tr>
+				<td><%= classs[:name]%></td>
+				<td><%= classs[:phone]%></td>
+				<td><%= classs[:email]%></td>
+				<td><%= classs[:class_name]%></td>
+				<td><%= classs[:school_name]%></td>
+				<td><%= classs[:availabilities].split(';') %></td>
+				<td><%= classs[:instrument] %></td>
+				<td><%= classs[:grade] %></td>
+				<td><%= classs[:comment] %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+</div>
+<div class="display-container">
+	<h3>Parents</h3>
+	<div class="table-container">
+		<table>
+			<tr class="headers-row">
+				<th>Student Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Address</th>
+				<th>Availabilities</th>
+				<th>Instruments</th>
+				<th>Experiences</th>
+				<th>Grade</th>
+				<th>Piano At Home?</th>
+				<th>Applied to TMC Before?</th>
+				<th>Matched with Tutor Before?</th>
+				<th>Qualify for Free and Reduced Lunch?</th>
+				<th>Comment</th>
+			</tr>
+			<% @parents.each do |parent| %>
+				<td><%= parent[:name] %></td>
+				<td><%= parent[:phone] %></td>
+				<td><%= parent[:email] %></td>
+				<td><%= parent[:address] %></td>
+				<td><%= parent[:availabilities].split(';') %></td>
+				<td><%= parent[:instrument] %></td>
+				<td><%= parent[:experiences] %></td>
+				<td><%= parent[:grade] %></td>
+				<td><%= parent[:piano_home] ? 'Yes' : 'No' %></td>
+				<td><%= parent[:past_app] ? 'Yes' : 'No' %></td>
+				<td><%= parent[:matched_before] ? 'Yes' : 'No' %></td>
+				<td><%= parent[:lunch] ? 'Yes' : 'No' %></td>
+				<td><%= parent[:comment] %></td>
+			<% end %>
+		</table>
+	</div>
+</div>
+
+
+<%= stylesheet_link_tag    'display_database', media: 'all', 'data-turbolinks-track' => true %>

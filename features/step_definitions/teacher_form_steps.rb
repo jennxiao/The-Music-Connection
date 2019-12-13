@@ -9,6 +9,20 @@ When /^(?:|I )fill in the teacher form with basic information/ do
 	)
 end
 
+When /^(?:|I )fill out the teacher form/ do
+	steps %{
+		And I fill in "Teacher Name" with "Teacher Anthony Zhou"
+		And I fill in "Phone Number" with "222-222-2222"
+		And I fill in "Email Address" with "Teacher@berkeley.edu"
+		And I press "Next"
+		
+		Then I fill in class "0" with basic information
+		And I check class "0" "K"
+		And I check class "0" "Piano"
+		Then I press "Submit"
+	}
+end
+
 When /^(?:I )fill in class "(.*)" with basic information/ do |class_num|
   steps %(
 		And I fill in class "#{class_num}" "Class Name" with "Example Class"

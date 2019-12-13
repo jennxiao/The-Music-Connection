@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Display Matches</title>
+  </head>
+  <body>
+    <h3>Show All Current Matches</h3>
+    <div id='table-container' style="overflow-x:auto;">
+      <table>
+        <tr>
+          <th>Tutor name</th>
+          <th>Tutor Phone Number</th>
+          <th>Tutor Email</th>
+          <th>Tutor Instruments</th>
+          <th>Tutor Experience</th>
+          <th>Tutor Availabilities</th>
+          <th>Matched to Parent or Tutor?</th>
+          <th>Score</th>
+          <th>Match Name</th>
+          <th>Match Phone</th>
+          <th>Match Email</th>
+          <th>Match Instruments</th>
+          <th>Match Availabilities</th>
+          <th>Address or School Name</th>
+        </tr>
+        <% @calculated.each do |match| %>
+        <tr>
+          <td><%= match[:tutor_name] %></td>
+          <td><%= match[:tutor_number] %></td>
+          <td><%= match[:tutor_email] %></td>
+          <td><%= match[:tutor_instruments] %></td>
+          <td><%= match[:tutor_experience] %></td>    
+          <td><%= match[:tutor_availabilities] %></td>  
+          <td><%= match[:match_identity] %></td>  
+          <td><%= match[:score] %></td>
+          <td><%= match[:match_name] %></td>
+          <td><%= match[:match_phone] %></td>
+          <td><%= match[:match_email] %></td>
+          <td><%= match[:match_instruments] %></td>
+          <td><%= match[:match_availabilities] %></td>
+          <td><%= match[:match_location] %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </body>
+</html>
+
+
+
+<%= stylesheet_link_tag    'display_matches', media: 'all', 'data-turbolinks-track' => true %>

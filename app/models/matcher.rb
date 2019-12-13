@@ -10,7 +10,6 @@ class Matcher
     def calculate
       a, m1, m2, m3 = generate_matrix
       return run_matches(a, m1, m2, m3) unless a.empty?
-
       []
     end
 
@@ -147,8 +146,6 @@ class Matcher
         overlapping_time += 8 if parent[:lunch]
         overlapping_time += 10 if parent[:matched_before]
 
-        # puts "Parent:"
-        # puts overlapping_time
         overlapping_time
       else
         overlapping_time = 0
@@ -180,9 +177,6 @@ class Matcher
           end
           overlapping_time += max_overlap
         end
-
-        # puts "Teacher:"
-        # puts overlapping_time
         overlapping_time
       end
     end

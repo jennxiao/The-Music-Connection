@@ -17,10 +17,14 @@ Rails.application.routes.draw do
 
   get  'admin/generate_matches' => 'admin#generate_matches'
   get  'admin/results'
+  
+  get 'admin/display_database' => 'admin#display_database'
 
   get  'admin/reset_database'
   post 'admin/confirm_reset_database' => 'admin#confirm_reset_database'
 
+  get 'admin/export_database' => 'admin#export_database', as: 'admin_export'
+  
   get 'admin/reset_matching'
 
   # Forms
