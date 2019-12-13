@@ -5,7 +5,7 @@ require 'axe/rspec'
 require 'rails_helper'
 
 RSpec.feature 'Home page accessibility', type: :feature do
-  xit 'Home page accessibility', js: true do
+  it 'Home page accessibility', js: true do
     visit '/'
     expect(page).to be_accessible
   end
