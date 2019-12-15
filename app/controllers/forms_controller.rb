@@ -69,7 +69,7 @@ class FormsController < ApplicationController
       end
       grades = ''
       (0...grade.count).each do |i|
-        grades += (i.to_s + ',')
+        grades += (grade[i].to_s + ',')
       end
 	  grades.chomp!(',')
       teacher = Teacher.new
